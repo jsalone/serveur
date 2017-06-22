@@ -23,12 +23,11 @@ def hello_world():
 
 @app.route('/reset')
 def route_dbinit():
-    """Cette route sert à initialiser (ou nettoyer) la base de données."""
-    urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-    conn = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
-    return "Done."
+  """Cette route sert à initialiser (ou nettoyer) la base de données."""
+  db = Db()
+  db.executeFile("database_reset.sql")
+  db.close()
+  return "Done."
 
 ##########################################################################################################################################
 if __name__ == "__main__":

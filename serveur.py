@@ -56,7 +56,7 @@ def addPlayer():
 	taille = len(result)
 	if taille!= 0:
 		table['name'] = "Jojo"
-	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudjet) VALUES (%(name)s, %(argent)s) RETURNING joueur_id as Joueur", {
+	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudjet) VALUES (%(name)s, %(argent)f) RETURNING joueur_id as Joueur", {
 			"username" : table['name'],
 			"argent" : 50.0
 			})

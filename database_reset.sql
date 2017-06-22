@@ -1,11 +1,19 @@
 --------------------------------------------------------------
 --        Script MySQL.
 --------------------------------------------------------------
-
+DROP TABLE IF EXISTS panneau CASCADE;
+DROP TABLE IF EXISTS magasin CASCADE;
+DROP TABLE IF EXISTS partie CASCADE;
+DROP TABLE IF EXISTS joueur CASCADE;
+DROP TABLE IF EXISTS recette CASCADE;
+DROP TABLE IF EXISTS ingredient CASCADE;
 
 --------------------------------------------------------------
 -- Table: panneau
 --------------------------------------------------------------
+
+
+
 
 CREATE SEQUENCE panneau_seq;
 

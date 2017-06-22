@@ -45,10 +45,16 @@ def jsonResponse(data, status=200):
 # Requête R4 - Rejoindre une partie
 @app.route("/players", methods=["POST"])
 def addPlayer():
+    db = Db()
     get_json = request.get_json()
-
+    
     if 'name' in get_json:
         table['name'] = get_json['name']
+        result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{
+		"name" : table["name"]
+		})
+	if result!= None:
+		table['name'] = "Jojo"
     else:
         table['name'] = "Jacky"
 

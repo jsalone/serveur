@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request
 from flask import render_template
-from flask_cors import CORS
 from db import Db # voyez db.py
 
 

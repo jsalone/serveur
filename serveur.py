@@ -35,10 +35,10 @@ def jsonResponse(data, status=200):
 
 ##########################################################################################################################################
 # Requête R8 - Reset
-@app.route("/reset", methods=["GET"])
-def reset():
-    #return json.dumps(json_table[len(json_table)-1])
-    return "OK:RESET"
+#@app.route("/reset", methods=["GET"])
+#def reset():
+#    #return json.dumps(json_table[len(json_table)-1])
+#    return "OK:RESET"
 
 
 ##########################################################################################################################################

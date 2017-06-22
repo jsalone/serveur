@@ -12,7 +12,7 @@ import urlparse
 
 
 app = Flask(__name__)
-
+app.debug = True
 
 
 

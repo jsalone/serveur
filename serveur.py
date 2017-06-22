@@ -58,7 +58,7 @@ def addPlayer():
 		table['name'] = "Jojo"
 	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudjet) VALUES (%(name)s, %(argent)s) RETURNING joueur_id as Joueur", {
 			"username" : table['name'],
-			"argent" : 50
+			"argent" : 50.0
 			})
 	idjoueur = db.select("SELECT idjoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]

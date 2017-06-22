@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from flask import Flask
+from flask import render_template
+from db import Db # voyez db.py
+import os
+import psycopg2
+import urlparse
+
+
+
+
+
+app = Flask(__name__)
+
+
+
+
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+@app.route('/reset')
+def route_dbinit():
+    """Cette route sert à initialiser (ou nettoyer) la base de données."""
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+    conn = psycopg2.connect(database=url.path[1:],user=url.username,password=url.password,host=url.hostname,port=url.port)
+    return "Done."
+
+##########################################################################################################################################
+if __name__ == "__main__":
+  app.run(host="0.0.0.0",debug=True)

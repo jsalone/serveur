@@ -44,11 +44,11 @@
 
 <fieldset>
   <legend>Info generale</legend>        
-      <label>Jour: <input type='text' id="jour"readonly></label>
-      <label>Heure: <input type='text' id="heure"readonly></label>
-      <label>Meteo: <input type='text' id="meteo"readonly></label>
+      <label>Jour: <input type='text' id="jour" readonly></label>
+      <label>Heure: <input type='text' id="heure" readonly></label>
+      <label>Meteo: <input type='text' id="meteo" readonly></label>
       <!--<label>Prevision Meteo: <input type='text' id="prevmeteo"readonly></label>-->
-      <label>Budjet: <input type='text' id="budjet"readonly></label>
+      <label>Budjet: <input type='text' id="budjet" readonly></label>
 </fieldset>
 
 <br>
@@ -143,8 +143,8 @@
       <br>
       <label>Nom du joueur: <input type='text' id="champ_joueur"readonly></label>
       <legend>Position Joueur</legend>
-      <label>X: <input type='num' id="xjoueur"readonly></label>
-      <label>Y: <input type='num' id="yjoueur"readonly></label>
+      <label>X: <input type='num' id="xjoueur" readonly></label>
+      <label>Y: <input type='num' id="yjoueur" readonly></label>
       </form>
 </fieldset>
 
@@ -214,7 +214,7 @@
 
         $("#rejoindrepartie").click(function(event) {
             
-            $.ajax("http://127.0.0.1:5000/metrology").then(function(text) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/metrology").then(function(text) {
             	$("#meteo").text(text);
             })
 
@@ -223,14 +223,14 @@
             	document.forms["from_joueur"].elements["champ_joueur"].value=saisie;
             }
          
-            $.ajax("http://127.0.0.1:5000/prixboisson").then(function(num) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
             $("#limo").text(num);
             $("#cafe").text(num);
             $("#soupe").text(num);
             $("#eau").text(num);
             })
 
-            $.ajax("http://127.0.0.1:5000/players", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players", {
             'type': "POST",
             'data': JSON.stringify({'name':saisie}),// decompresse la donnée en string pour python
             'contentType': "application/json",
@@ -238,19 +238,20 @@
 	          $("#error").text(response.responseJSON["error"])
 	        }).done(function(response) {
 	          alert(JSON.stringify(response));
-	          //$("#elements").find("input[type='text']").val("")
-	          //$("#elements").find("div").html("")
+	          $("#xjoueur").val(response['location']['longitude'])
+	          $("#yjoueur").val(response['location']['latitude'])
+	          $("#budjet").val(response['info']['cash'])
 	        })
       })
 
 
       $("#reset").click(function(event) {
-            $.ajax("http://127.0.0.1:5000/reset")    
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/reset")    
       })
 
 
       $("#quitterpartie").click(function(event) {
-        $.ajax("http://127.0.0.1:5000/player/#joueur", {
+        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/player/#joueur", {
             'type': "DELETE",
             'contentType': "application/json"
         }) 
@@ -261,16 +262,16 @@
 
       function refreshAction(event) {
             if (event) event.preventDefault();
-            /*$.ajax("http://127.0.0.1:5000/jour").then(function(num) {
+            /*$.ajax("https://enigmatic-bayou-14181.herokuapp.com/jour").then(function(num) {
             $("#jour").text(num);
             })
-             $.ajax("http://127.0.0.1:5000/heure").then(function(num) {
+             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/heure").then(function(num) {
             $("#heur").text(num);
             })*/
-            $.ajax("http://127.0.0.1:5000/metrology").then(function(text) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/metrology").then(function(text) {
             $("#meteo").text(text);
             })
-            /*$.ajax("http://127.0.0.1:5000/budjet").then(function(text) {
+            /*$.ajax("https://enigmatic-bayou-14181.herokuapp.com/budjet").then(function(text) {
             $("#budjet").text(text);
             })*/
       }

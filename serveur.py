@@ -53,7 +53,8 @@ def addPlayer():
         result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
-	if result!= None:
+	taille = len(result)
+	if taille!= 0:
 		table['name'] = "Jojo"
     else:
         table['name'] = "Jacky"

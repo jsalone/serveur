@@ -47,7 +47,7 @@ def jsonResponse(data, status=200):
 def addPlayer():
     db = Db()
     get_json = request.get_json()
-    
+    table={}
     if 'name' in get_json:
         table['name'] = get_json['name']
         result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{

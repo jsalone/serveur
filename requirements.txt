@@ -5,9 +5,9 @@ dj-database-url==0.4.1
 Django==1.9.7
 Flask==0.12.2
 Flask-RESTful==0.3.6
-gevent
+gevent==1.2.2
 greenlet==0.4.12
-gunicorn
+gunicorn==19.6.0
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0

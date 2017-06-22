@@ -25,13 +25,18 @@
 <fieldset id="part" class="container">
   <legend>Partie</legend>
         <fieldset  id="rp" class="item">
-          <legend>Rejoindre une partie</legend>
+          <legend>Rejoindre la partie</legend>
           <button id="rejoindrepartie">Rejoindre la partie</button>   
         </fieldset>
      
         <fieldset id="cp" class="item">
           <legend>Créer une partie</legend>
           <button id="creerpartie">Créer la partie</button>
+        </fieldset>
+
+        <fieldset id="qp" class="item">
+          <legend>Quitter la partie</legend>
+          <button id="quitterpartie">Quitter la partie</button>
         </fieldset>
 </fieldset>
 
@@ -40,8 +45,9 @@
 <fieldset>
   <legend>Info generale</legend>        
       <label>Jour: <input type='text' id="jour"readonly></label>
+      <label>Heure: <input type='text' id="heure"readonly></label>
       <label>Meteo: <input type='text' id="meteo"readonly></label>
-      <label>Prevision Meteo: <input type='text' id="prevmeteo"readonly></label>
+      <!--<label>Prevision Meteo: <input type='text' id="prevmeteo"readonly></label>-->
       <label>Budjet: <input type='text' id="budjet"readonly></label>
 </fieldset>
 
@@ -57,7 +63,7 @@
           <br>
           <br>
 
-                <SELECT name="recette1" size="1" id="SELECTrescette1">
+                <SELECT name="recette1" size="1" id="SELECTrecette1">
                 <option value="0">--NONE--</option>
                 <option value="1">Limonade</option>
                 <option value="2">Café</option>
@@ -70,7 +76,7 @@
           <br>
           <br>
 
-                <SELECT name="recette2" size="1" id="SELECTrescette2">
+                <SELECT name="recette2" size="1" id="SELECTrecette2">
                 <option value="0">--NONE--</option>
                 <option value="1">Limonade</option>
                 <option value="2">Café</option>
@@ -83,7 +89,7 @@
           <br>
           <br>
 
-                <SELECT name="recette3" size="1" id="SELECTrescette3">
+                <SELECT name="recette3" size="1" id="SELECTrecette3">
                 <option value="0">--NONE--</option>
                 <option value="1">Limonade</option>
                 <option value="2">Café</option>
@@ -97,7 +103,7 @@
           <br>
           <br>
 
-                <SELECT name="recette4" size="1" id="SELECTrescette4">
+                <SELECT name="recette4" size="1" id="SELECTrecette4">
                 <option value="0">--NONE--</option>
                 <option value="1">Limonade</option>
                 <option value="2">Café</option>
@@ -119,21 +125,30 @@
             <label>Eau: <input type='num' id="eau"readonly></label>
 </fieldset>
 </form>
+<button id="valider">validé et envoyer</button>
 </fieldset>
 
+
+
 <br>
+
+
 
 <fieldset>
 <legend>Position</legend>
 <fieldset>
+ <form id="from_joueur">
   <legend>Mini carte</legend>
       <img src="map.jpg"alt="map"/>
       <br>
-      <label>Nom du joueur: <input type='text' id="joueur"></label>
-      <legend>Position Joureur</legend>
-      <label>X: <input type='num' id="xjoueur"></label>
-      <label>Y: <input type='num' id="yjoueur"></label>
+      <label>Nom du joueur: <input type='text' id="champ_joueur"readonly></label>
+      <legend>Position Joueur</legend>
+      <label>X: <input type='num' id="xjoueur"readonly></label>
+      <label>Y: <input type='num' id="yjoueur"readonly></label>
+      </form>
 </fieldset>
+
+
 
 <fieldset>
   <legend>Panneau publicitaire</legend>
@@ -156,23 +171,22 @@
 </fieldset>
 
 <button id="refresh">Rafraichir</button>
-<button id="valider">validé et envoyer</button>
-<button id="rinit">rinitialisé</button>
+
+<button id="rinit">Réinitialisé</button>
 </body>
 
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script >
-        //POST
-        $("#valider").click(function(event) {}
-          event.preventDefault();
-          // fabrication de la donnée
-            var data1{
-            "SELECTrescette1": $("#SELECTrescette1").val(),
-            "SELECTrescette2": $("#SELECTrescette2").val(),
-            "SELECTrescette3": $("#SELECTrescette3").val(),
-            "SELECTrescette4": $("#SELECTrescette4").val()
+
+        $("#valider").click(function(event) {
+
+            /*var data1{
+            "SELECTrecette1": $("#SELECTrecette1").val(),
+            "SELECTrecette2": $("#SELECTrecette2").val(),
+            "SELECTrecette3": $("#SELECTrecette3").val(),
+            "SELECTrecette4": $("#SELECTrecette4").val()
             }
             
             var data2{
@@ -190,37 +204,88 @@
 
             var dataJason =JSON.stringify(data3)
             //requete pour l'envoie de donnée
-            $.ajax("/post/sales", {
+            $.ajax("/sales", {
             'type': "POST",
             'data': JSON.stringify(data3),// decompresse la donnée en string pour python
             'contentType': "application/json",
-            }).done(function() {
-              $("#elements").find("input[type='num']").val("")
-             })
-           })
-        $("#valider").click(function(event) {}
-          event.preventDefault();
+            })*/
+        })
           
-             })
-           })
 
-
-
-
-        // GET
         $("#rejoindrepartie").click(function(event) {
-            event.preventDefault();
-            $.ajax("/get/jour").then(function(num) {
+            
+            $.ajax("http://127.0.0.1:5000/metrology").then(function(text) {
+            	$("#meteo").text(text);
+            })
+
+            var saisie = prompt("Saisissez votre pseudo :", "")
+            if (saisie!=null) {
+            	document.forms["from_joueur"].elements["champ_joueur"].value=saisie;
+            }
+         
+            $.ajax("http://127.0.0.1:5000/prixboisson").then(function(num) {
+            $("#limo").text(num);
+            $("#cafe").text(num);
+            $("#soupe").text(num);
+            $("#eau").text(num);
+            })
+
+            $.ajax("http://127.0.0.1:5000/players", {
+            'type': "POST",
+            'data': JSON.stringify({'name':saisie}),// decompresse la donnée en string pour python
+            'contentType': "application/json",
+            }).fail(function(response) {
+	          $("#error").text(response.responseJSON["error"])
+	        }).done(function(response) {
+	          alert(JSON.stringify(response));
+	          //$("#elements").find("input[type='text']").val("")
+	          //$("#elements").find("div").html("")
+	        })
+      })
+
+
+      $("#reset").click(function(event) {
+            $.ajax("http://127.0.0.1:5000/reset")    
+      })
+
+
+      $("#quitterpartie").click(function(event) {
+        $.ajax("http://127.0.0.1:5000/player/#joueur", {
+            'type': "DELETE",
+            'contentType': "application/json"
+        }) 
+      	alert(event);
+      })
+
+
+
+      function refreshAction(event) {
+            if (event) event.preventDefault();
+            /*$.ajax("http://127.0.0.1:5000/jour").then(function(num) {
             $("#jour").text(num);
             })
-            $.ajax("/get/meteo").then(function(text) {
+             $.ajax("http://127.0.0.1:5000/heure").then(function(num) {
+            $("#heur").text(num);
+            })*/
+            $.ajax("http://127.0.0.1:5000/metrology").then(function(text) {
             $("#meteo").text(text);
             })
-            $.ajax("/get/prevmeteo").then(function(text) {
-            $("#prevmeteo").text(text);
-            })
-      })
+            /*$.ajax("http://127.0.0.1:5000/budjet").then(function(text) {
+            $("#budjet").text(text);
+            })*/
+      }
+
+
+      $("#refresh").click(refreshAction)
+
+      var sec=12500;
+      setInterval(refreshAction,sec);
+      refreshAction(false)
     
+
+
+          
+
 </script>
 
 

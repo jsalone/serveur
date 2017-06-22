@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS ingredient CASCADE;
 
 
 
-CREATE SEQUENCE panneau_seq;
+--CREATE SEQUENCE panneau_seq;
 
 CREATE TABLE panneau(
         idPanneau        int  Default nextval ('panneau_seq')  NOT NULL ,
@@ -31,7 +31,7 @@ CREATE TABLE panneau(
 -- Table: magasin
 --------------------------------------------------------------
 
-CREATE SEQUENCE magasin_seq;
+--CREATE SEQUENCE magasin_seq;
 
 CREATE TABLE magasin(
         idMagasin   int  Default nextval ('magasin_seq')  NOT NULL ,
@@ -46,7 +46,7 @@ CREATE TABLE magasin(
 -- Table: partie
 --------------------------------------------------------------
 
-CREATE SEQUENCE partie_seq;
+--CREATE SEQUENCE partie_seq;
 
 CREATE TABLE partie(
         IdPartie  int  Default nextval ('partie_seq')  NOT NULL ,
@@ -59,7 +59,7 @@ CREATE TABLE partie(
 -- Table: joueur
 --------------------------------------------------------------
 
-CREATE SEQUENCE joueur_seq;
+--CREATE SEQUENCE joueur_seq;
 
 CREATE TABLE joueur(
         idJoueur     int  Default nextval ('joueur_seq')  NOT NULL ,
@@ -74,7 +74,7 @@ CREATE TABLE joueur(
 -- Table: recette
 --------------------------------------------------------------
 
-CREATE SEQUENCE recette_seq;
+--CREATE SEQUENCE recette_seq;
 
 CREATE TABLE recette(
         idRecette  int  Default nextval ('recette_seq')  NOT NULL ,
@@ -88,7 +88,7 @@ CREATE TABLE recette(
 -- Table: ingredient
 --------------------------------------------------------------
 
-CREATE SEQUENCE ingredient_seq;
+--CREATE SEQUENCE ingredient_seq;
 
 CREATE TABLE ingredient(
         idIngredient          int  Default nextval ('ingredient_seq')  NOT NULL ,

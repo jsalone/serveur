@@ -56,30 +56,19 @@ def addPlayer():
 	taille = len(result)
 	if taille!= 0:
 		table['name'] = "Jojo"
-	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudjet) VALUES (%(name)s, %(argent)f) RETURNING joueur_id as Joueur", {
+	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudjet) VALUES (%(name)s, %(argent)s) RETURNING joueur_id as Joueur", {
 			"username" : table['name'],
-			"argent" : 50.0
+			"argent" : 50
 			})
-	idjoueur = db.select("SELECT idjoueur FROM joueur WHERE JoueurNom = %(name)s",{
-		"name" : table["name"]
-		})
-	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(X)s, %(Y)s, %(id)s) RETURNING joueur_id as Joueur", {
-			"X" : random.randrange(10),
-			"Y" : random.randrange(10),
-			"id" : idjoueur
-			})
+	
     else:
         table['name'] = "Jacky"
 
     table['location'] = {}
-    table['location']['latitude'] = db.select("SELECT MagasinPosX FROM magasin WHERE idjoueur = %(idjoueur)s",{
-		"idjoueur" : idjoueur
-		})
-    table['location']['longitude'] = db.select("SELECT MagasinPosY FROM magasin WHERE idjoueur = %(idjoueur)s",{
-		"idjoueur" : idjoueur
-		})
+    table['location']['latitude'] = random.randrange(10)
+    table['location']['longitude'] = random.randrange(10)
     table['info'] = {}
-    table['info']['cash'] = 50.0
+    table['info']['cash'] = 1.0
     table['info']['sales'] = 0
     table['info']['profit'] = 0.0
 

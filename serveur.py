@@ -7,14 +7,8 @@ import os
 import psycopg2
 import urlparse
 
-
-
-
-
 app = Flask(__name__)
 app.debug = True
-
-
 
 
 @app.route('/')

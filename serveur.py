@@ -55,7 +55,13 @@ def addPlayer():
 		})
 	taille = len(result)
 	if taille!= 0:
-		table['name'] = "Jojo"
+		table['name'] = random.randrange(100)
+	
+	db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING joueur_id as Joueur", {"username" : table['name']})
+	result = db.select("SELECT IdJoueur FROM joueur WHERE JoueurNom = %(name)s",{
+		"name" : table["name"]
+		})
+	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)s,%(posY)s,%(idJoueur)s) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result})
 	
     else:
         table['name'] = "Jacky"
@@ -64,7 +70,7 @@ def addPlayer():
     table['location']['latitude'] = random.randrange(10)
     table['location']['longitude'] = random.randrange(10)
     table['info'] = {}
-    table['info']['cash'] = 1.0
+    table['info']['cash'] = 50
     table['info']['sales'] = 0
     table['info']['profit'] = 0.0
 

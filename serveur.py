@@ -96,7 +96,7 @@ def deletePlayer(playerName):
 
     print("---------------------------------------------------------------------------------------------------")
     db = Db()
-    get_json = request.get_json()
+    
     print("----------------------------------------------------------")
     result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     magasin=db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})

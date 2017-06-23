@@ -106,18 +106,18 @@ def deletePlayer(playerName):
     
     taille = len(recette)
     if taille !=0:
-	db.select("delete * FROM recette WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
+	db.select("delete FROM recette WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
     	contenir=db.select("SELECT * FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idRecette']})
 	taille = len(contenir)
 	if taille !=0:
-		db.select("delete * FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})    
+		db.select("delete FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})    
 
     taille = len(panneau)
     if taille !=0:
-	db.select("delete * FROM panneau WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})  
+	db.select("delete FROM panneau WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})  
     taille = len(magasin)
     if taille !=0:
-	db.select("delete * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
+	db.select("delete FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
     taille = len(result)
     if taille !=0:
 	

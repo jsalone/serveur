@@ -116,6 +116,8 @@ def deletePlayer(playerName):
 	db.select("delete * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
     taille = len(result)
     if taille !=0:
+	
+	print("--------------------------------------%d---------------------------------------------------",result[0])
 	db.select("delete * FROM result WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
 
     #if (playerName == ""):

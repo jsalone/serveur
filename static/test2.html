@@ -19,21 +19,26 @@
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <body>
 <!-- Ceci est un commentaire HTML -->
-<header></header>
+
+<audio id="audioPlayer" src="PQCNP"></audio>
 
 
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            PARTIE                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <fieldset id="part" class="container">
   <legend>Partie</legend>
         <fieldset  id="rp" class="item">
-          <legend>Rejoindre la partie</legend>
+          <legend>Créer ou Rejoindre la partie</legend>
           <button id="rejoindrepartie">Rejoindre la partie</button>   
         </fieldset>
-     
+ <!--    
         <fieldset id="cp" class="item">
           <legend>Créer une partie</legend>
           <button id="creerpartie">Créer la partie</button>
         </fieldset>
-
+-->
         <fieldset id="qp" class="item">
           <legend>Quitter la partie</legend>
           <button id="quitterpartie">Quitter la partie</button>
@@ -41,7 +46,9 @@
 </fieldset>
 
 <br>
-
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            INFO GENERALE                                                                       -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <fieldset>
   <legend>Info generale</legend>        
       <label>Jour: <input type='text' id="jour" readonly></label>
@@ -53,6 +60,9 @@
 
 <br>
 
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            production                                                                          -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <fieldset id="recet" class="container">
 <legend>Production</legend>
 <form id="elements">
@@ -72,7 +82,7 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit1"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit1"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit1"readonly></label>
              
           <br>
           <br>
@@ -86,7 +96,7 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit2"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit2"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit2"readonly></label>
            
           <br>
           <br>
@@ -100,7 +110,7 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit3"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit3"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit3"readonly></label>
 
 
           <br>
@@ -115,7 +125,7 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit4"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit4"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit4"readonly></label>
 
 
           <br>
@@ -138,6 +148,11 @@
 <button id="valider">validé et envoyer</button>
 
 
+<fieldset id="listi" class="item">
+  <legend>Liste ingrédients</legend>
+      <ul id="listeingredients"></ul>
+</fieldset>
+
 </fieldset>
 
 
@@ -145,13 +160,20 @@
 <br>
 
 
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            Position                                                                            -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
 <fieldset>
 <legend>Position</legend>
 <fieldset>
  <form id="from_joueur">
   <legend>Mini carte</legend>
+      
+
       <img src="map.jpg"alt="map"/>
+
+
       <br>
       <label>Nom du joueur: <input type='text' id="champ_joueur"readonly></label>
       <legend>Position Joueur</legend>
@@ -175,6 +197,16 @@
 <button id="rinit">Réinitialisé</button>
 </body>
 
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            SCRIPT                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -231,14 +263,15 @@
 /**************************************************************************************************************************************************/
 
         $("#rejoindrepartie").click(function(event) {
+
             var saisie = prompt("Saisissez votre pseudo :", "")
 
 
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
-            $("#limo").text(num);
-            $("#cafe").text(num);
-            $("#soupe").text(num);
-            $("#eau").text(num);
+            $("#limo").val(response['limonade'])
+            $("#cafe").val(response['cafe'])
+            $("#soupe").val(response['soupe'])
+            $("#eau").val(response['eau'])
             })
 
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players", {
@@ -255,6 +288,7 @@
 	          $("#yjoueur").val(response['location']['latitude'])
 	          $("#budjet").val(response['info']['cash'])
 
+            
 
 	          })
         })
@@ -292,6 +326,7 @@
             $("#jour").val(response['jour'])
             $("#heur").val(response['heur'])
             })
+            ingredientsAction();
           }
 
       $("#refresh").click(refreshAction)
@@ -303,7 +338,18 @@
 /**************************************************************************************************************************************************/
 /*                                                              ingredients                                                                     */
 /**************************************************************************************************************************************************/
+    function ingredientsAction(event) {
+            if (event) event.preventDefault();
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/ingredient").then(function(text) {
+            var i=1;
+            var fin = val(response['nbingredients'])
+            for (i=0;i<fin;i++){
+            var text = val(response['ingredient'])
+            $('#listeingredients').append('<li>' + text + '</li>');
+            }
+            })
 
+          }
 
 
           

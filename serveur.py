@@ -71,8 +71,8 @@ def addPlayer():
         table['name'] = "Jacky"
     print("--------------------------------------%d---------------------------------------------------",result[0])
     table['location'] = {}
-    table['location']['latitude'] = result[0]['MagasinPosY']
-    table['location']['longitude'] = result[0]['MagasinPosX']
+    table['location']['latitude'] = result[0]['magasinposy']
+    table['location']['longitude'] = result[0]['magasinposx']
     table['info'] = {}
     table['info']['cash'] = 50
     table['info']['sales'] = 0

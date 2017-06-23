@@ -69,7 +69,7 @@ def addPlayer():
 		})
     else:
         table['name'] = "Jacky"
-
+    print("--------------------------------------%d---------------------------------------------------",result[0])
     table['location'] = {}
     table['location']['latitude'] = result[0]['MagasinPosY']
     table['location']['longitude'] = result[0]['MagasinPosX']

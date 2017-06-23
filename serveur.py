@@ -58,7 +58,7 @@ def addPlayer():
 	taille = len(result)
 	if taille!= 0:
 		print("--------------------------------------invite---------------------------------------------------")
-		table['name'] = "invite%d"% 1
+		table['name'] = "invite%d"% invite+1
 	
 	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING idJoueur", {"name" : table["name"]})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{

@@ -64,12 +64,15 @@ def addPlayer():
 	print("--------------------------------------%d---------------------------------------------------",result[0])
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)s,%(posY)s,%(idJoueur)s) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result[0]['idjoueur']})
 	
+	result = db.select("SELECT * FROM magasin WHERE JoueurNom = %(name)s",{
+		"name" : result[0]['idjoueur']
+		})
     else:
         table['name'] = "Jacky"
 
     table['location'] = {}
-    table['location']['latitude'] = random.randrange(10)
-    table['location']['longitude'] = random.randrange(10)
+    table['location']['latitude'] = result[0]['MagasinPosY']
+    table['location']['longitude'] = result[0]['MagasinPosX']
     table['info'] = {}
     table['info']['cash'] = 50
     table['info']['sales'] = 0

@@ -61,7 +61,7 @@ def addPlayer():
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
-	print("--------------------------------------%s---------------------------------------------------",result[0]["idJoueur"])
+	print("--------------------------------------%s---------------------------------------------------",result)
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)d,%(posY)d,%(idJoueur)d) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result[0]["idJoueur"]})
 	
     else:

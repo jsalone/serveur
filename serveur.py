@@ -59,8 +59,7 @@ def addPlayer():
 	taille = len(result)
 	if taille!= 0:
 		print("--------------------------------------invite---------------------------------------------------")
-		
-		table['name'] = "invite%d"% invite+=1
+		table['name'] = "invite%d"% invite
 			
 
 	

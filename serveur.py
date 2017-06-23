@@ -58,7 +58,7 @@ def addPlayer():
 		table['name'] = random.randrange(100)
 	
 	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING idJoueur", {"name" : table["name"]})
-	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)d,%(posY)d,%(idJoueur)d) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": idjoueur[0][idJoueur]})
+	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)d,%(posY)d,%(idJoueur)d) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": idjoueur[0]['idJoueur']})
 	
     else:
         table['name'] = "Jacky"

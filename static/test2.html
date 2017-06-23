@@ -55,7 +55,7 @@
       <label>Heure: <input type='text' id="heure" readonly></label>
       <label>Meteo: <input type='text' id="meteo" readonly></label>
       <!--<label>Prevision Meteo: <input type='text' id="prevmeteo"readonly></label>-->
-      <label>Budjet: <input type='text' id="budjet" readonly></label>
+      <label>budget: <input type='text' id="budget" readonly></label>
 </fieldset>
 
 <br>
@@ -286,7 +286,7 @@
             $("#champ_joueur").val(response['name'])
 	          $("#xjoueur").val(response['location']['longitude'])
 	          $("#yjoueur").val(response['location']['latitude'])
-	          $("#budjet").val(response['info']['cash'])
+	          $("#budget").val(response['info']['cash'])
 
             
 
@@ -308,7 +308,7 @@
 /**************************************************************************************************************************************************/
 
       $("#quitterpartie").click(function(event) {
-        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/player/#joueur", {
+        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players/#joueur", {
             'type': "DELETE",
             'contentType': "application/json"
         }) 

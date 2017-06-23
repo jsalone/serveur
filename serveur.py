@@ -110,10 +110,13 @@ def deletePlayer(playerName):
     	contenir=db.select("SELECT * FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idRecette']})
 	taille = len(contenir)
 	if taille !=0:
-		db.select("delete FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})    
+		db.select("DELETE  FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})    
 
-
-
+    taille = len(panneau)
+    if taille !=0:
+	db.execute("DELETE FROM panneau WHERE idJoueur = %s",result[0]['idjoueur'])  
+    taille = len(magasin)
+ 
     #if (playerName == ""):
     return "OK:DELETE " + playerName
 

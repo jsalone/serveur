@@ -122,7 +122,7 @@ def deletePlayer(playerName):
     taille = len(result)
     if taille !=0:
 	
-    print("--------------------------------------%d---------------------------------------------------",result[0])
+    print("--------------------------------------%d---------------------------------------------------")
     db.select("delete FROM result WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
 
     #if (playerName == ""):

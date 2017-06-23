@@ -60,11 +60,12 @@ def addPlayer():
 	if taille!= 0:
 		print("--------------------------------------invite---------------------------------------------------")
 		
-		print("--------------------------------------invite avant:%d---------------------------------------------------",invite)
-		invite+=1
-		table['name'] = "invite%d"% invite
+		while taille !=0:
+			invite+=1
+			table['name'] = "invite%d"% invite
+			result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : table["name"]})
+			taille = len(result)
 		
-		print("--------------------------------------invite apres:%d---------------------------------------------------",invite)
 			
 
 	

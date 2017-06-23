@@ -65,9 +65,7 @@ def addPlayer():
 			table['name'] = "invite%d"% invite
 			result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : table["name"]})
 			taille = len(result)
-		
-			
-
+					
 	
 	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING idJoueur", {"name" : table["name"]})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
@@ -95,6 +93,31 @@ def addPlayer():
 # Requête R4 - Quitter une partie
 @app.route("/players/<playerName>", methods=["DELETE"])
 def deletePlayer(playerName):
+    db = Db()
+    get_json = request.get_json()
+  
+    result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+    magasin=db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
+    panneau=db.select("SELECT * FROM panneau WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
+    recette=db.select("SELECT * FROM recette WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
+    contenir=db.select("SELECT * FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})
+    
+    taille = len(contenir)
+    if taille !=0:
+	db.select("delete * FROM contenir WHERE idRecette = %(name)s",{"name" : recette[0]['idrecette']})
+    taille = len(recette)
+    if taille !=0:
+	db.select("delete * FROM recette WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
+    taille = len(panneau)
+    if taille !=0:
+	db.select("delete * FROM panneau WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})  
+    taille = len(magasin)
+    if taille !=0:
+	db.select("delete * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
+    taille = len(result)
+    if taille !=0:
+	db.select("delete * FROM result WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']}) 
+
     #if (playerName == ""):
     return "OK:DELETE " + playerName
 

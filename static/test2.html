@@ -15,7 +15,7 @@
 
 
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<!-- 														BODY 												                                                      	-->
+<!-- 														BODY 													-->
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <body>
 <!-- Ceci est un commentaire HTML -->
@@ -58,7 +58,7 @@
 <form id="elements">
 <fieldset id="pb" class="item">
   <legend>Production boisson</legend>
-     <!-- <label>Nombre recette: <input type='text' id="jour"></label>-->
+      <label>Nombre recette: <input type='text' id="jour"></label>
 
           <br>
           <br>
@@ -72,7 +72,6 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit1"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit1"></label>
              
           <br>
           <br>
@@ -86,7 +85,6 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit2"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit2"></label>
            
           <br>
           <br>
@@ -100,8 +98,7 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit3"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit3"></label>
-
+          
 
           <br>
           <br>
@@ -115,13 +112,6 @@
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit4"></label>
-                <label>Nombre vendu: <input type='num' id="venteproduit4"></label>
-
-
-          <br>
-          <br>
-          <label>Cout total <input type='num' id="coutt"></label>
-
 </fieldset>
 
 <fieldset id="cb" class="item">
@@ -136,8 +126,6 @@
 </fieldset>
 </form>
 <button id="valider">validé et envoyer</button>
-
-
 </fieldset>
 
 
@@ -164,8 +152,20 @@
 
 <fieldset>
   <legend>Panneau publicitaire</legend>
-    <label>Achat de panneau: <input type='num' id="nbpanneau"></label>
-    <ul id="listepanneau"></ul>
+    <label>X: <input type='num' id="x1"></label>
+    <label>Y: <input type='num' id="y1"></label>
+    <br>
+    <label>X: <input type='num' id="x2"></label>
+    <label>Y: <input type='num' id="y2"></label>
+    <br>
+    <label>X: <input type='num' id="x3"></label>
+    <label>Y: <input type='num' id="y3"></label>
+    <br>
+    <label>X: <input type='num' id="x4"></label>
+    <label>Y: <input type='num' id="y4"></label>
+    <br>
+    <label>X: <input type='num' id="x5"></label>
+    <label>Y: <input type='num' id="y5"></label>
     <br>
 </fieldset>
 </fieldset>
@@ -179,13 +179,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script >
-/**************************************************************************************************************************************************/
-/*                                                              action jour suivant                                                               */
-/**************************************************************************************************************************************************/
-/*
+
         $("#valider").click(function(event) {
 
-            var data1{
+            /*var data1{
             "SELECTrecette1": $("#SELECTrecette1").val(),
             "SELECTrecette2": $("#SELECTrecette2").val(),
             "SELECTrecette3": $("#SELECTrecette3").val(),
@@ -201,33 +198,19 @@
 
             var data3{
             "joueur": $("#joueur").val(),
-            "data1": $(data1).val(),
-            "data2": $(data2).val(),
-            "panneau": $("#nbpanneau").val()
+            "data1": $("#data1").val(),
+            "data2": $("#data2").val()
             }
 
             var dataJason =JSON.stringify(data3)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#joueur", {
+            $.ajax("/sales", {
             'type': "POST",
             'data': JSON.stringify(data3),// decompresse la donnée en string pour python
             'contentType': "application/json",
-            })
-
-            int 1;
-            for (i=0;i<#nbpanneau;i++){
-            var text = val(response['Plocation']['longitude'])
-            var text2 = val(response['Plocation']['latitude'])
-            $('#listepanneau').append('<li>' + text + text2 + '</li>');
-            }
-            $("#coutt").val(response['info']['cout'])
-
+            })*/
         })
           
-*/
-/**************************************************************************************************************************************************/
-/*                                                              rejoindrepartie                                                                   */
-/**************************************************************************************************************************************************/
 
         $("#rejoindrepartie").click(function(event) {
             
@@ -236,43 +219,36 @@
             })
 
             var saisie = prompt("Saisissez votre pseudo :", "")
-
-/*
+            if (saisie!=null) {
+            	document.forms["from_joueur"].elements["champ_joueur"].value=saisie;
+            }
+         
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
             $("#limo").text(num);
             $("#cafe").text(num);
             $("#soupe").text(num);
             $("#eau").text(num);
             })
-*/
+
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players", {
             'type': "POST",
             'data': JSON.stringify({'name':saisie}),// decompresse la donnée en string pour python
             'contentType': "application/json",
             }).fail(function(response) {
 	          $("#error").text(response.responseJSON["error"])
-	          }).done(function(response) {
+	        }).done(function(response) {
 	          alert(JSON.stringify(response));
-            $("#champ_joueur").val(response['name'])
 	          $("#xjoueur").val(response['location']['longitude'])
 	          $("#yjoueur").val(response['location']['latitude'])
 	          $("#budjet").val(response['info']['cash'])
-	          })
-        })
-
-/**************************************************************************************************************************************************/
-/*                                                              reset                                                                             */
-/**************************************************************************************************************************************************/
-
-      $("#reset").click(function(event) {
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/reset")   
-            alert(event); 
+	        })
       })
 
 
-/**************************************************************************************************************************************************/
-/*                                                              quitterpartie                                                                     */
-/**************************************************************************************************************************************************/
+      $("#reset").click(function(event) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/reset")    
+      })
+
 
       $("#quitterpartie").click(function(event) {
         $.ajax("https://enigmatic-bayou-14181.herokuapp.com/player/#joueur", {
@@ -282,17 +258,22 @@
       	alert(event);
       })
 
-/**************************************************************************************************************************************************/
-/*                                                              refreshAction    (metrologie)                                                     */
-/**************************************************************************************************************************************************/
+
 
       function refreshAction(event) {
-            if {} (event) event.preventDefault();
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/metrology").then(function(text) {
-            $("#meteo").val(response['meteo'])
-            $("#jour").val(response['jour'])
-            $("#heur").val(response['heur'])
+            if (event) event.preventDefault();
+            /*$.ajax("https://enigmatic-bayou-14181.herokuapp.com/jour").then(function(num) {
+            $("#jour").text(num);
             })
+             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/heure").then(function(num) {
+            $("#heur").text(num);
+            })*/
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/metrology").then(function(text) {
+            $("#meteo").text(text);
+            })
+            /*$.ajax("https://enigmatic-bayou-14181.herokuapp.com/budjet").then(function(text) {
+            $("#budjet").text(text);
+            })*/
       }
 
 
@@ -301,11 +282,7 @@
       var sec=12500;
       setInterval(refreshAction,sec);
       refreshAction(false)
-
-/**************************************************************************************************************************************************/
-/*                                                              ingredients                                                                     */
-/**************************************************************************************************************************************************/
-
+    
 
 
           

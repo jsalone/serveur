@@ -120,7 +120,7 @@ def deletePlayer(playerName):
 	#db.select("DELETE FROM magasin WHERE idJoueur = %d",result[0]['idjoueur'])  
 
 
-    db.select("DELETE FROM joueur WHERE idJoueur = %s",str(result[0]['idjoueur'])) 
+    db.select("DELETE FROM joueur WHERE idJoueur = %(joueur)s",{"joueur":result[0]['idjoueur']}) 
     #if (playerName == ""):
     return "OK:DELETE " + playerName
 

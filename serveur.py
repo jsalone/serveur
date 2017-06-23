@@ -47,6 +47,7 @@ def jsonResponse(data, status=200):
 # Requête R4 - Rejoindre une partie
 @app.route("/players", methods=["POST"])
 def addPlayer():
+    global invite
     db = Db()
     get_json = request.get_json()
     table={}
@@ -59,7 +60,7 @@ def addPlayer():
 	if taille!= 0:
 		print("--------------------------------------invite---------------------------------------------------")
 		
-		table['name'] = "invite%d"% 1
+		table['name'] = "invite%d"% invite+=1
 			
 
 	

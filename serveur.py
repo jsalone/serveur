@@ -62,7 +62,7 @@ def addPlayer():
 		
 		print("--------------------------------------invite avant:%d---------------------------------------------------",invite)
 		table['name'] = "invite%d"% invite
-		invite= invite +1
+		invite= invite +10
 		print("--------------------------------------invite apres:%d---------------------------------------------------",invite)
 			
 

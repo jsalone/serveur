@@ -233,7 +233,7 @@
             }
 
             var data3={
-            "joueur": $("#joueur").val(),
+            "joueur": $("#champ_joueur").val(),
             "data1": $(data1).val(),
             "data2": $(data2).val(),
             "panneau": $("#nbpanneau").val()
@@ -241,7 +241,7 @@
 
             var dataJason =JSON.stringify(data3)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#joueur", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
             'type': "POST",
             'data': JSON.stringify(data3),// decompresse la donnée en string pour python
             'contentType': "application/json",
@@ -308,7 +308,7 @@
 /**************************************************************************************************************************************************/
 
       $("#quitterpartie").click(function(event) {
-        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players/#joueur", {
+        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players/#champ_joueur", {
             'type': "DELETE",
             'contentType': "application/json"
         }) 

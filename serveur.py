@@ -14,6 +14,8 @@ import urlparse
 app = Flask(__name__)
 app.debug = True
 
+invite=0
+
 
 @app.route('/')
 def hello_world():
@@ -55,7 +57,7 @@ def addPlayer():
 		})
 	taille = len(result)
 	if taille!= 0:
-		table['name'] = 'jojo'
+		table['name'] = invite+1
 	
 	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING idJoueur", {"name" : table["name"]})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{

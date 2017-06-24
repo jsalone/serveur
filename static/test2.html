@@ -340,7 +340,7 @@
 /**************************************************************************************************************************************************/
     function ingredientsAction(event) {
             if (event) event.preventDefault();
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/ingredient").then(function(text) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/ingredients").then(function(text) {
             var i=1;
             var fin = val(response['nbingredients'])
             for (i=0;i<fin;i++){

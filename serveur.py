@@ -238,7 +238,7 @@ def mapPlayer(playerName):
     location={}
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
-    availableIngredients[classementJoueur]={}
+    availableIngredients['classementJoueur']=classementJoueur
     pan = db.select("SELECT PanneauPosX,PanneauPosY,PanneauInfluence FROM panneau WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
     mag = db.select("SELECT MagasinPosX,MagasinPosY,MagasinInfluence FROM magasin WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
     nbpan=len(pan)
@@ -263,7 +263,7 @@ def mapPlayer(playerName):
 	mapItem['location']['latitude']=mag['MagasinPosY']
 	mapItem['location']['longitude']= ma['MagasinPosX']
 	mapItem['influene']=mag['MagasinInfluence']
-    availableIngredients[mapItem]={}
+    availableIngredients['mapItem']=mapItem
 
     return jsonResponse(availableIngredients)
 

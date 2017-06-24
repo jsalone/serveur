@@ -239,8 +239,8 @@ def mapPlayer(playerName):
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
     availableIngredients['classementJoueur']=classementJoueur
-    pan = db.select("SELECT PanneauPosX,PanneauPosY,PanneauInfluence FROM panneau WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
-    mag = db.select("SELECT MagasinPosX,MagasinPosY,MagasinInfluence FROM magasin WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
+    pan = db.select("SELECT PanneauPosX,PanneauPosY,PanneauInfluence FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+    mag = db.select("SELECT MagasinPosX,MagasinPosY,MagasinInfluence FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     nbpan=len(pan)
 
     if nbpan!= 0:

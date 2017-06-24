@@ -153,4 +153,4 @@ INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,Ingre
 INSERT INTO recette (RecetteNom) VALUES 
    ('Eau'),('limonade'),('cafe'),('soupe');
 INSERT INTO contenir (idRecette,idIngredient) VALUES 
-   ('idRecette from recette where RecetteNom=Eau');
+   (idRecette from recette where RecetteNom='Eau');

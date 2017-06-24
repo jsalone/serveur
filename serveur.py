@@ -72,7 +72,7 @@ def addPlayer():
 			taille = len(result)
 					
 	
-	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget,IdPartie) VALUES (%(name)s, 50,%(parti)s) RETURNING idJoueur", {"name" : table["name"],parti:partiExist[0]['idpartie']})
+	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget,IdPartie) VALUES (%(name)s, 50,%(parti)s) RETURNING idJoueur", {"name" : table["name"],"parti":partiExist[0]['idpartie']})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})

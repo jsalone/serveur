@@ -93,10 +93,8 @@ def addPlayer():
 # Requête R4 - Quitter une partie
 @app.route("/players/<playerName>", methods=["DELETE"])
 def deletePlayer(playerName):
-
     print("-----------------------------------------delete----------------------------------------------------------")
     db = Db()
-    
     result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     magasin=db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})
     panneau=db.select("SELECT * FROM panneau WHERE idJoueur = %(name)s",{"name" : result[0]['idjoueur']})

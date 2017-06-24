@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.debug = True
 
 invite=0
-debutpartie
+debutpartie=0
 
 @app.route('/')
 def hello_world():
@@ -183,16 +183,139 @@ def actionsPlayer(playerName):
 # Requête R2 -  Map
 @app.route("/map", methods=["GET"])
 def map():
+
     #return json.dumps(json_table)
     return "OK:GET_MAP"
-
+#map:
+#	region : 
+#		center :
+#			coordinates :
+#				latitude
+#				longitude
+#		span :
+#			coordinatesSpan :
+#				latitudeSpan
+#				longitudeSpan	
+#	ranking: string id/name all player
+#	itemsByPlayer:{
+#		mapItem: repeated pour tous les joueurs
+#			kind :string stand ou at
+#			owner : string playername
+#			location :
+#				coordinates :
+#					latitude
+#					longitude
+#			influence : float distance
+#		}
+#	playerInfo:{
+#		playerInfo: repeated pour tous les joueurs
+#			cash: float
+#			sales: int nombre de vendu par recettes
+#			profit : float -> negatif perdu
+#			drinksOffered:
+#				drinkInfo :
+#					name
+#					price
+#					has alcohol
+#					is cold
+#		}
+#	drinksByPlayer:{
+#		drinkInfo :
+#			name
+#			price
+#			has alcohol
+#			is cold
+#		}
 
 ##########################################################################################################################################
 # Requête R5 - Détails d'une partie
 @app.route("/map/<playerName>", methods=["GET"])
 def mapPlayer(playerName):
+    db = Db()
+    table ={}
+    availableIngredients={}
+    mapitem= {}
+    location={}
+    monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+    classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
+    availableIngredients[classementJoueur]={}
+    pan = db.select("SELECT PanneauPosX,PanneauPosY,PanneauInfluence FROM panneau WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
+    mag = db.select("SELECT MagasinPosX,MagasinPosY,MagasinInfluence FROM magasin WHERE idJoueur = %(idjou)s ORDER BY JoueurBudget",{"idjou" : monjoueur[0]['idjoueur']})
+    nbpan=len(pan)
+
+    if nbpan!= 0:
+	#parti panneau
+	for matable in pan:
+		mapItem['kind'][matable]= 'at'
+		mapItem['owner'][matable]= playerName
+		mapItem['location'][matable]['latitude']=pan[matable]['PanneauPosY']
+		mapItem['location'][matable]['longitude']= pan[matable]['PanneauPosX']
+		mapItem['influene'][matable]=pan[matable]['PanneauInfluence']
+	#partie mag
+	mapItem['kind'][nbpan+1]= 'stand'
+	mapItem['owner'][nbpan+1]= playerName
+	mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['MagasinPosY']
+	mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['MagasinPosX']
+	mapItem['influene'][nbpan+1]=mag[nbpan+1]['MagasinInfluence']
+    else:
+	mapItem['kind']= 'stand'
+	mapItem['owner']= playerName
+	mapItem['location']['latitude']=mag['MagasinPosY']
+	mapItem['location']['longitude']= ma['MagasinPosX']
+	mapItem['influene']=mag['MagasinInfluence']
+    availableIngredients[mapItem]={}
+
     return "GET:OK_MAP_PLAYER" + playerName
 
+#availableIngredients:
+#	region : 
+#		center :
+#			
+#			latitude float
+#			longitude float
+#		span :
+#			
+#			latitudeSpan float
+#			longitudeSpan float
+#	ranking: string id/name all player
+#	itemsByPlayer:{
+#		mapItem: repeated pour tous les joueurs
+#			kind :string stand ou at
+#			owner : string playername
+#			location :
+#				
+#				latitude
+#				longitude
+#			influence : float distance
+#		}
+#	ingredient :
+#		name string
+#		cost float
+#		hasAlcohol bool
+#		isCold bool
+#map:
+#	itemsByPlayer:{
+#		mapItem: repeated pour tous les joueurs
+#			kind :string stand ou at
+#			owner : string playername
+#			location :
+#				
+#				latitude
+#				longitude
+#			influence : float distance
+#		}
+#playerInfo:
+#	playerInfo: repeated pour tous les joueurs
+#		cash: float
+#		sales: int nombre de vendu par recettes
+#		profit : float -> negatif perdu
+#		drinksOffered:
+#			
+#			name
+#			price
+#			has alcohol
+#			is cold
+#	}
 
 ##########################################################################################################################################
 # Requête R9 - Liste ingrédients

@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS avoir CASCADE;
 
 CREATE TABLE panneau(
         idPanneau        int  Default nextval ('panneau_seq')  NOT NULL ,
-        PanneauPosX      Int ,
-        PanneauPosY      Int ,
+        PanneauPosX      Double precision ,
+        PanneauPosY      Double precision ,
         PanneauInfluence Double precision ,
         idJoueur         Int ,
         PRIMARY KEY (idPanneau )
@@ -38,8 +38,9 @@ CREATE TABLE panneau(
 
 CREATE TABLE magasin(
         idMagasin   int  Default nextval ('magasin_seq')  NOT NULL ,
-        MagasinPosX Int ,
-        MagasinPosY Int ,
+        MagasinPosX Double precision ,
+        MagasinPosY Double precision ,
+	MagasinInfluence Double precision ,
         idJoueur    Int ,
         PRIMARY KEY (idMagasin )
 );

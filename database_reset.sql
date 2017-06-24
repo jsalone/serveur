@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS recette CASCADE;
 DROP TABLE IF EXISTS ingredient CASCADE;
 DROP TABLE IF EXISTS contenir CASCADE;
 DROP TABLE IF EXISTS compatible CASCADE;
-
+DROP TABLE IF EXISTS avoir CASCADE;
 
 --------------------------------------------------------------
 -- Table: panneau

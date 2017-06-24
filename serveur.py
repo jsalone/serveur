@@ -249,22 +249,22 @@ def mapPlayer(playerName):
 	for matable in pan:
 		mapItem['kind'][matable]= 'at'
 		mapItem['owner'][matable]= playerName
-		mapItem['location'][matable]['latitude']=pan[matable]['PanneauPosY']
-		mapItem['location'][matable]['longitude']= pan[matable]['PanneauPosX']
-		mapItem['influene'][matable]=pan[matable]['PanneauInfluence']
+		mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']
+		mapItem['location'][matable]['longitude']= pan[matable]['panneauposx']
+		mapItem['influene'][matable]=pan[matable]['panneauinfluence']
 	#partie mag
 	mapItem['kind'][nbpan+1]= 'stand'
 	mapItem['owner'][nbpan+1]= playerName	
-	mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['MagasinPosY']
-	mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['MagasinPosX']
-	mapItem['influene'][nbpan+1]=mag[nbpan+1]['MagasinInfluence']
+	mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+	mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+	mapItem['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
     else:
 	mapItem['kind']= 'stand'
 	mapItem['owner']= playerName
 	mapItem['location']={}
-	mapItem['location']['latitude']=mag[0]['MagasinPosY']
-	mapItem['location']['longitude']= mag[0]['MagasinPosX']
-	mapItem['influene']=mag[0]['MagasinInfluence']
+	mapItem['location']['latitude']=mag[0]['magasinposY']
+	mapItem['location']['longitude']= mag[0]['magasinposX']
+	mapItem['influene']=mag[0]['magasininfluence']
     availableIngredients['mapItem']=mapItem
 
     return jsonResponse(availableIngredients)

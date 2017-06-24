@@ -173,6 +173,7 @@ def mapPlayer(playerName):
 def ingredients():
     print("-----------------------------------------ingredient----------------------------------------------------------")
     db = Db()
+    table={}
     result = db.select("SELECT * FROM ingredient")
     table['ingredients'] = result
     return jsonResponse(table)

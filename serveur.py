@@ -245,6 +245,7 @@ def mapPlayer(playerName):
 
     if nbpan!= 0:
 	#parti panneau
+	mapItem['location']={}
 	for matable in pan:
 		mapItem['kind'][matable]= 'at'
 		mapItem['owner'][matable]= playerName
@@ -253,15 +254,16 @@ def mapPlayer(playerName):
 		mapItem['influene'][matable]=pan[matable]['PanneauInfluence']
 	#partie mag
 	mapItem['kind'][nbpan+1]= 'stand'
-	mapItem['owner'][nbpan+1]= playerName
+	mapItem['owner'][nbpan+1]= playerName	
 	mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['MagasinPosY']
 	mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['MagasinPosX']
 	mapItem['influene'][nbpan+1]=mag[nbpan+1]['MagasinInfluence']
     else:
 	mapItem['kind']= 'stand'
 	mapItem['owner']= playerName
+	mapItem['location']={}
 	mapItem['location']['latitude']=50
-	mapItem['location']['longitude']= ma['MagasinPosX']
+	mapItem['location']['longitude']= mag['MagasinPosX']
 	mapItem['influene']=mag['MagasinInfluence']
     availableIngredients['mapItem']=mapItem
 

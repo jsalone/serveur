@@ -201,7 +201,7 @@ def ingredients():
     #print(result)
     table['ingredients'] = result
     db.close()
-    return jsonResponse(table)
+    return jsonResponse(result)
 
 
 

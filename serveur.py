@@ -265,7 +265,7 @@ def mapPlayer(playerName):
 	mapItem['influene']=mag['MagasinInfluence']
     availableIngredients[mapItem]={}
 
-    return "GET:OK_MAP_PLAYER" + playerName
+    return jsonResponse(availableIngredients)
 
 #availableIngredients:
 #	region : 

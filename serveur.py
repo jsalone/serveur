@@ -262,8 +262,8 @@ def mapPlayer(playerName):
 	mapItem['kind']= 'stand'
 	mapItem['owner']= playerName
 	mapItem['location']={}
-	mapItem['location']['latitude']=float(mag['MagasinPosY'])
-	mapItem['location']['longitude']= float(mag['MagasinPosX'])
+	mapItem['location']['latitude']=int(mag['MagasinPosY'])
+	mapItem['location']['longitude']= int(mag['MagasinPosX'])
 	mapItem['influene']=mag['MagasinInfluence']
     availableIngredients['mapItem']=mapItem
 

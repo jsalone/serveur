@@ -172,6 +172,7 @@ def mapPlayer(playerName):
 @app.route("/ingredients", methods=["GET"])
 def ingredients():
     print("-----------------------------------------ingredient----------------------------------------------------------")
+    db = Db()
     result = db.select("SELECT * FROM ingredient")
     table['ingredients'] = result
     return jsonResponse(table)

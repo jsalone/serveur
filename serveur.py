@@ -262,9 +262,9 @@ def mapPlayer(playerName):
 	mapItem['kind']= 'stand'
 	mapItem['owner']= playerName
 	mapItem['location']={}
-	mapItem['location']['latitude']=50
-	mapItem['location']['longitude']= mag['MagasinPosX']
-	mapItem['influene']=mag['MagasinInfluence']
+	mapItem['location']['latitude']=mag[0]['MagasinPosY']
+	mapItem['location']['longitude']= mag[0]['MagasinPosX']
+	mapItem['influene']=mag[0]['MagasinInfluence']
     availableIngredients['mapItem']=mapItem
 
     return jsonResponse(availableIngredients)

@@ -57,6 +57,10 @@ def addPlayer():
         result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
+	partiExist = db.select("SELECT idPartie FROM partie")
+	taille = len(partiExist)
+	if taille == 0:
+		partiExist=db.select ("INSERT INTO partie(PartieNom) VALUES (game) RETURNING idPartie")
 	taille = len(result)
 	if taille!= 0:
 		
@@ -68,7 +72,7 @@ def addPlayer():
 			taille = len(result)
 					
 	
-	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget) VALUES (%(name)s, 50) RETURNING idJoueur", {"name" : table["name"]})
+	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget,IdPartie) VALUES (%(name)s, 50,%(parti)s) RETURNING idJoueur", {"name" : table["name"],partiExist[0]['idpartie']})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
@@ -201,7 +205,7 @@ def ingredients():
     #print(result)
     table['ingredients'] = result
     db.close()
-    return jsonResponse(result)
+    return jsonResponse(table)
 
 
 

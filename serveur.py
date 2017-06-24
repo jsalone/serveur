@@ -47,6 +47,7 @@ def jsonResponse(data, status=200):
 # Requête R4 - Rejoindre une partie
 @app.route("/players", methods=["POST"])
 def addPlayer():
+    print("--------------------------------------rejoindre partie---------------------------------------------------")
     global invite
     db = Db()
     get_json = request.get_json()
@@ -58,7 +59,7 @@ def addPlayer():
 		})
 	taille = len(result)
 	if taille!= 0:
-		print("--------------------------------------invite---------------------------------------------------")
+		
 		
 		while taille !=0:
 			invite+=1
@@ -71,14 +72,12 @@ def addPlayer():
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
-	print("--------------------------------------%d---------------------------------------------------",result[0])
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)s,%(posY)s,%(idJoueur)s) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result[0]['idjoueur']})
 	
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
 		})
     db.close()
-    print("--------------------------------------%d---------------------------------------------------",result[0])
     table['location'] = {}
     table['location']['latitude'] = result[0]['magasinposy']
     table['location']['longitude'] = result[0]['magasinposx']

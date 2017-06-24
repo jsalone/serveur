@@ -238,7 +238,7 @@ def mapPlayer(playerName):
     location={}
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
-    availableIngredients['classementJoueur']=classementJoueur
+    availableIngredients['ranking']=classementJoueur
     pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     nbpan=len(pan)
@@ -264,8 +264,8 @@ def mapPlayer(playerName):
 	mapItem['location']={}
 	mapItem['location']['latitude']=mag[0]['magasinposy']
 	mapItem['location']['longitude']= mag[0]['magasinposx']
-	mapItem['influene']=mag[0]['magasininfluence']
-    availableIngredients['mapItem']=mapItem
+	mapItem['influence']=mag[0]['magasininfluence']
+    availableIngredients['itemsByPlayer']=mapItem
 
     return jsonResponse(availableIngredients)
 
@@ -281,15 +281,14 @@ def mapPlayer(playerName):
 #			longitudeSpan float
 #	ranking: string id/name all player
 #	itemsByPlayer:{
-#		mapItem: repeated pour tous les joueurs
-#			kind :string stand ou at
-#			owner : string playername
-#			location :
-#				
-#				latitude
-#				longitude
-#			influence : float distance
-#		}
+#		repeated pour tous les joueurs
+#		kind :string stand ou at
+#		owner : string playername
+#		location :				
+#			latitude
+#			longitude
+#		influence : float distance
+#	}
 #	ingredient :
 #		name string
 #		cost float

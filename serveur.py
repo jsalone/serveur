@@ -234,7 +234,7 @@ def mapPlayer(playerName):
     db = Db()
     table ={}
     availableIngredients={}
-    mapitem= {}
+    mapItem= {}
     location={}
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})

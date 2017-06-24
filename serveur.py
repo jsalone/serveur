@@ -171,7 +171,9 @@ def mapPlayer(playerName):
 # Requête R9 - Liste ingrédients
 @app.route("/ingredients", methods=["GET"])
 def ingredients():
-    return "GET:OK_INGREDIENTS"
+    result = db.select("SELECT * FROM ingredient")
+    table['ingredients'] = result
+    return jsonResponse(table)
 
 
 

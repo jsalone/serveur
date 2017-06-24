@@ -152,5 +152,5 @@ INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,Ingre
    ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('légume', '4', '0', '0');
 INSERT INTO recette (RecetteNom) VALUES 
    ('Eau'),('limonade'),('cafe'),('soupe');
-INSERT INTO contenir (idRecette,idIngredient) VALUES SELECT
+INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='Eau'),'2');

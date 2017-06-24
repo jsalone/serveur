@@ -105,6 +105,7 @@ CREATE TABLE ingredient(
 -- Table: avoir
 --------------------------------------------------------------
 CREATE TABLE avoir(
+	vendre    Int ,
         idJoueur    Int NOT NULL ,
         idRecette Int NOT NULL ,
         PRIMARY KEY (idJoueur ,idRecette )

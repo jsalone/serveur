@@ -77,7 +77,7 @@ def addPlayer():
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
 		})
-
+    db.close()
     print("--------------------------------------%d---------------------------------------------------",result[0])
     table['location'] = {}
     table['location']['latitude'] = result[0]['magasinposy']
@@ -114,6 +114,7 @@ def deletePlayer(playerName):
 
     db.execute("DELETE FROM magasin WHERE idJoueur = "+ str(result[0]['idjoueur'])) 
     db.execute("DELETE FROM joueur WHERE idJoueur = "+ str(result[0]['idjoueur'])) 
+    db.close()
     #if (playerName == ""):
     return "OK:DELETE " + playerName
 
@@ -135,10 +136,36 @@ def metrology():
 # Requête R3 - Sales
 @app.route("/sales", methods=["POST"])
 def sales():
+    print("-----------------------------------------sales----------------------------------------------------------")
     global json_table
+    table={}
+    #player: string
+    #item : string
+    #quantity
+    db = Db()
     get_json = request.get_json()
+    if 'player' in get_json:
+	table['name'] = get_json['player']
+	table['item'] = get_json['item']
+	table['quantity'] = get_json['quantity']
+        idjou = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
+		"name" : table["name"]
+		})
+	idrec = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(name)s",{
+		"name" : table["item"]
+		})
+	vend =db.select("SELECT * FROM avoir WHERE idJoueur = %(name)s AND idRecette = %(idrec)s",{
+		"name" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"]
+		})
+	taille = len(vend)
+	if taille!= 0:
+		vend[0]['vendre']+=table["quantity"]
+		db.execute("UPDATE avoir SET vendre=(%(vendre)s) WHERE idJoueur=(%(j_user)s)AND idRecette = %(namerec)s", {"vendre": vend[0]["vendre"],"j_user" : idjou[0]["idjoueur"],"namerec" : idrec[0]["idrecette"]})
+	else:
+		idjoueur = db.select ("INSERT INTO vendre(vendre, idJoueur, idRecette) VALUES (%(vendre)s,%(idjoueur)s ,%(idrec)s) RETURNING idJoueur", {"vendre" : table["quantity"],"idjoueur" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"] })
+
     #json_table[value].update(get_json)
-    print (get_json)
+    db.close()
 
     return "OK:POST_SALES"
 
@@ -175,8 +202,9 @@ def ingredients():
     db = Db()
     table={}
     result = db.select("SELECT * FROM ingredient")
-    print(result)
+    #print(result)
     table['ingredients'] = result
+    db.close()
     return jsonResponse(table)
 
 

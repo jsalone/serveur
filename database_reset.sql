@@ -149,8 +149,25 @@ ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient_ingredient FORE
 --------------------------------------------------------------
 
 INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcool) VALUES 
-   ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('légume', '4', '0', '0');
+   ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('legume', '4', '0', '0');
 INSERT INTO recette (RecetteNom) VALUES 
    ('Eau'),('limonade'),('cafe'),('soupe');
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='Eau'),'2');
+   ((select idRecette from recette where RecetteNom='Eau'),(select idIngredient from ingredient where IngredientNom='Eau'));
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='Eau'));
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='orange'));
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='Eau'));
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='graine de cafe'));
+
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='Eau'));
+INSERT INTO contenir (idRecette,idIngredient) VALUES
+   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='legume'));
+
+
+
+

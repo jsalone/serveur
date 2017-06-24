@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.debug = True
 
 invite=0
-
+debutpartie
 
 @app.route('/')
 def hello_world():

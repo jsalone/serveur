@@ -152,6 +152,6 @@ INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,Ingre
    ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('légume', '4', '0', '0');
 INSERT INTO recette (RecetteNom) VALUES 
    ('Eau'),('limonade'),('cafe'),('soupe');
-INSERT INTO avoir (idRecette,idIngredient) VALUES 
+INSERT INTO contenir (idRecette,idIngredient) VALUES 
    ('1','1'),('2','1'),('2','2'),('3','1'),('3','3'),('4','1'),('4','4');
 

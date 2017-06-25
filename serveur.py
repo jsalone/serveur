@@ -137,6 +137,8 @@ def metrology():
 	print("-----------------------------------------GET METRO----------------------------------------------------------")
 	weather={}
 	forcast={}
+	forcast['dfn']={}
+	forcast['weather']={}
 	forcast['dfn'][0]=0
 	forcast['weather'][0]=weathertoday
 	forcast['dfn'][1]=1

@@ -275,7 +275,7 @@ def mapPlayer(playerName):
     availableIngredients={}
     mapItem= {}
     location={}
-    mamap={}
+
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
     availableIngredients['ranking']=classementJoueur

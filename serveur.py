@@ -331,6 +331,24 @@ def mapPlayer(playerName):
     mamap['itemsByPlayer']=mapItem
     availableIngredients['map']=mamap
 
+    #playerInfo
+    playerInfo={}
+    playerInfo['cash']=monjoueur[0]['joueurbudget']
+    sales={}
+    idrecette=recette=db.select("SELECT * FROM recette")
+    for dep in range(len(idrecette)):
+	compvendu+=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
+	
+#playerInfo:
+#	cash: float
+#	sales: int nombre de vendu
+#	profit : float -> negatif perdu
+#	drinksOffered:
+#		name
+#		price
+#		has alcohol
+#		is cold
+#	}
 
     return jsonResponse(availableIngredients)
 
@@ -357,17 +375,7 @@ def mapPlayer(playerName):
 #				latitude : float
 #				longitude : float
 #			influence : float
-#playerInfo:
-#	playerInfo: repeated pour tous les joueurs
-#		cash: float
-#		sales: int nombre de vendu par recettes
-#		profit : float -> negatif perdu
-#		drinksOffered:
-#			name
-#			price
-#			has alcohol
-#			is cold
-#	}
+
 
 ##########################################################################################################################################
 # Requête R9 - Liste ingrédients

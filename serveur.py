@@ -287,7 +287,7 @@ def mapPlayer(playerName):
     mesingredient= db.select("SELECT * FROM ingredient")
     ingredient={}
     for matable in mesingredient:
-	ingredient['name'][0]=mesingredient[matable]['ingredientnom']
+	ingredient['name'][matable]=mesingredient['ingredientnom'][matable]
 	ingredient['cost'][matable]=mesingredient[matable]['ingredientprix']
 	ingredient['hasAlcohol'][matable]=mesingredient[matable]['ingredientalcool']
 	ingredient['isCold'][matable]=mesingredient[matable]['ingredienttemperature']

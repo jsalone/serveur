@@ -341,8 +341,10 @@ def mapPlayer(playerName):
     for dep in range(len(idrecette)):
 	compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
   
-    availableIngredients['test']=compvendu
-	
+    for dep in range(len(idrecette)):
+	if compvendu['vend'][dep]=None:
+		compvendu['vend'][dep]=0;
+    availableIngredients['vend']=compvendu
 #playerInfo:
 #	cash: float
 #	sales: int nombre de vendu

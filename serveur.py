@@ -342,7 +342,7 @@ def mapPlayer(playerName):
 	compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
   
     for dep in range(len(idrecette)):
-	if compvendu['vend'][dep]=='':
+	if not compvendu['vend'][dep]:
 		compvendu['vend'][dep]=0;
     availableIngredients['vend']=compvendu
 #playerInfo:

@@ -17,6 +17,12 @@ app.debug = True
 invite=0
 debutpartie=0
 
+dfn=0
+
+weathertoday='sunny'
+weathertomor='sunny'
+timestamp=0
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
@@ -123,12 +129,37 @@ def deletePlayer(playerName):
 # Requête R1/R7 - Metrology
 @app.route("/metrology", methods=["GET", "POST"])
 def metrology():
-    global json_table
+    global dfn
+    global weathertoday
+    global weathertomor
+    global timestamp
     if request.method == "GET":
-        return "OK:GET_METROLOGY"
+	print("-----------------------------------------GET METRO----------------------------------------------------------")
+	weather={}
+	forcast={}
+	forcast['dfn'][0]=0
+	forcast['weather'][0]=weathertoday
+	forcast['dfn'][1]=1
+	forcast['weather'][1]=weathertomor
+	weather['forcast']=forcast
+        return jsonResponse(weather)
     elif request.method == "POST":
+	get_json = request.get_json()
+	timestamp=get_json['timestamp']
+	day=get_json['weather']['forcast'][0]['dfn']
+	if day==0:
+		weathertoday=get_json['weather']['forcast'][0]['weather']
+		weathertomor=get_json['weather']['forcast'][1]['weather']
+	else :
+		weathertoday=get_json['weather']['forcast'][1]['weather']
+		weathertomor=get_json['weather']['forcast'][0]['weather']		
+	print("-----------------------------------------POST METRO----------------------------------------------------------")
         return "OK:POST_METROLOGY"
-
+#timestamp: int nb d'heure joue 0 aujourd'hui 1 demain
+#weather:
+#	forcast: // 2 forcast pour aujourd'hui et demain
+#		dfn : int day from now - 0 aujourd'hui 1 demain
+#		weather:
     #return json.dumps(json_table), 200, {'Content-Type': 'application/json'}
 
 
@@ -174,6 +205,9 @@ def sales():
 # Requête R6 - Instructions du joueur
 @app.route("/actions/<playerName>", methods=["POST"])
 def actionsPlayer(playerName):
+
+#action:
+#	
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

@@ -290,8 +290,8 @@ def mapPlayer(playerName):
     ingredient['cost']={}
     ingredient['hasAlcohol']={}
     ingredient['isCold']={}
-    for dep in mesingredient:
-	ingredient['name'][dep]=dep['ingredientnom']
+    for dep in len(mesingredient):
+	ingredient['name'][dep]=mesingredient[dep]['ingredientnom']
 	ingredient['cost'][dep]=dep['ingredientprix']
 	ingredient['hasAlcohol'][dep]=dep['ingredientalcool']
 	ingredient['isCold'][dep]=dep['ingredienttemperature']

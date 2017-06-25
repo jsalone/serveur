@@ -337,7 +337,7 @@ def mapPlayer(playerName):
     sales={}
     idrecette=recette=db.select("SELECT * FROM recette")
     compvendu={}
-    compvendu['vend']
+    compvendu['vend']={}
     for dep in range(len(idrecette)):
 	compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
     

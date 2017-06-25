@@ -286,11 +286,15 @@ def mapPlayer(playerName):
     #ingredient
     mesingredient= db.select("SELECT * FROM ingredient")
     ingredient={}
+    ingredient['name']={}
+    ingredient['cost']={}
+    ingredient['hasAlcohol']={}
+    ingredient['isCold']={}
     for dep in mesingredient:
 	ingredient['name'][dep]=dep['ingredientnom']
-	ingredient['cost'][dep]=mesingredient[dep]['ingredientprix']
-	ingredient['hasAlcohol'][dep]=mesingredient[dep]['ingredientalcool']
-	ingredient['isCold'][dep]=mesingredient[dep]['ingredienttemperature']
+	ingredient['cost'][dep]=dep['ingredientprix']
+	ingredient['hasAlcohol'][dep]=dep['ingredientalcool']
+	ingredient['isCold'][dep]=dep['ingredienttemperature']
 
     availableIngredients['ingredient']=ingredient
 

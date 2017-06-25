@@ -275,12 +275,25 @@ def mapPlayer(playerName):
     availableIngredients={}
     mapItem= {}
     location={}
+    mamap={}
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     classementJoueur = db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
     availableIngredients['ranking']=classementJoueur
     pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     nbpan=len(pan)
+
+    #ingredient
+    mesingredient= db.select("SELECT * FROM ingredient")
+    ingredient={}
+    for matable in mesingredient:
+	ingredient['name'][matable]=mesingredient[matable]['ingredientnom']
+	ingredient['cost'][matable]=mesingredient[matable]['ingredientprix']
+	ingredient['hasAlcohol'][matable]=mesingredient[matable]['ingredientalcool']
+	ingredient['isCold'][matable]=mesingredient[matable]['ingredienttemperature']
+
+    availableIngredients['ingredient']=ingredient
+
 
     if nbpan!= 0:
 	#parti panneau
@@ -306,51 +319,40 @@ def mapPlayer(playerName):
 	mapItem['influence']=mag[0]['magasininfluence']
     availableIngredients['itemsByPlayer']=mapItem
 
+
+
     return jsonResponse(availableIngredients)
 
 #availableIngredients:
-#	region : 
-#		center :
-#			
-#			latitude float
-#			longitude float
-#		span :
-#			
-#			latitudeSpan float
-#			longitudeSpan float
-#	ranking: string id/name all player
-#	itemsByPlayer:{
-#		repeated pour tous les joueurs
-#		kind :string stand ou at
-#		owner : string playername
-#		location :				
-#			latitude
-#			longitude
-#		influence : float distance
-#	}
 #	ingredient :
 #		name string
 #		cost float
 #		hasAlcohol bool
-#		isCold bool
+#		isCold bool	
 #map:
-#	itemsByPlayer:{
-#		mapItem: repeated pour tous les joueurs
-#			kind :string stand ou at
-#			owner : string playername
+#	region:
+#		center:
+#			latitude : float
+#			longitude : float
+#		span:
+#			latitudeSpan : float
+#			longitudeSpan : float
+#
+#	ranking: string
+#	itemsByPlayer :
+#		mapItem :
+#			kind: string stand or ad
+#			owner: string
 #			location :
-#				
-#				latitude
-#				longitude
-#			influence : float distance
-#		}
+#				latitude : float
+#				longitude : float
+#			influence : float
 #playerInfo:
 #	playerInfo: repeated pour tous les joueurs
 #		cash: float
 #		sales: int nombre de vendu par recettes
 #		profit : float -> negatif perdu
 #		drinksOffered:
-#			
 #			name
 #			price
 #			has alcohol

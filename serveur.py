@@ -344,7 +344,9 @@ def mapPlayer(playerName):
     for dep in range(len(idrecette)):
 	if not compvendu['vend'][dep]:
 		compvendu['vend'][dep]=0;
-    total=sum(compvendu.values())
+
+    for dep in range(len(idrecette)):
+	totalvendu+=compvendu['vend'][dep]
     
 #playerInfo:
 #	cash: float

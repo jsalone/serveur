@@ -82,7 +82,7 @@ def addPlayer():
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
-	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur) VALUES (%(posX)s,%(posY)s,%(idJoueur)s) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result[0]['idjoueur']})
+	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,1) RETURNING idMagasin as magasin", {"posX" : random.randrange(10),"posY" : random.randrange(10),"idJoueur": result[0]['idjoueur']})
 	
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
@@ -275,9 +275,7 @@ def mapPlayer(playerName):
     availableIngredients={}
     mapItem= {}
     location={}
-
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
-    availableIngredients['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
     pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
     nbpan=len(pan)
@@ -296,8 +294,17 @@ def mapPlayer(playerName):
 	ingredient['isCold'][dep]=mesingredient[dep]['ingredienttemperature']
 
     availableIngredients['ingredient']=ingredient
+    #map
+    mamap={}
 
-
+    #region
+    ###############################################################
+    # a faire
+    #
+    ###############################################################
+    #ranking
+    mamap['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
+    #itemsduPlayer
     if nbpan!= 0:
 	#parti panneau
 	mapItem['location']={}
@@ -320,8 +327,9 @@ def mapPlayer(playerName):
 	mapItem['location']['latitude']=mag[0]['magasinposy']
 	mapItem['location']['longitude']= mag[0]['magasinposx']
 	mapItem['influence']=mag[0]['magasininfluence']
-    availableIngredients['itemsByPlayer']=mapItem
-
+    
+    mamap['itemsByPlayer']=mapItem
+    availableIngredients['map']=mamap
 
 
     return jsonResponse(availableIngredients)

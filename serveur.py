@@ -292,9 +292,9 @@ def mapPlayer(playerName):
     ingredient['isCold']={}
     for dep in range(len(mesingredient)):
 	ingredient['name'][dep]=mesingredient[dep]['ingredientnom']
-	ingredient['cost'][dep]=dep['ingredientprix']
-	ingredient['hasAlcohol'][dep]=dep['ingredientalcool']
-	ingredient['isCold'][dep]=dep['ingredienttemperature']
+	ingredient['cost'][dep]=mesingredient[dep]['ingredientprix']
+	ingredient['hasAlcohol'][dep]=mesingredient[dep]['ingredientalcool']
+	ingredient['isCold'][dep]=mesingredient[dep]['ingredienttemperature']
 
     availableIngredients['ingredient']=ingredient
 
@@ -302,7 +302,7 @@ def mapPlayer(playerName):
     if nbpan!= 0:
 	#parti panneau
 	mapItem['location']={}
-	for matable in pan:
+	for matable in range(len(pan)):
 		mapItem['kind'][matable]= 'at'
 		mapItem['owner'][matable]= playerName
 		mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']

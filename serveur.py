@@ -342,7 +342,7 @@ def mapPlayer(playerName):
     
     vendu=0
     for dep in range(len(idrecette)):
-	vendu+=compvendu[dep]
+	vendu+=compvendu[0][dep]
 	
 #playerInfo:
 #	cash: float

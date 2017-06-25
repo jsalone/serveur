@@ -293,7 +293,7 @@ def mapPlayer(playerName):
 	ingredient['hasAlcohol'][dep]=mesingredient[dep]['ingredientalcool']
 	ingredient['isCold'][dep]=mesingredient[dep]['ingredienttemperature']
 
-    availableIngredients['ingredient']=ingredient
+    availableIngredients['availableIngredients']=ingredient
     #map
     mamap={}
 
@@ -335,7 +335,6 @@ def mapPlayer(playerName):
     return jsonResponse(availableIngredients)
 
 #availableIngredients:
-#	ingredient :
 #		name string
 #		cost float
 #		hasAlcohol bool

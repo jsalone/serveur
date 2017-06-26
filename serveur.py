@@ -271,14 +271,7 @@ def map():
     mapItem={}
     nomjoueur="joueur"
     mamap['map']['itemsByPlayer']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['kind']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['owner']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['influence']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['location']['latitude']={}
-    mamap['map']['itemsByPlayer'][nomjoueur]['location']['longitude']={}
+
 
     mamap['map']['playerInfo']={}
     mamap['map']['playerInfo'][nomjoueur]={}
@@ -335,7 +328,14 @@ def map():
 #		influence : float distance
 #		}
 	newplayeurname=mamap['map']['ranking'][numjoueur]['joueurnom']
-	mamap['map']['itemsByPlayer'][newplayeurname]=mamap['map']['itemsByPlayer'].pop(nomjoueur)
+	mamap['map']['itemsByPlayer'][newplayeurname]={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['kind']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['location']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['owner']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['influence']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['location']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['location']['latitude']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]['location']['longitude']={}
 	if nbpan!= 0:
 		#parti panneau
 		

@@ -224,9 +224,7 @@ def actionsPlayer(playerName):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
 	contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : get_json['recipe'][0]['name'] })	
 
-    if get_json['actions']=='ad':
 
-    if get_json['actions']=='drink':
 
     #global json_table
     #return json.dumps(json_table[value])

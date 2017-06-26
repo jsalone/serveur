@@ -252,6 +252,7 @@ def actionsPlayer(playerName):
 def map():
     db = Db()
     mamap={}
+    availableIngredients={}
     mamap['map']={}
     print "----------------------------------map -----------------------------------------"
 #map:

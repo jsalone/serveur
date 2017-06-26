@@ -156,7 +156,7 @@ ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient_ingredient FORE
 -- Insert
 --------------------------------------------------------------
 
-INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcool) VALUES 
+INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcohol) VALUES 
    ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('legume', '4', '0', '0');
 INSERT INTO recette (RecetteNom) VALUES 
    ('Eau'),('limonade'),('cafe'),('soupe');

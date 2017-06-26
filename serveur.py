@@ -134,10 +134,10 @@ def metrology():
     global weathertomor
     global timestamp
     db = Db()
-    if request.method == "GET":
+    meteoparti = db.select("SELECT * FROM partie")
+    if request.method == "GET" and len(meteoparti)!=0 :
 	print("-----------------------------------------GET METRO----------------------------------------------------------")
-	meteoparti = db.select("SELECT * FROM partie")
-	print("--------------------",meteoparti)
+	
 	weather={}
 	forcast={}
 	Temps={}
@@ -145,10 +145,9 @@ def metrology():
 	forcast['dfn']={}
 	forcast['weather']={}
 
-	forcast['dfn'][0]=1 #meteoparti[0]['partidfn']
-	forcast['weather'][0]=meteoparti[0]['ici']
+	forcast['dfn'][0]=meteoparti[0]['partidfn']
+	forcast['weather'][0]=meteoparti[0]['partimetrologitoday']
 	forcast['dfn'][1]=1
-	
 	forcast['weather'][1]=meteoparti[0]['partimetrologitomor']
 	Temps['timestamp']=timestamp
 	Temps['weather']=forcast

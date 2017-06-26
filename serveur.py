@@ -273,6 +273,7 @@ def map():
 
     #pour chaque joueur
     itemsByPlayer={}
+    mapItem={}
     itemsByPlayer['location']={}
     mapItem['location']={}
     mapItem={}

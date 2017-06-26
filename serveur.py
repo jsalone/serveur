@@ -235,7 +235,7 @@ def actionsPlayer(playerName):
     if action['kind']=='ad':
 	location=action['location']
 	
-	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : location['latitude'],"y" : location[0]['longitude'],"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
+	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
 
    # if action['kind']=='drinks':

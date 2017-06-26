@@ -150,6 +150,7 @@ def metrology():
 	Temps['weather']=forcast
         return jsonResponse(Temps)
     if request.method == "POST" :
+	print "----------------------------------post metro -----------------------------------------"
 	get_json = request.get_json()
 	print "----------------------------------post metro -----------------------------------------",get_json
 	

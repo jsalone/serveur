@@ -274,12 +274,16 @@ def map():
 
     #pour chaque joueur
     itemsByPlayer={}
-    mapItem={}
     itemsByPlayer['location']={}
-    mapItem['location']={}
-    mamap={}
-    mamap['itemsByPlayer']={}
+
+
+    mapItem={}
+    mapItem['itemsByPlayer']={}
     mapItem['itemsByPlayer']['kind']={}
+    mapItem['itemsByPlayer']['location']={}
+    mapItem['itemsByPlayer']['owner']={}
+    mapItem['itemsByPlayer']['influence']={}
+
     mapItem={}
     for numjoueur in range(len(ranking)):
 	print"--------------",ranking['ranking']
@@ -304,13 +308,13 @@ def map():
 			mapItem['owner'][matable]= playerName
 			mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']
 			mapItem['location'][matable]['longitude']= pan[matable]['panneauposx']
-			mapItem['influene'][matable]=pan[matable]['panneauinfluence']
+			mapItem['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
 		mapItem['kind'][nbpan+1]= 'stand'
 		mapItem['owner'][nbpan+1]= playerName	
 		mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
 		mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		mapItem['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		mapItem['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
 		mapItem['itemsByPlayer'][numjoueur]['kind']= 'stand'
@@ -320,7 +324,7 @@ def map():
 		mapItem['itemsByPlayer'][numjoueur]['location']['longitude']= mag[0]['magasinposx']
 		mapItem['itemsByPlayer'][numjoueur]['influence']=mag[0]['magasininfluence']
 	
-	#mamap['itemsByPlayer'][numjoueur]=mapItem
+	
     availableIngredients['map']=mamap
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs

@@ -170,7 +170,7 @@ def metrology():
 #	forcast: // 2 forcast pour aujourd'hui et demain
 #		dfn : int day from now - 0 aujourd'hui 1 demain
 #		weather:
-    #return json.dumps(json_table), 200, {'Content-Type': 'application/json'}
+    return json.dumps("ok")
 
 
 ##########################################################################################################################################

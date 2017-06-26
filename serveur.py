@@ -283,6 +283,7 @@ def map():
     mapItem['itemsByPlayer']['location']={}
     mapItem['itemsByPlayer']['owner']={}
     mapItem['itemsByPlayer']['influence']={}
+    mapItem['itemsByPlayer']['location']={}
     mapItem['itemsByPlayer']['location']['latitude']={}
     mapItem['itemsByPlayer']['location']['longitude']={}
 
@@ -321,7 +322,7 @@ def map():
 		
 		mapItem['itemsByPlayer']['kind'][numjoueur]= 'stand'
 		mapItem['itemsByPlayer']['owner'][numjoueur]= monjoueur[0]['joueurnom']
-		mapItem['itemsByPlayer']['location']={}
+		
 		mapItem['itemsByPlayer']['location']['latitude'][numjoueur]=mag[0]['magasinposy']
 		mapItem['itemsByPlayer']['location']['longitude'][numjoueur]= mag[0]['magasinposx']
 		mapItem['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']

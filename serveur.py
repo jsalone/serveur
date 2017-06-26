@@ -153,6 +153,7 @@ def metrology():
 	Temps['weather']=forcast
         return jsonResponse(Temps)
     elif request.method == "POST" and len(meteoparti)!=0 :
+	print("-----------------------------------------POST METRO----------------------------------------------------------")
 	get_json = request.get_json()
 	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
@@ -163,7 +164,7 @@ def metrology():
 		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn']})
 		weathertoday=get_json['weather'][1]['weather']
 		weathertomor=get_json['weather'][0]['weather']		
-	print("-----------------------------------------POST METRO----------------------------------------------------------")
+
         return "OK:POST_METROLOGY"
 #timestamp: int nb d'heure joue 0 aujourd'hui 1 demain
 #weather:
@@ -234,7 +235,6 @@ def actionsPlayer(playerName):
 
     if action['kind']=='ad':
 	location=action['location']
-	
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
 

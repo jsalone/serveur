@@ -229,6 +229,7 @@ def actionsPlayer(playerName):
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['name'][matable]})
 		print "----------------------------------recette -----------------------------------------",idrecette[0]['idrecette']
+		print "----------------------------------recette -----------------------------------------",idingr[0]['idingredient']
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
     if action['kind']=='ad':

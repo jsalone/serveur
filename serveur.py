@@ -317,7 +317,7 @@ def map():
 		mapItem['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		mapItem['itemsByPlayer']['kind']= 'stand'
+		mapItem['itemsByPlayer']['kind'][numjoueur]= 'stand'
 		mapItem['itemsByPlayer'][numjoueur]['owner']= monjoueur[0]['joueurnom']
 		mapItem['itemsByPlayer'][numjoueur]['location']={}
 		mapItem['itemsByPlayer'][numjoueur]['location']['latitude']=mag[0]['magasinposy']

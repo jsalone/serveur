@@ -283,6 +283,8 @@ def map():
     mapItem['itemsByPlayer']['location']={}
     mapItem['itemsByPlayer']['owner']={}
     mapItem['itemsByPlayer']['influence']={}
+    mapItem['itemsByPlayer']['location']['latitude']={}
+    mapItem['itemsByPlayer']['location']['longitude']={}
 
     for numjoueur in range(len(ranking)):
 	print"--------------",ranking['ranking']

@@ -142,10 +142,10 @@ def metrology():
 	Temps={}
 	forcast['dfn']={}
 	forcast['weather']={}
-	forcast['dfn'][0]=meteoparti['partidfn']
-	forcast['weather'][0]=meteoparti['partimetrologitoday']
+	forcast['dfn'][0]=meteoparti[0]['partidfn']
+	forcast['weather'][0]=meteoparti[0]['partimetrologitoday']
 	forcast['dfn'][1]=1
-	forcast['weather'][1]=meteoparti['partimetrologitomor']
+	forcast['weather'][1]=meteoparti[0]['partimetrologitomor']
 	Temps['timestamp']=timestamp
 	Temps['weather']=forcast
         return jsonResponse(Temps)

@@ -272,29 +272,31 @@ def map():
     nomjoueur="joueur"
     mamap['map']['itemsByPlayer']={}
     mamap['map']['itemsByPlayer'][nomjoueur]={}
-    mamap['map']['itemsByPlayer']['kind']={}
-    mamap['map']['itemsByPlayer']['location']={}
-    mamap['map']['itemsByPlayer']['owner']={}
-    mamap['map']['itemsByPlayer']['influence']={}
-    mamap['map']['itemsByPlayer']['location']={}
-    mamap['map']['itemsByPlayer']['location']['latitude']={}
-    mamap['map']['itemsByPlayer']['location']['longitude']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['kind']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['owner']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['influence']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['location']['latitude']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]['location']['longitude']={}
 
     mamap['map']['playerInfo']={}
-    mamap['map']['playerInfo']['cash']={}
-    mamap['map']['playerInfo']['sales']={}
-    mamap['map']['playerInfo']['profit']={}
-    mamap['map']['playerInfo']['drinksOffered']={}
-    mamap['map']['playerInfo']['drinksOffered']['name']={}
-    mamap['map']['playerInfo']['drinksOffered']['price']={}
-    mamap['map']['playerInfo']['drinksOffered']['hasAlcohol']={}
-    mamap['map']['playerInfo']['drinksOffered']['isCold']={}
+    mamap['map']['playerInfo'][nomjoueur]={}
+    mamap['map']['playerInfo'][nomjoueur]['cash']={}
+    mamap['map']['playerInfo'][nomjoueur]['sales']={}
+    mamap['map']['playerInfo'][nomjoueur]['profit']={}
+    mamap['map']['playerInfo'][nomjoueur]['drinksOffered']={}
+    mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['name']={}
+    mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['price']={}
+    mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['hasAlcohol']={}
+    mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['isCold']={}
 
     mamap['map']['drinksByPlayer']={}
-    mamap['map']['drinksByPlayer']['name']={}
-    mamap['map']['drinksByPlayer']['price']={}
-    mamap['map']['drinksByPlayer']['hasAlcohol']={}
-    mamap['map']['drinksByPlayer']['isCold']={}
+    mamap['map']['drinksByPlayer'][nomjoueur]={}
+    mamap['map']['drinksByPlayer'][nomjoueur]['name']={}
+    mamap['map']['drinksByPlayer'][nomjoueur]['price']={}
+    mamap['map']['drinksByPlayer'][nomjoueur]['hasAlcohol']={}
+    mamap['map']['drinksByPlayer'][nomjoueur]['isCold']={}
 
     mamap['map']['region']={}
     mamap['map']['region']['center']={}
@@ -319,6 +321,7 @@ def map():
 
     for numjoueur in range(len(mamap['map']['ranking'])):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
+	nomjoueur=mamap['map']['ranking'][numjoueur]['joueurnom']
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
@@ -335,25 +338,25 @@ def map():
 		#parti panneau
 		
 		for matable in range(len(pan)):
-			mamap['map']['itemsByPlayer']['kind'][matable]= 'at'
-			mamap['map']['itemsByPlayer']['owner'][matable]= playerName
-			mamap['map']['itemsByPlayer']['location'][matable]['latitude']=pan[matable]['panneauposy']
-			mamap['map']['itemsByPlayer']['location'][matable]['longitude']= pan[matable]['panneauposx']
-			mamap['map']['itemsByPlayer']['influence'][matable]=pan[matable]['panneauinfluence']
+			mamap['map']['itemsByPlayer'][nomjoueur]['kind'][matable]= 'at'
+			mamap['map']['itemsByPlayer'][nomjoueur]['owner'][matable]= playerName
+			mamap['map']['itemsByPlayer'][nomjoueur]['location'][matable]['latitude']=pan[matable]['panneauposy']
+			mamap['map']['itemsByPlayer'][nomjoueur]['location'][matable]['longitude']= pan[matable]['panneauposx']
+			mamap['map']['itemsByPlayer'][nomjoueur]['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
-		mamap['map']['itemsByPlayer']['kind'][nbpan+1]= 'stand'
-		mamap['map']['itemsByPlayer']['owner'][nbpan+1]= playerName	
-		mamap['map']['itemsByPlayer']['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-		mamap['map']['itemsByPlayer']['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		mamap['map']['itemsByPlayer']['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		mamap['map']['itemsByPlayer'][nomjoueur]['kind'][nbpan+1]= 'stand'
+		mamap['map']['itemsByPlayer'][nomjoueur]['owner'][nbpan+1]= playerName	
+		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+		mamap['map']['itemsByPlayer'][nomjoueur]['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		mamap['map']['itemsByPlayer']['kind'][numjoueur]= 'stand'
-		mamap['map']['itemsByPlayer']['owner'][numjoueur]= monjoueur[0]['joueurnom']
+		mamap['map']['itemsByPlayer'][nomjoueur]['kind'][numjoueur]= 'stand'
+		mamap['map']['itemsByPlayer'][nomjoueur]['owner'][numjoueur]= monjoueur[0]['joueurnom']
 		
-		mamap['map']['itemsByPlayer']['location']['latitude'][numjoueur]=mag[0]['magasinposy']
-		mamap['map']['itemsByPlayer']['location']['longitude'][numjoueur]= mag[0]['magasinposx']
-		mamap['map']['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
+		mamap['map']['itemsByPlayer'][nomjoueur]['location']['latitude'][numjoueur]=mag[0]['magasinposy']
+		mamap['map']['itemsByPlayer'][nomjoueur]['location']['longitude'][numjoueur]= mag[0]['magasinposx']
+		mamap['map']['itemsByPlayer'][nomjoueur]['influence'][numjoueur]=mag[0]['magasininfluence']
 
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
@@ -366,7 +369,7 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-		mamap['map']['playerInfo']['cash'][numjoueur]=monjoueur[0]['joueurbudget']
+		mamap['map']['playerInfo'][nomjoueur]['cash'][numjoueur]=monjoueur[0]['joueurbudget']
 
 #	drinksByPlayer:{
 #		name

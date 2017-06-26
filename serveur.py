@@ -144,9 +144,8 @@ def metrology():
 	forcast['weather'][0]=weathertoday
 	forcast['dfn'][1]=1
 	forcast['weather'][1]=weathertomor
-	weather['forcast']=forcast
 	Temps['timestamp']=timestamp
-	Temps['weather']=weather
+	Temps['weather']=forcast
         return jsonResponse(Temps)
     elif request.method == "POST":
 	get_json = request.get_json()

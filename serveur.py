@@ -321,7 +321,7 @@ def map():
 
     for numjoueur in range(len(mamap['map']['ranking'])):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
-	nomjoueur=mamap['map']['ranking'][numjoueur]['joueurnom']
+	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
@@ -334,6 +334,7 @@ def map():
 #				longitude
 #		influence : float distance
 #		}
+	mamap['map']['itemsByPlayer'][mamap['map']['ranking'][numjoueur]['joueurnom']]=mamap.pop['map']['itemsByPlayer'][nomjoueur]
 	if nbpan!= 0:
 		#parti panneau
 		

@@ -279,7 +279,7 @@ def map():
     mapItem={}
     for numjoueur in range(len(ranking)):
 	print"--------------",ranking['ranking']
-	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking[0]['joueurnom']})
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)

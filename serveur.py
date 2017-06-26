@@ -274,12 +274,20 @@ def map():
     itemsByPlayer={}
     itemsByPlayer['location']={}
     mapItem={}
-    for numjoueur range(len(ranking)):
+    for numjoueur in range(len(ranking)):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
-
+#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
+#		kind :string stand ou at
+#		owner : string playername
+#		location :
+#			coordinates :
+#				latitude
+#				longitude
+#		influence : float distance
+#		}
 	if nbpan!= 0:
 		#parti panneau
 		mapItem['location']={}
@@ -302,15 +310,7 @@ def map():
 		mapItem[numjoueur]['location']['latitude']=mag[0]['magasinposy']
 		mapItem[numjoueur]['location']['longitude']= mag[0]['magasinposx']
 		mapItem[numjoueur]['influence']=mag[0]['magasininfluence']
-#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
-#		kind :string stand ou at
-#		owner : string playername
-#		location :
-#			coordinates :
-#				latitude
-#				longitude
-#		influence : float distance
-#		}	
+	
 	
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs

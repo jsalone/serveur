@@ -66,7 +66,7 @@ def addPlayer():
 	partiExist = db.select("SELECT idPartie FROM partie")
 	taille = len(partiExist)
 	if taille == 0:
-		partiExist=db.select ("INSERT INTO partie(PartieNom) VALUES (%(name)s) RETURNING idPartie",{"name" : table["name"]})
+		partiExist=db.select ("INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor,Partidfn) VALUES (%(name)s,sunny,rainny,0) RETURNING idPartie",{"name" : table["name"]})
 	taille = len(result)
 	if taille!= 0:
 		

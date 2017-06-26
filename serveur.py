@@ -154,7 +154,7 @@ def metrology():
         return jsonResponse(Temps)
     elif request.method == "POST" and len(meteoparti)!=0 :
 	get_json = request.get_json()
-	print("-----------------------------------------POST METRO----------------------------------------------------------")
+	print("-----------------------------------------POST METRO----------------------------------------------------------",get_json)
 	
 	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']

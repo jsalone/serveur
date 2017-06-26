@@ -371,8 +371,8 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-		mamap['map']['playerInfo'][newplayeurname]=mamap['map']['itemsByPlayer'].pop(nomjoueur)
-		mamap['map']['playerInfo'][newplayeurname]['cash'][numjoueur]=monjoueur[0]['joueurbudget']
+	mamap['map']['playerInfo'][newplayeurname]=mamap['map']['itemsByPlayer'].pop(nomjoueur)
+	mamap['map']['playerInfo'][newplayeurname]['cash'][numjoueur]=monjoueur[0]['joueurbudget']
 
 #	drinksByPlayer:{
 #		name

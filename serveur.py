@@ -266,7 +266,7 @@ def map():
 #				longitudeSpan
 	
 #	ranking: string id/name all player
-    ranking[]={}
+    ranking={}
     ranking['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
     mamap['map']=ranking
     
@@ -312,7 +312,9 @@ def map():
 		mapItem[numjoueur]['location']['longitude']= mag[0]['magasinposx']
 		mapItem[numjoueur]['influence']=mag[0]['magasininfluence']
 	
-	
+	    
+	mamap['itemsByPlayer']=mapItem
+	availableIngredients['map']=mamap
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float

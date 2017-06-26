@@ -325,37 +325,6 @@ def map():
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
-	mamap['map']['itemsByPlayer']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['kind']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['owner']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['influence']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['location']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['location']['latitude']={}
-	mamap['map']['itemsByPlayer'][nomjoueur]['location']['longitude']={}
-
-	mamap['map']['playerInfo']={}
-	mamap['map']['playerInfo'][nomjoueur]={}
-	mamap['map']['playerInfo'][nomjoueur]['cash']={}
-	mamap['map']['playerInfo'][nomjoueur]['sales']={}
-	mamap['map']['playerInfo'][nomjoueur]['profit']={}
-	mamap['map']['playerInfo'][nomjoueur]['drinksOffered']={}
-	mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['name']={}
-	mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['price']={}
-	mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['hasAlcohol']={}
-	mamap['map']['playerInfo'][nomjoueur]['drinksOffered']['isCold']={}
-
-	mamap['map']['drinksByPlayer']={}
-	mamap['map']['drinksByPlayer'][nomjoueur]={}
-	mamap['map']['drinksByPlayer'][nomjoueur]['name']={}
-	mamap['map']['drinksByPlayer'][nomjoueur]['price']={}
-	mamap['map']['drinksByPlayer'][nomjoueur]['hasAlcohol']={}
-	mamap['map']['drinksByPlayer'][nomjoueur]['isCold']={}
-
-
-
-
 #	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
 #		kind :string stand ou at
 #		owner : string playername
@@ -400,7 +369,7 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-		mamap['map']['playerInfo'][nomjoueur]['cash'][numjoueur]=monjoueur[0]['joueurbudget']
+		mamap['map']['playerInfo']['cash'][numjoueur]=monjoueur[0]['joueurbudget']
 
 #	drinksByPlayer:{
 #		name

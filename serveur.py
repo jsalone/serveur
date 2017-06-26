@@ -286,10 +286,8 @@ def map():
     mapItem['itemsByPlayer']['location']={}
     mapItem['itemsByPlayer']['location']['latitude']={}
     mapItem['itemsByPlayer']['location']['longitude']={}
-    total=0
-    total=range(len(ranking))
-    total+=1
-    for numjoueur in total:
+
+    for numjoueur in range(len(ranking)):
 	print"--------------------------------------",range(len(ranking))
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking['ranking'][numjoueur]['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

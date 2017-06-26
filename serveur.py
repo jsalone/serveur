@@ -346,19 +346,19 @@ def map():
 			mamap['map']['itemsByPlayer'][nomjoueur]['location'][matable]['longitude']= pan[matable]['panneauposx']
 			mamap['map']['itemsByPlayer'][nomjoueur]['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
-		mamap['map']['itemsByPlayer'][newplayeurname]['kind'][nbpan+1]= 'stand'
+		mamap['map']['itemsByPlayer'][nomjoueur]['kind'][nbpan+1]= 'stand'
 		mamap['map']['itemsByPlayer'][nomjoueur]['owner'][nbpan+1]= playerName	
 		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
 		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
 		mamap['map']['itemsByPlayer'][nomjoueur]['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		mamap['map']['itemsByPlayer'][nomjoueur]['kind'][numjoueur]= 'stand'
-		mamap['map']['itemsByPlayer'][nomjoueur]['owner'][numjoueur]= monjoueur[0]['joueurnom']
+		mamap['map']['itemsByPlayer'][newplayeurname]['kind'][numjoueur]= 'stand'
+		mamap['map']['itemsByPlayer'][newplayeurname]['owner'][numjoueur]= monjoueur[0]['joueurnom']
 		
-		mamap['map']['itemsByPlayer'][nomjoueur]['location']['latitude'][numjoueur]=mag[0]['magasinposy']
-		mamap['map']['itemsByPlayer'][nomjoueur]['location']['longitude'][numjoueur]= mag[0]['magasinposx']
-		mamap['map']['itemsByPlayer'][nomjoueur]['influence'][numjoueur]=mag[0]['magasininfluence']
+		mamap['map']['itemsByPlayer'][newplayeurname]['location']['latitude'][numjoueur]=mag[0]['magasinposy']
+		mamap['map']['itemsByPlayer'][newplayeurname]['location']['longitude'][numjoueur]= mag[0]['magasinposx']
+		mamap['map']['itemsByPlayer'][newplayeurname]['influence'][numjoueur]=mag[0]['magasininfluence']
 
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
@@ -371,7 +371,7 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-		mamap['map']['playerInfo']['cash'][numjoueur]=monjoueur[0]['joueurbudget']
+		mamap['map']['playerInfo'][newplayeurname]['cash'][numjoueur]=monjoueur[0]['joueurbudget']
 
 #	drinksByPlayer:{
 #		name

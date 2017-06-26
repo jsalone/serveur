@@ -318,11 +318,11 @@ def map():
 	else:
 		
 		mapItem['itemsByPlayer']['kind'][numjoueur]= 'stand'
-		mapItem['itemsByPlayer'][numjoueur]['owner']= monjoueur[0]['joueurnom']
-		mapItem['itemsByPlayer'][numjoueur]['location']={}
-		mapItem['itemsByPlayer'][numjoueur]['location']['latitude']=mag[0]['magasinposy']
-		mapItem['itemsByPlayer'][numjoueur]['location']['longitude']= mag[0]['magasinposx']
-		mapItem['itemsByPlayer'][numjoueur]['influence']=mag[0]['magasininfluence']
+		mapItem['itemsByPlayer']['owner'][numjoueur]= monjoueur[0]['joueurnom']
+		mapItem['itemsByPlayer']['location']={}
+		mapItem['itemsByPlayer']['location']['latitude'][numjoueur]=mag[0]['magasinposy']
+		mapItem['itemsByPlayer']['location']['longitude'][numjoueur]= mag[0]['magasinposx']
+		mapItem['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
 	
 	
     availableIngredients['map']=mamap

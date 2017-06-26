@@ -239,7 +239,10 @@ def actionsPlayer(playerName):
 	
 
    # if action['kind']=='drinks':
-
+   ##################################################################################
+   #
+   #
+   ###############"""################################################################
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

@@ -172,7 +172,20 @@
 
 <fieldset>
   <legend>Panneau publicitaire</legend>
-    <label>Achat de panneau: <input type='num' id="nbpanneau"></label>
+     <legend>taille du panneau</legend>
+    <SELECT name="radus" size="1" id="radius">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                </SELECT>
+    <br><button id="panneau">Achetter un panneau</button>
     <ul id="listepanneau"></ul>
     <br>
 </fieldset>
@@ -220,7 +233,7 @@ var rejpar=0;
             }
 
             var data3={
-            "joueur": $("#champ_joueur").val(),
+            "kind": "drinks",
             "data1": $(data1).val(),
             "data2": $(data2).val(),
             "panneau": $("#nbpanneau").val()
@@ -234,12 +247,7 @@ var rejpar=0;
             'contentType': "application/json",
             })
 
-            var i=1;
-            for (i=0;i<$("#nbpanneau").val();i++){
-            var text = val(response['Plocation']['longitude'])
-            var text2 = val(response['Plocation']['latitude'])
-            $('#listepanneau').append('<li>' + text + text2 + '</li>');
-            }
+
             $("#coutt").val(response['info']['cout'])
             alert("Achat et production validé");
         })
@@ -359,6 +367,7 @@ $('#addrecette').click(function(event){
   $('select').append('<option>'+newrecette+'</option>')
 
             var datare={
+            "kind": "recipe",
             "nomrecette": $("#nomrecette").val(),
             "ingrédients1": $("#igr1").val(),
             "ingrédients2": $("#igr2").val(),
@@ -374,13 +383,41 @@ $('#addrecette').click(function(event){
             alert("Recette créée");
             var dataJason =JSON.stringify(datare)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/newrecette", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
             'type': "POST",
             'data': JSON.stringify(datare),// decompresse la donnée en string pour python
             'contentType': "application/json",
             })
 })
 
+/**************************************************************************************************************************************************/
+/*                                                              panneau                                                                           */
+/**************************************************************************************************************************************************/
+
+$('#achatpanneau').click(function(event){
+          event.preventDefault();
+
+            var datapa={
+            "kind": "ad",
+            "radius": $("#radius").val(),
+
+            }
+            alert("Panneau Achetté");
+            var dataJason =JSON.stringify(datapa)
+            //requete pour l'envoie de donnée
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
+            'type': "POST",
+            'data': JSON.stringify(datare),// decompresse la donnée en string pour python
+            'contentType': "application/json",
+            })
+
+            var i=1;
+            for (i=0;i<$("#nbpanneau").val();i++){
+            var text = val(response['location']['longitude'])
+            var text2 = val(response['location']['latitude'])
+            $('#listepanneau').append('<li>' + text + text2 + '</li>');
+            }
+})
           
 
 </script>

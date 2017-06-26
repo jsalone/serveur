@@ -274,7 +274,7 @@ def map():
     itemsByPlayer={}
     itemsByPlayer['location']={}
     mapItem={}
-    for numjoueur range(len(ranking))
+    for numjoueur range(len(ranking)):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

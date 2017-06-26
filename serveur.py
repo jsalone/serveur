@@ -142,7 +142,7 @@ def metrology():
 	Temps={}
 	forcast['dfn']={}
 	forcast['weather']={}
-	forcast['dfn'][0]=meteoparti[0]['partidfn']
+	forcast['dfn'][0]=1 #meteoparti[0]['partidfn']
 	forcast['weather'][0]=meteoparti[0]['partimetrologitoday']
 	forcast['dfn'][1]=1
 	forcast['weather'][1]=meteoparti[0]['partimetrologitomor']

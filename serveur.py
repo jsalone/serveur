@@ -269,7 +269,9 @@ def map():
 
 
     mapItem={}
+    nomjoueur="joueur"
     mamap['map']['itemsByPlayer']={}
+    mamap['map']['itemsByPlayer'][nomjoueur]={}
     mamap['map']['itemsByPlayer']['kind']={}
     mamap['map']['itemsByPlayer']['location']={}
     mamap['map']['itemsByPlayer']['owner']={}

@@ -335,7 +335,7 @@ def map():
 #		influence : float distance
 #		}
 	newplayeurname=mamap['map']['ranking'][numjoueur]['joueurnom']
-	mamap['map']['itemsByPlayer'][newplayeurname]=mamap.pop(['map']['itemsByPlayer'][nomjoueur])
+	mamap['map']['itemsByPlayer'][newplayeurname]=mamap['map']['itemsByPlayer'].pop(['map']['itemsByPlayer'][nomjoueur])
 	if nbpan!= 0:
 		#parti panneau
 		

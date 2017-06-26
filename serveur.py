@@ -314,7 +314,7 @@ def map():
 #		influence : float distance
 #		}
 	newplayeurname=mamap['map']['ranking'][numjoueur]['joueurnom']
-	mamap['map']['itemsByPlayer'][newplayeurname]={}
+	mamap['map']['itemsByPlayer'][newplayeurname]=[]
 	mamap['map']['itemsByPlayer'][newplayeurname]['kind']={}
 	mamap['map']['itemsByPlayer'][newplayeurname]['location']={}
 	mamap['map']['itemsByPlayer'][newplayeurname]['owner']={}

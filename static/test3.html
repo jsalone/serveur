@@ -19,11 +19,6 @@
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <body>
 <!-- Ceci est un commentaire HTML -->
-
-<audio id="audioPlayer" src="PQCNP"></audio>
-
-
-
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!--                            PARTIE                                                                              -->
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
@@ -75,7 +70,8 @@
           <br>
 
                 <SELECT name="recette1" size="1" id="SELECTrecette1">
-                <option >--NONE--</option>
+                <option value="0">--NONE--</option>
+                <option value="1">Limonade</option>
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit1"></label>
@@ -86,6 +82,7 @@
 
                 <SELECT name="recette2" size="1" id="SELECTrecette2">
                 <option value="0">--NONE--</option>
+                <option value="1">Limonade</option>
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit2"></label>
@@ -96,6 +93,7 @@
 
                 <SELECT name="recette3" size="1" id="SELECTrecette3">
                 <option value="0">--NONE--</option>
+                <option value="1">Limonade</option>
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit3"></label>
@@ -107,6 +105,7 @@
 
                 <SELECT name="recette4" size="1" id="SELECTrecette4">
                 <option value="0">--NONE--</option>
+                <option value="1">Limonade</option>
                 </SELECT>
               
                 <label>Nombre à produire: <input type='num' id="nbproduit4"></label>
@@ -119,25 +118,24 @@
 
 </fieldset>
 </form>
-<button id="valider">validé et envoyer</button>
 
 
 <fieldset id="listi" class="item">
   <legend>Liste ingrédients</legend>
-<label>igr1: <input type="checkbox" id="igr1" value="checkbox1"></label>
-<label>igr2: <input type="checkbox" id="igr2" value="checkbox2"></label>
-<label>igr3: <input type="checkbox" id="igr3" value="checkbox3"></label><br>
-<label>igr4: <input type="checkbox" id="igr4" value="checkbox4"></label>
-<label>igr5: <input type="checkbox" id="igr5" value="checkbox5"></label>
-<label>igr6: <input type="checkbox" id="igr6" value="checkbox6"></label><br>
-<label>igr7: <input type="checkbox" id="igr7" value="checkbox7"></label>
-<label>igr8: <input type="checkbox" id="igr8" value="checkbox8"></label>
-<label>igr9: <input type="checkbox" id="igr9" value="checkbox9"></label><br>
-<label>igr10: <input type="checkbox" id="igr10" value="checkbox10"></label><br>
+<label>Sucre: <input type="checkbox" id="igr1" value="sucre"></label>
+<label>Sirop: <input type="checkbox" id="igr2" value="sirop"></label>
+<label>Glace: <input type="checkbox" id="igr3" value="glace"></label><br>
+<label>Chocolat: <input type="checkbox" id="igr4" value="chocolat"></label>
+<label>Légume: <input type="checkbox" id="igr5" value="legume"></label>
+<label>Lait: <input type="checkbox" id="igr6" value="lait"></label><br>
+<label>Alcool: <input type="checkbox" id="igr7" value="alcool"></label>
+<label>Eau gazéifiée: <input type="checkbox" id="igr8" value="eg"></label>
+<label>Café: <input type="checkbox" id="igr9" value="cafe"></label><br>
+<label>Thé: <input type="checkbox" id="igr10" value="the"></label><br>
 
 <label>Nom de la recette: <input type='text' id="nomrecette"></label>
 
-<button  id="text">Creer la recette</button><br>
+<button  id="addrecette">Creer la recette</button><br>
 
 </fieldset>
 
@@ -180,8 +178,8 @@
 </fieldset>
 </fieldset>
 
+<button id="valider">validé et envoyer</button>
 <button id="refresh">Rafraichir</button>
-
 <button id="rinit">Réinitialisé</button>
 </body>
 
@@ -199,6 +197,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script >
+var rejpar=0;
 /**************************************************************************************************************************************************/
 /*                                                              action jour suivant                                                               */
 /**************************************************************************************************************************************************/
@@ -242,7 +241,7 @@
             $('#listepanneau').append('<li>' + text + text2 + '</li>');
             }
             $("#coutt").val(response['info']['cout'])
-
+            alert("Achat et production validé");
         })
           
 
@@ -253,7 +252,8 @@
         $("#rejoindrepartie").click(function(event) {
 
             var saisie = prompt("Saisissez votre pseudo :", "")
-/*
+            rejpar=1;
+/*          
 
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
             $("#limo").val(response['limonade'])
@@ -269,7 +269,7 @@
             }).fail(function(response) {
 	          $("#error").text(response.responseJSON["error"])
 	          }).done(function(response) {
-	          alert(JSON.stringify(response));
+	          alert("Bienvenu sur notre projet!!!");
 
             $("#champ_joueur").val(response['name'])
 	          $("#xjoueur").val(response['location']['longitude'])
@@ -287,7 +287,7 @@
 
       $("#reset").click(function(event) {
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/reset")   
-            alert("Partir Réinitialisé"); 
+            alert("Notre projet et réinitialisé"); 
       })
 
 
@@ -300,7 +300,7 @@
             'type': "DELETE",
             'contentType': "application/json"
         }) 
-      	alert(event);
+      	alert("A bientôt sur notre projet!!!");
       })
 
 /**************************************************************************************************************************************************/
@@ -340,8 +340,8 @@ $("#jour").val(jo);
             })
 */        
           }
-
-      $("#refresh").click(refreshAction)
+      if (rejpar==1)
+      $("#refresh").click(refreshAction);
 
       var sec=12500;
       setInterval(refreshAction,sec);
@@ -351,13 +351,12 @@ $("#jour").val(jo);
 /*                                                              recette                                                                           */
 /**************************************************************************************************************************************************/
 
-$('addrecette').on('click', function(event){
+$('#addrecette').click(function(event){
           event.preventDefault();
 
 
-  var newrecette = $('#newrecette').val()
+  var newrecette = $('#nomrecette').val()
   $('select').append('<option>'+newrecette+'</option>')
-
 
             var datare={
             "nomrecette": $("#nomrecette").val(),
@@ -372,7 +371,7 @@ $('addrecette').on('click', function(event){
             "ingrédients9": $("#igr9").val(),
             "ingrédients10": $("#igr10").val(),
             }
-
+            alert("Recette créée");
             var dataJason =JSON.stringify(datare)
             //requete pour l'envoie de donnée
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/newrecette", {
@@ -380,9 +379,6 @@ $('addrecette').on('click', function(event){
             'data': JSON.stringify(datare),// decompresse la donnée en string pour python
             'contentType': "application/json",
             })
-
-
-
 })
 
           

@@ -299,6 +299,13 @@ def map():
     mamap['map']['playerInfo']['drinksOffered']['hasAlcohol']={}
     mamap['map']['playerInfo']['drinksOffered']['isCold']={}
 
+    mamap['map']['drinksByPlayer']={}
+    mamap['map']['drinksByPlayer']['name']={}
+    mamap['map']['drinksByPlayer']['price']={}
+    mamap['map']['drinksByPlayer']['hasAlcohol']={}
+    mamap['map']['drinksByPlayer']['isCold']={}
+
+
     for numjoueur in range(len(mamap['map']['ranking'])):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
@@ -352,7 +359,7 @@ def map():
 		compvendu={}
     		compvendu['vend']={}
     		for dep in range(len(idrecette)):
-			compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
+			compvendu['vend'][dep]=db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
 		
 		for dep in range(len(idrecette)):
 			if not compvendu['vend'][dep]:
@@ -361,15 +368,23 @@ def map():
 		for dep in range(len(idrecette)):
 			totalvendu+=compvendu['vend'][dep]
 		mamap['map']['playerInfo']['sales'][numjoueur]=totalvendu
+		mamap['map']['playerInfo']['profit'][numjoueur]=0.0#################################################################
+		
+		for dep in range(len(compvendu)):
+			recetteperso=recette=db.select("SELECT * FROM recette where idRecette=%(idrec)s",{"idrec":compvendu['idrecette'][0]})
+			
+			mamap['map']['drinksByPlayer'][numjoueur]['name'][dep]=recetteperso['recettenom'][0]
+			mamap['map']['drinksByPlayer']['price']={}
+			mamap['map']['drinksByPlayer']['hasAlcohol']={}
+			mamap['map']['drinksByPlayer']['isCold']={}
 
 #	drinksByPlayer:{
-#		drinkInfo :
-#			name
-#			price
-#			has alcohol
-#			is cold
+#		name
+#		price
+#		has alcohol
+#		is cold
 #		}
-
+		
 
 
     #return json.dumps(json_table)

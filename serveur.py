@@ -218,7 +218,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    print "----------------------------------action -----------------------------------------",get_json
+    print "----------------------------------action -----------------------------------------"
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
     if action['kind']=='recipe':
@@ -228,8 +228,7 @@ def actionsPlayer(playerName):
 	idingr={}
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients']['name'][matable]})
-		print "----------------------------------recette -----------------------------------------",idrecette[0]['idrecette']
-		print "----------------------------------recette -----------------------------------------",idingr[0]['idingredient']
+	
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
     if action['kind']=='ad':
@@ -267,6 +266,7 @@ def map():
 #				longitudeSpan
 	
 #	ranking: string id/name all player
+    ranking[]={}
     ranking['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
     mamap['map']=ranking
     

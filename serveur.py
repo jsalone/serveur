@@ -324,10 +324,17 @@ def mapPlayer(playerName):
     mamap={}
 
     #region
-    ###############################################################
-    # a faire
-    #
-    ###############################################################
+#map:
+#	region:
+#		center:
+#			latitude : float
+#			longitude : float
+#		span:
+#			latitudeSpan : float
+#			longitudeSpan : float
+#
+
+
     #ranking
     mamap['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
     #itemsduPlayer

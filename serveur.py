@@ -277,7 +277,8 @@ def map():
     mapItem={}
     itemsByPlayer['location']={}
     mapItem['location']={}
-    
+    mamap={}
+    mamap['itemsByPlayer']={}
     mapItem['kind']={}
     mapItem={}
     for numjoueur in range(len(ranking)):

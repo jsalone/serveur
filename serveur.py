@@ -220,7 +220,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    if get_json['actions'][0]['kind']=='recipe':
+    if get_json['actions']['kind']=='recipe':
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['recipe'][0]['name'] })
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'] })
@@ -229,10 +229,10 @@ def actionsPlayer(playerName):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
-    if get_json['actions'][0]['kind']=='ad':
+    if get_json['actions']['kind']=='ad':
 	
 
-    if get_json['actions'][0]['kind']=='drinks':
+    if get_json['actions']['kind']=='drinks':
 
     #global json_table
     #return json.dumps(json_table[value])

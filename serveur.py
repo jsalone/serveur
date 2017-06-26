@@ -256,18 +256,7 @@ def map():
     mamap['map']={}
     idrecette=recette=db.select("SELECT * FROM recette")
     print "----------------------------------map -----------------------------------------"
-#map:
-#	region : 
-#		center :
-#			coordinates :
-#				latitude
-#				longitude
-#		span :
-#			coordinatesSpan :
-#				latitudeSpan
-#				longitudeSpan
-	
-#	ranking: string id/name all player
+
     ranking={}
     mamap['map']['ranking']={}
     mamap['map']['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
@@ -304,6 +293,25 @@ def map():
     mamap['map']['drinksByPlayer']['price']={}
     mamap['map']['drinksByPlayer']['hasAlcohol']={}
     mamap['map']['drinksByPlayer']['isCold']={}
+
+    mamap['map']['region']={}
+    mamap['map']['region']['center']={}
+    mamap['map']['region']['center']['latitude']=300.0
+    mamap['map']['region']['center']['longitude']=300.0
+    mamap['map']['region']['span']['latitudeSpan']=600.0
+    mamap['map']['region']['span']['longitudeSpan']=600.0
+#map:
+#	region : 
+#		center :
+#			coordinates :
+#				latitude
+#				longitude
+#		span :
+#			coordinatesSpan :
+#				latitudeSpan
+#				longitudeSpan
+	
+#	ranking: string id/name all player
 
 
     for numjoueur in range(len(mamap['map']['ranking'])):

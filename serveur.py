@@ -227,7 +227,7 @@ def actionsPlayer(playerName):
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'] })
 	idingr={}
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
-		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients'][matable]})
+		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients']['name'][matable]})
 		print "----------------------------------recette -----------------------------------------",idrecette[0]['idrecette']
 		print "----------------------------------recette -----------------------------------------",idingr[0]['idingredient']
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
@@ -251,9 +251,9 @@ def actionsPlayer(playerName):
 # Requête R2 -  Map
 @app.route("/map", methods=["GET"])
 def map():
-
-    #return json.dumps(json_table)
-    return "OK:GET_MAP"
+    db = Db()
+    mamap={}
+    mamap['map']={}
 #map:
 #	region : 
 #		center :
@@ -263,10 +263,46 @@ def map():
 #		span :
 #			coordinatesSpan :
 #				latitudeSpan
-#				longitudeSpan	
+#				longitudeSpan
+	
 #	ranking: string id/name all player
-#	itemsByPlayer:{mapItem: repeated pour tous les joueurs
-#		
+    ranking['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
+    mamap['map']=ranking
+    
+
+    #pour chaque joueur
+    itemsByPlayer={}
+    itemsByPlayer['location']={}
+    mapItem={}
+    for numjoueur range(len(ranking))
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	nbpan=len(pan)
+
+	if nbpan!= 0:
+		#parti panneau
+		mapItem['location']={}
+		for matable in range(len(pan)):
+			mapItem[numjoueur]['kind'][matable]= 'at'
+			mapItem[numjoueur]['owner'][matable]= playerName
+			mapItem[numjoueur]['location'][matable]['latitude']=pan[matable]['panneauposy']
+			mapItem[numjoueur]['location'][matable]['longitude']= pan[matable]['panneauposx']
+			mapItem[numjoueur]['influene'][matable]=pan[matable]['panneauinfluence']
+		#partie mag
+		mapItem[numjoueur]['kind'][nbpan+1]= 'stand'
+		mapItem[numjoueur]['owner'][nbpan+1]= playerName	
+		mapItem[numjoueur]['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+		mapItem[numjoueur]['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+		mapItem[numjoueur]['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+	else:
+		mapItem[numjoueur]['kind']= 'stand'
+		mapItem[numjoueur]['owner']= playerName
+		mapItem[numjoueur]['location']={}
+		mapItem[numjoueur]['location']['latitude']=mag[0]['magasinposy']
+		mapItem[numjoueur]['location']['longitude']= mag[0]['magasinposx']
+		mapItem[numjoueur]['influence']=mag[0]['magasininfluence']
+#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
 #		kind :string stand ou at
 #		owner : string playername
 #		location :
@@ -274,7 +310,9 @@ def map():
 #				latitude
 #				longitude
 #		influence : float distance
-#		}
+#		}	
+	
+
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float
 #		sales: int nombre de vendu par recettes
@@ -286,6 +324,7 @@ def map():
 #				has alcohol
 #				is cold
 #		}
+
 #	drinksByPlayer:{
 #		drinkInfo :
 #			name
@@ -293,6 +332,12 @@ def map():
 #			has alcohol
 #			is cold
 #		}
+
+
+
+    #return json.dumps(json_table)
+    return "OK:GET_MAP"
+
 
 ##########################################################################################################################################
 # Requête R5 - Détails d'une partie

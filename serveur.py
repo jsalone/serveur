@@ -66,7 +66,7 @@ def addPlayer():
 	partiExist = db.select("SELECT idPartie FROM partie")
 	taille = len(partiExist)
 	if taille == 0:
-		partiExist=db.select ("INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor,Partidfn) VALUES (%(name)s,sunny,rainny,0) RETURNING idPartie",{"name" : table["name"]})
+		partiExist=db.select ("INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor,Partidfn) VALUES (%(name)s,%(today)s,%(tomor)s,0) RETURNING idPartie",{"name" : table["name"],"today" : "sunny","tomor" : "rainny"})
 	taille = len(result)
 	if taille!= 0:
 		
@@ -133,8 +133,10 @@ def metrology():
     global weathertoday
     global weathertomor
     global timestamp
+    db = Db()
     if request.method == "GET":
 	print("-----------------------------------------GET METRO----------------------------------------------------------")
+
 	weather={}
 	forcast={}
 	Temps={}

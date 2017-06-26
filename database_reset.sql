@@ -55,6 +55,9 @@ CREATE TABLE magasin(
 CREATE TABLE partie(
         IdPartie  int  Default nextval ('partie_seq')  NOT NULL ,
         PartieNom Char (25) ,
+	PartiMetrologitoday Char (25) ,
+	PartiMetrologitomor Char (25) ,
+	Partidfn int ,
         PRIMARY KEY (IdPartie )
 );
 

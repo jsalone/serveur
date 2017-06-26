@@ -20,7 +20,7 @@ debutpartie=0
 dfn=0
 
 weathertoday='sunny'
-weathertomor='sunny'
+weathertomor='rainny'
 timestamp=0
 
 @app.route('/')
@@ -150,13 +150,13 @@ def metrology():
     elif request.method == "POST":
 	get_json = request.get_json()
 	timestamp=get_json['timestamp']
-	day=get_json['weather']['forcast'][0]['dfn']
+	day=get_json['weather'][0]['dfn']
 	if day==0:
-		weathertoday=get_json['weather']['forcast'][0]['weather']
-		weathertomor=get_json['weather']['forcast'][1]['weather']
+		weathertoday=get_json['weather'][0]['weather']
+		weathertomor=get_json['weather'][1]['weather']
 	else :
-		weathertoday=get_json['weather']['forcast'][1]['weather']
-		weathertomor=get_json['weather']['forcast'][0]['weather']		
+		weathertoday=get_json['weather'][1]['weather']
+		weathertomor=get_json['weather'][0]['weather']		
 	print("-----------------------------------------POST METRO----------------------------------------------------------")
         return "OK:POST_METROLOGY"
 #timestamp: int nb d'heure joue 0 aujourd'hui 1 demain

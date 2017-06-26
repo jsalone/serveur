@@ -154,9 +154,10 @@ def metrology():
 	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
 	if day==0:
-		weathertoday=get_json['weather'][0]['weather']
-		weathertomor=get_json['weather'][1]['weather']
+		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn']})
+
 	else :
+		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn']})
 		weathertoday=get_json['weather'][1]['weather']
 		weathertomor=get_json['weather'][0]['weather']		
 	print("-----------------------------------------POST METRO----------------------------------------------------------")

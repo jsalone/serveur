@@ -129,10 +129,7 @@ def deletePlayer(playerName):
 # Requête R1/R7 - Metrology
 @app.route("/metrology", methods=["GET", "POST"])
 def metrology():
-    global dfn
-    global weathertoday
-    global weathertomor
-    global timestamp
+    print("-----------------------------------------METRO-----------------------------------------------------------")
     db = Db()
     meteoparti = db.select("SELECT * FROM partie")
     if request.method == "GET" and len(meteoparti)!=0 :

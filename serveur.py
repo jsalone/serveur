@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request
 from flask import render_template
-from flask_cors import CORS, cross_origin
 from db import Db # voyez db.py
 
 
@@ -14,7 +13,6 @@ import urlparse
 
 app = Flask(__name__)
 app.debug = True
-CORS(app)
 
 invite=0
 debutpartie=0
@@ -142,18 +140,13 @@ def metrology():
 	Temps={}
 	forcast['dfn']={}
 	forcast['weather']={}
-
 	forcast['dfn'][0]=0
 	forcast['weather'][0]=weathertoday
-
 	forcast['dfn'][1]=1
 	forcast['weather'][1]=weathertomor
-
 	weather['forcast']=forcast
-
 	Temps['timestamp']=timestamp
 	Temps['weather']=weather
-
         return jsonResponse(Temps)
     elif request.method == "POST":
 	get_json = request.get_json()
@@ -207,7 +200,7 @@ def sales():
 	else:
 		idjoueur = db.select ("INSERT INTO vendre(vendre, idJoueur, idRecette) VALUES (%(vendre)s,%(idjoueur)s ,%(idrec)s) RETURNING idJoueur", {"vendre" : table["quantity"],"idjoueur" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"] })
 
-
+    #json_table[value].update(get_json)
     db.close()
 
     return "OK:POST_SALES"
@@ -217,44 +210,9 @@ def sales():
 # Requête R6 - Instructions du joueur
 @app.route("/actions/<playerName>", methods=["POST"])
 def actionsPlayer(playerName):
-    db = Db()
-    get_json = request.get_json()
-#	kind: recipe 
-#	recipe:
-#		name :
-#		ingredients:
-#			name: string
-#			cost: float
-#			hasAlcohol: bool
-#			isCold: bool
-    if get_json['kind']=='recipe':
-	idrecette=db.select ("INSERT INTO recette(RecetteNom,RecetteAlcohol,RecetteTemperature) VALUES (%(nom)s,%(recAl)s,%(RecTemps)s) RETURNING idRecette",{"nom" : get_json["name"],"recal" : get_json['recipe'][dep]['ingredients']['hasalcohol'],"RecTemps" : get_json['recipe'][dep]['ingredients']['iscold']})
-	#liaison contenir
-	for dep in range(len(get_json['recipe']['ingredients'])):
-		listeingredient= db.select("SELECT * FROM ingredient WHERE IngredientNom=(%(name)s)",{"name" :get_json['recipe'][dep]['ingredients']['name']})
-		connexion=db.select ("INSERT INTO panneau(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette",{"idrec" : idrecette[0]['idrecette'],"iding" : listeingredient[0]['idingredient']})
 
-		
-#	// nouveau panneau
-#	kind: ad
-#	location:
-#		latitude : float
-#		longitude : float
-#	radius:float
-    if get_json['kind']=='ad':
-	idpanneau=db.select ("INSERT INTO contenir(PanneauPosX,PanneauPosY,PanneauInfluence) VALUES (%(x)s,%(y)s,%(influ)s) RETURNING idPanneau",{"x" : get_json["location"]["longitude"],"y" : get_json["location"]["latitude"],"influ" : get_json["radius"]})
-
-#	// nouveau panneau
-#	kind: drink
-#	prepare:{string: int} //reccette nombre
-#	price:{string : float} //recette prix
-    if get_json['kind']=='drink':
-#price
-####################################################################################
-#a finir
-#
-####################################################################################
-
+#action:
+#	
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName
@@ -404,7 +362,7 @@ def mapPlayer(playerName):
     ###############################################################
 
 
-    db.close()
+
     return jsonResponse(availableIngredients)
 
 #availableIngredients:

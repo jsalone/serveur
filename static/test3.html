@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!-- 														HEAD 													-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+ <head>
+    <meta charset="utf-8">
+    <title>PQCNP</title>
+    <link rel="stylesheet" href="test2.css" />
+  </head>
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!-- 														BODY 												                                                      	-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<body>
+<!-- Ceci est un commentaire HTML -->
+
+<audio id="audioPlayer" src="PQCNP"></audio>
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            PARTIE                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<fieldset id="part" class="container">
+  <legend>Partie</legend>
+        <fieldset  id="rp" class="item">
+          <legend>Créer ou Rejoindre la partie</legend>
+          <button id="rejoindrepartie">Rejoindre la partie</button>   
+        </fieldset>
+ <!--    
+        <fieldset id="cp" class="item">
+          <legend>Créer une partie</legend>
+          <button id="creerpartie">Créer la partie</button>
+        </fieldset>
+-->
+        <fieldset id="qp" class="item">
+          <legend>Quitter la partie</legend>
+          <button id="quitterpartie">Quitter la partie</button>
+        </fieldset>
+</fieldset>
+
+<br>
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            INFO GENERALE                                                                       -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<fieldset>
+  <legend>Info generale</legend>        
+      <label>Jour: <input type='text' id="jour" readonly></label>
+      <label>Heure: <input type='num' id="heure" readonly></label>
+      <label>Heure serveur: <input type='num' id="durertotal" readonly></label><br>
+      <label>Meteo: <input type='text' id="meteo" readonly></label>
+      <label>Prevision Meteo: <input type='text' id="prevmeteo"readonly></label><br>
+      <label>budget: <input type='num' id="budget" readonly></label>
+</fieldset>
+
+<br>
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            production                                                                          -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<fieldset id="recet" class="container">
+<legend>Production</legend>
+<form id="elements">
+<fieldset id="pb" class="item">
+  <legend>Production boisson</legend>
+     <!-- <label>Nombre recette: <input type='text' id="jour"></label>-->
+
+          <br>
+          <br>
+
+                <SELECT name="recette1" size="1" id="SELECTrecette1">
+                <option >--NONE--</option>
+                </SELECT>
+              
+                <label>Nombre à produire: <input type='num' id="nbproduit1"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit1"readonly></label>
+             
+          <br>
+          <br>
+
+                <SELECT name="recette2" size="1" id="SELECTrecette2">
+                <option value="0">--NONE--</option>
+                </SELECT>
+              
+                <label>Nombre à produire: <input type='num' id="nbproduit2"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit2"readonly></label>
+           
+          <br>
+          <br>
+
+                <SELECT name="recette3" size="1" id="SELECTrecette3">
+                <option value="0">--NONE--</option>
+                </SELECT>
+              
+                <label>Nombre à produire: <input type='num' id="nbproduit3"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit3"readonly></label>
+
+
+          <br>
+          <br>
+
+                <SELECT name="recette4" size="1" id="SELECTrecette4">
+                <option value="0">--NONE--</option>
+                </SELECT>
+              
+                <label>Nombre à produire: <input type='num' id="nbproduit4"></label>
+                <label>Nombre vendu: <input type='num' id="venteproduit4"readonly></label>
+
+
+          <br>
+          <br>
+          <label>Cout total <input type='num' id="coutt"></label>
+
+</fieldset>
+</form>
+<button id="valider">validé et envoyer</button>
+
+
+<fieldset id="listi" class="item">
+  <legend>Liste ingrédients</legend>
+<label>igr1: <input type="checkbox" id="igr1" value="checkbox1"></label>
+<label>igr2: <input type="checkbox" id="igr2" value="checkbox2"></label>
+<label>igr3: <input type="checkbox" id="igr3" value="checkbox3"></label><br>
+<label>igr4: <input type="checkbox" id="igr4" value="checkbox4"></label>
+<label>igr5: <input type="checkbox" id="igr5" value="checkbox5"></label>
+<label>igr6: <input type="checkbox" id="igr6" value="checkbox6"></label><br>
+<label>igr7: <input type="checkbox" id="igr7" value="checkbox7"></label>
+<label>igr8: <input type="checkbox" id="igr8" value="checkbox8"></label>
+<label>igr9: <input type="checkbox" id="igr9" value="checkbox9"></label><br>
+<label>igr10: <input type="checkbox" id="igr10" value="checkbox10"></label><br>
+
+<label>Nom de la recette: <input type='text' id="nomrecette"></label>
+
+<button  id="text">Creer la recette</button><br>
+
+</fieldset>
+
+</fieldset>
+
+
+
+<br>
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            Position                                                                            -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<fieldset>
+<legend>Position</legend>
+<fieldset>
+ <form id="from_joueur">
+  <legend>Mini carte</legend>
+      
+
+      <img src="map.jpg"alt="map"/>
+
+
+      <br>
+      <label>Nom du joueur: <input type='text' id="champ_joueur"readonly></label>
+      <legend>Position Joueur</legend>
+      <label>X: <input type='num' id="xjoueur" readonly></label>
+      <label>Y: <input type='num' id="yjoueur" readonly></label>
+      </form>
+</fieldset>
+
+
+
+<fieldset>
+  <legend>Panneau publicitaire</legend>
+    <label>Achat de panneau: <input type='num' id="nbpanneau"></label>
+    <ul id="listepanneau"></ul>
+    <br>
+</fieldset>
+</fieldset>
+
+<button id="refresh">Rafraichir</button>
+
+<button id="rinit">Réinitialisé</button>
+</body>
+
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            SCRIPT                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script >
+/**************************************************************************************************************************************************/
+/*                                                              action jour suivant                                                               */
+/**************************************************************************************************************************************************/
+
+        $("#valider").click(function(event) {
+          event.preventDefault();
+
+            var  data1={
+            "SELECTrecette1": $("#SELECTrecette1").val(),
+            "SELECTrecette2": $("#SELECTrecette2").val(),
+            "SELECTrecette3": $("#SELECTrecette3").val(),
+            "SELECTrecette4": $("#SELECTrecette4").val()
+            }
+            
+            var data2={
+            "nbproduit1": $("#nbproduit1").val(),
+            "nbproduit2": $("#nbproduit2").val(),
+            "nbproduit3": $("#nbproduit3").val(),
+            "nbproduit4": $("#nbproduit4").val()
+            }
+
+            var data3={
+            "joueur": $("#champ_joueur").val(),
+            "data1": $(data1).val(),
+            "data2": $(data2).val(),
+            "panneau": $("#nbpanneau").val()
+            }
+
+            var dataJason =JSON.stringify(data3)
+            //requete pour l'envoie de donnée
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
+            'type': "POST",
+            'data': JSON.stringify(data3),// decompresse la donnée en string pour python
+            'contentType': "application/json",
+            })
+
+            var i=1;
+            for (i=0;i<$("#nbpanneau").val();i++){
+            var text = val(response['Plocation']['longitude'])
+            var text2 = val(response['Plocation']['latitude'])
+            $('#listepanneau').append('<li>' + text + text2 + '</li>');
+            }
+            $("#coutt").val(response['info']['cout'])
+
+        })
+          
+
+/**************************************************************************************************************************************************/
+/*                                                              rejoindrepartie                                                                   */
+/**************************************************************************************************************************************************/
+
+        $("#rejoindrepartie").click(function(event) {
+
+            var saisie = prompt("Saisissez votre pseudo :", "")
+/*
+
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
+            $("#limo").val(response['limonade'])
+            $("#cafe").val(response['cafe'])
+            $("#soupe").val(response['soupe'])
+            $("#eau").val(response['eau'])
+            })
+*/
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players", {
+            'type': "POST",
+            'data': JSON.stringify({'name':saisie}),// decompresse la donnée en string pour python
+            'contentType': "application/json",
+            }).fail(function(response) {
+	          $("#error").text(response.responseJSON["error"])
+	          }).done(function(response) {
+	          alert(JSON.stringify(response));
+
+            $("#champ_joueur").val(response['name'])
+	          $("#xjoueur").val(response['location']['longitude'])
+	          $("#yjoueur").val(response['location']['latitude'])
+	          $("#budget").val(response['info']['cash'])
+
+            
+
+	          })
+        })
+
+/**************************************************************************************************************************************************/
+/*                                                              reset                                                                             */
+/**************************************************************************************************************************************************/
+
+      $("#reset").click(function(event) {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/reset")   
+            alert("Partir Réinitialisé"); 
+      })
+
+
+/**************************************************************************************************************************************************/
+/*                                                              quitterpartie                                                                     */
+/**************************************************************************************************************************************************/
+
+      $("#quitterpartie").click(function(event) {
+        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players/#champ_joueur", {
+            'type': "DELETE",
+            'contentType': "application/json"
+        }) 
+      	alert(event);
+      })
+
+/**************************************************************************************************************************************************/
+/*                                                              refreshAction    (metrologie)                                                     */
+/**************************************************************************************************************************************************/
+var i=0,j=0,jo=0,he=0;
+$("#jour").val(jo);
+      function refreshAction(event) {
+            if (event) event.preventDefault();
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/metrology").then(function(reponse) {
+            $("#meteo").val(reponse['weather']['weather']['0'])
+            $("#prevmeteo").val(reponse['weather']['weather']['1'])
+            $("#durertotal").val(reponse['timestamp'])
+
+
+            j=$("#durertotal").val();
+            if (i != j){
+              if((j-i)>=24){
+                he=(j-i)-24;
+                jo++;
+                $("#heure").val(he);
+                $("#jour").val(jo);
+              }
+              else{
+                he=(j-i);
+                $("#heure").val(he);
+              }
+              i=j;
+            }
+            else{$("#heure").val(he);}
+
+
+            })
+/*
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players").then(function(reponse) {
+            $("#budget").val(response['info']['cash'])
+            })
+*/        
+          }
+
+      $("#refresh").click(refreshAction)
+
+      var sec=12500;
+      setInterval(refreshAction,sec);
+      refreshAction(false)
+
+/**************************************************************************************************************************************************/
+/*                                                              recette                                                                           */
+/**************************************************************************************************************************************************/
+
+$('addrecette').on('click', function(event){
+          event.preventDefault();
+
+
+  var newrecette = $('#newrecette').val()
+  $('select').append('<option>'+newrecette+'</option>')
+
+
+            var datare={
+            "nomrecette": $("#nomrecette").val(),
+            "ingrédients1": $("#igr1").val(),
+            "ingrédients2": $("#igr2").val(),
+            "ingrédients3": $("#igr3").val(),
+            "ingrédients4": $("#igr4").val(),
+            "ingrédients5": $("#igr5").val(),
+            "ingrédients6": $("#igr6").val(),
+            "ingrédients7": $("#igr7").val(),
+            "ingrédients8": $("#igr8").val(),
+            "ingrédients9": $("#igr9").val(),
+            "ingrédients10": $("#igr10").val(),
+            }
+
+            var dataJason =JSON.stringify(datare)
+            //requete pour l'envoie de donnée
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/newrecette", {
+            'type': "POST",
+            'data': JSON.stringify(datare),// decompresse la donnée en string pour python
+            'contentType': "application/json",
+            })
+
+
+
+})
+
+          
+
+</script>
+
+
+
+</html>

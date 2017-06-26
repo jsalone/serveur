@@ -220,6 +220,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
+    print("----------------------------------action-----------------------------------------",get_json)
     if get_json['actions']['kind']=='recipe':
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['recipe'][0]['name'] })

@@ -254,6 +254,7 @@ def map():
     mamap={}
     availableIngredients={}
     mamap['map']={}
+    idrecette=recette=db.select("SELECT * FROM recette")
     print "----------------------------------map -----------------------------------------"
 #map:
 #	region : 
@@ -287,6 +288,16 @@ def map():
     mamap['map']['itemsByPlayer']['location']={}
     mamap['map']['itemsByPlayer']['location']['latitude']={}
     mamap['map']['itemsByPlayer']['location']['longitude']={}
+
+    mamap['map']['playerInfo']={}
+    mamap['map']['playerInfo']['cash']={}
+    mamap['map']['playerInfo']['sales']={}
+    mamap['map']['playerInfo']['profit']={}
+    mamap['map']['playerInfo']['drinksOffered']={}
+    mamap['map']['playerInfo']['drinksOffered']['name']={}
+    mamap['map']['playerInfo']['drinksOffered']['price']={}
+    mamap['map']['playerInfo']['drinksOffered']['hasAlcohol']={}
+    mamap['map']['playerInfo']['drinksOffered']['isCold']={}
 
     for numjoueur in range(len(mamap['map']['ranking'])):
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
@@ -325,23 +336,31 @@ def map():
 		mamap['map']['itemsByPlayer']['location']['latitude'][numjoueur]=mag[0]['magasinposy']
 		mamap['map']['itemsByPlayer']['location']['longitude'][numjoueur]= mag[0]['magasinposx']
 		mamap['map']['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
-	
-	
-    #mamap['map'][1]=mapItem
+
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float
 #		sales: int nombre de vendu par recettes
 #		profit : float -> negatif perdu
 #		drinksOffered:
-#			drinkInfo :
-#				name
-#				price
-#				has alcohol
-#				is cold
+#			name
+#			price
+#			hasAlcohol
+#			isCold
 #		}
-	
-
+		mamap['map']['playerInfo']['cash'][numjoueur]=monjoueur[0]['joueurbudget']
+		compvendu={}
+    		compvendu['vend']={}
+    		for dep in range(len(idrecette)):
+			compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
+		
+		for dep in range(len(idrecette)):
+			if not compvendu['vend'][dep]:
+				compvendu['vend'][dep]=0;
+		totalvendu=0.0
+		for dep in range(len(idrecette)):
+			totalvendu+=compvendu['vend'][dep]
+		mamap['map']['playerInfo']['sales']=totalvendu
 
 #	drinksByPlayer:{
 #		drinkInfo :

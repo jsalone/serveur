@@ -346,7 +346,7 @@ def map():
 			mamap['map']['itemsByPlayer'][nomjoueur]['location'][matable]['longitude']= pan[matable]['panneauposx']
 			mamap['map']['itemsByPlayer'][nomjoueur]['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
-		mamap['map']['itemsByPlayer'][nomjoueur]['kind'][nbpan+1]= 'stand'
+		mamap['map']['itemsByPlayer'][newplayeurname]['kind'][nbpan+1]= 'stand'
 		mamap['map']['itemsByPlayer'][nomjoueur]['owner'][nbpan+1]= playerName	
 		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
 		mamap['map']['itemsByPlayer'][nomjoueur]['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']

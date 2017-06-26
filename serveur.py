@@ -3,7 +3,7 @@
 from flask import Flask, request
 from flask import render_template
 from db import Db # voyez db.py
-
+from flask_cors import CORS, cross_origin
 
 import json
 import random
@@ -13,7 +13,7 @@ import urlparse
 
 app = Flask(__name__)
 app.debug = True
-
+CORS(app)
 invite=0
 debutpartie=0
 

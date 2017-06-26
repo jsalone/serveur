@@ -152,7 +152,7 @@ def metrology():
 	Temps['timestamp']=timestamp
 	Temps['weather']=forcast
         return jsonResponse(Temps)
-    elif request.method == "POST":
+    elif request.method == "POST" and len(meteoparti)!=0 :
 	get_json = request.get_json()
 	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
@@ -225,7 +225,7 @@ def actionsPlayer(playerName):
 	
 	for matable in range(len(get_json['recipe']['ingredients'])):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
-	contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : get_json['recipe'][0]['name'] })	
+		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
 
 

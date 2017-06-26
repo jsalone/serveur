@@ -223,7 +223,7 @@ def actionsPlayer(playerName):
     action=get_json['actions']
     if action['kind']=='recipe':
 
-	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe'][0]['name'] })
+	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe']['name'] })
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'] })
 	
 	for matable in range(len(get_json['recipe']['ingredients'])):

@@ -136,7 +136,7 @@ def metrology():
     db = Db()
     meteoparti = db.select("SELECT * FROM partie")
     if request.method == "GET" and len(meteoparti)!=0 :
-	print("-----------------------------------------GET METRO----------------------------------------------------------")
+	print("-----------------------------------------GET METRO-----------------------------------------------------------")
 	
 	weather={}
 	forcast={}

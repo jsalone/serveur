@@ -328,7 +328,7 @@ def map():
 		mapItem['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
 	
 	
-    mamap['map']=mapItem
+    #mamap['map']=mapItem
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float

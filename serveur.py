@@ -274,9 +274,10 @@ def map():
     #pour chaque joueur
     itemsByPlayer={}
     itemsByPlayer['location']={}
+    mapItem['location']={}
     mapItem={}
     for numjoueur in range(len(ranking)):
-	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking[0]['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
@@ -291,7 +292,7 @@ def map():
 #		}
 	if nbpan!= 0:
 		#parti panneau
-		mapItem['location']={}
+		
 		for matable in range(len(pan)):
 			mapItem[numjoueur]['kind'][matable]= 'at'
 			mapItem[numjoueur]['owner'][matable]= playerName

@@ -161,7 +161,7 @@
 
 
       <br>
-      <label>Nom du joueur: <input type='text' id="champ_joueur"readonly></label>
+      <label>Nom du joueur: <input type='text' id="champ_joueur" readonly></label>
       <legend>Position Joueur</legend>
       <label>X: <input type='num' id="xjoueur" readonly></label>
       <label>Y: <input type='num' id="yjoueur" readonly></label>
@@ -241,7 +241,10 @@ var rejpar=0;
 
             var dataJason =JSON.stringify(data3)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
+
+
+
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "POST",
             'data': JSON.stringify(data3),// decompresse la donnée en string pour python
             'contentType': "application/json",
@@ -261,15 +264,8 @@ var rejpar=0;
 
             var saisie = prompt("Saisissez votre pseudo :", "")
             rejpar=1;
-/*          
 
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/prixboisson").then(function(num) {
-            $("#limo").val(response['limonade'])
-            $("#cafe").val(response['cafe'])
-            $("#soupe").val(response['soupe'])
-            $("#eau").val(response['eau'])
-            })
-*/
+
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players", {
             'type': "POST",
             'data': JSON.stringify({'name':saisie}),// decompresse la donnée en string pour python
@@ -304,7 +300,7 @@ var rejpar=0;
 /**************************************************************************************************************************************************/
 
       $("#quitterpartie").click(function(event) {
-        $.ajax("https://enigmatic-bayou-14181.herokuapp.com/players/#champ_joueur", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "DELETE",
             'contentType': "application/json"
         }) 
@@ -381,9 +377,11 @@ $('#addrecette').click(function(event){
             "ingrédients10": $("#igr10").val(),
             }
             alert("Recette créée");
+            alert($("#champ_joueur").val());
+
             var dataJason =JSON.stringify(datare)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "POST",
             'data': JSON.stringify(datare),// decompresse la donnée en string pour python
             'contentType': "application/json",
@@ -405,7 +403,7 @@ $('#achatpanneau').click(function(event){
             alert("Panneau Achetté");
             var dataJason =JSON.stringify(datapa)
             //requete pour l'envoie de donnée
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/#champ_joueur", {
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "POST",
             'data': JSON.stringify(datapa),// decompresse la donnée en string pour python
             'contentType': "application/json",

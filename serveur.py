@@ -254,6 +254,7 @@ def map():
     db = Db()
     mamap={}
     mamap['map']={}
+    print "----------------------------------map -----------------------------------------"
 #map:
 #	region : 
 #		center :
@@ -324,6 +325,8 @@ def map():
 #				has alcohol
 #				is cold
 #		}
+	
+
 
 #	drinksByPlayer:{
 #		drinkInfo :

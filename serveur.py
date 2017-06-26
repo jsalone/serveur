@@ -298,6 +298,7 @@ def map():
     mamap['map']['region']['center']={}
     mamap['map']['region']['center']['latitude']=300.0
     mamap['map']['region']['center']['longitude']=300.0
+    mamap['map']['region']['span']={}
     mamap['map']['region']['span']['latitudeSpan']=600.0
     mamap['map']['region']['span']['longitudeSpan']=600.0
 #map:

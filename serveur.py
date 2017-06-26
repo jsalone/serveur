@@ -494,7 +494,7 @@ def mapPlayer(playerName):
 #	region:
 #		center:
 #			latitude : float
-#			longitude : float
+#			longitude : flot
 #		span:
 #			latitudeSpan : float
 #			longitudeSpan : float

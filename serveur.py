@@ -231,10 +231,10 @@ def actionsPlayer(playerName):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
-    if get_json['actions']['kind']=='ad':
+    if action['kind']=='ad':
 	
 
-    if get_json['actions']['kind']=='drinks':
+    if action['kind']=='drinks':
 
     #global json_table
     #return json.dumps(json_table[value])

@@ -300,6 +300,7 @@ def map():
 #				longitude
 #		influence : float distance
 #		}
+	print"-----",mapItem
 	if nbpan!= 0:
 		#parti panneau
 		

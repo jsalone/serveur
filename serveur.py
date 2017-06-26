@@ -269,7 +269,7 @@ def map():
 #	ranking: string id/name all player
     ranking={}
     ranking['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
-    mamap['map']=ranking
+    mamap['map'][0]=ranking
     
 
     #pour chaque joueur
@@ -288,7 +288,6 @@ def map():
     mapItem['itemsByPlayer']['location']['longitude']={}
 
     for numjoueur in range(len(ranking['ranking'])):
-	print"--------------------------------------",range(len(ranking))
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking['ranking'][numjoueur]['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
@@ -327,7 +326,7 @@ def map():
 		mapItem['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
 	
 	
-    mamap['map']=mapItem
+    mamap['map'][1]=mapItem
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float

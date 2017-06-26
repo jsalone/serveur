@@ -157,22 +157,17 @@ ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient_ingredient FORE
 --------------------------------------------------------------
 
 INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcohol) VALUES 
-   ('Eau', '0.5', '0', '0'),('orange', '1', '0', '0'),('graine de cafe', '2', '0', '0'),('legume', '4', '0', '0');
+   ('eg', '0.5', '0', '0'),('sirop', '1', '0', '0'),('glace', '2', '0', '0'),('sucre', '4', '0', '0'),('chocolat', '4', '0', '0'),('legume', '4', '0', '0'),('lait', '4', '0', '0'),('alcohol', '4', '0', '1'),('cafe', '4', '1', '0'),('the', '4', '1', '0');
 INSERT INTO recette (RecetteNom) VALUES 
-   ('Eau'),('limonade'),('cafe'),('soupe');
+   ('eg'),('limonade'),('cafe'),('soupe');
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='Eau'),(select idIngredient from ingredient where IngredientNom='Eau'));
+   ((select idRecette from recette where RecetteNom='eg'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='Eau'));
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='orange'));
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='Eau'));
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='graine de cafe'));
+   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='cafe'));
+
 
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='Eau'));
+   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='legume'));
 

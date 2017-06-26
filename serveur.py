@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request
 from flask import render_template
+from flask_cors import CORS, cross_origin
 from db import Db # voyez db.py
 
 
@@ -13,6 +14,7 @@ import urlparse
 
 app = Flask(__name__)
 app.debug = True
+CORS(app)
 
 invite=0
 debutpartie=0
@@ -140,13 +142,18 @@ def metrology():
 	Temps={}
 	forcast['dfn']={}
 	forcast['weather']={}
+
 	forcast['dfn'][0]=0
 	forcast['weather'][0]=weathertoday
+
 	forcast['dfn'][1]=1
 	forcast['weather'][1]=weathertomor
+
 	weather['forcast']=forcast
+
 	Temps['timestamp']=timestamp
 	Temps['weather']=weather
+
         return jsonResponse(Temps)
     elif request.method == "POST":
 	get_json = request.get_json()
@@ -200,7 +207,7 @@ def sales():
 	else:
 		idjoueur = db.select ("INSERT INTO vendre(vendre, idJoueur, idRecette) VALUES (%(vendre)s,%(idjoueur)s ,%(idrec)s) RETURNING idJoueur", {"vendre" : table["quantity"],"idjoueur" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"] })
 
-    #json_table[value].update(get_json)
+
     db.close()
 
     return "OK:POST_SALES"
@@ -210,9 +217,44 @@ def sales():
 # Requête R6 - Instructions du joueur
 @app.route("/actions/<playerName>", methods=["POST"])
 def actionsPlayer(playerName):
+    db = Db()
+    get_json = request.get_json()
+#	kind: recipe 
+#	recipe:
+#		name :
+#		ingredients:
+#			name: string
+#			cost: float
+#			hasAlcohol: bool
+#			isCold: bool
+    if get_json['kind']=='recipe':
+	idrecette=db.select ("INSERT INTO recette(RecetteNom,RecetteAlcohol,RecetteTemperature) VALUES (%(nom)s,%(recAl)s,%(RecTemps)s) RETURNING idRecette",{"nom" : get_json["name"],"recal" : get_json['recipe'][dep]['ingredients']['hasalcohol'],"RecTemps" : get_json['recipe'][dep]['ingredients']['iscold']})
+	#liaison contenir
+	for dep in range(len(get_json['recipe']['ingredients'])):
+		listeingredient= db.select("SELECT * FROM ingredient WHERE IngredientNom=(%(name)s)",{"name" :get_json['recipe'][dep]['ingredients']['name']})
+		connexion=db.select ("INSERT INTO panneau(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette",{"idrec" : idrecette[0]['idrecette'],"iding" : listeingredient[0]['idingredient']})
 
-#action:
-#	
+		
+#	// nouveau panneau
+#	kind: ad
+#	location:
+#		latitude : float
+#		longitude : float
+#	radius:float
+    if get_json['kind']=='ad':
+	idpanneau=db.select ("INSERT INTO contenir(PanneauPosX,PanneauPosY,PanneauInfluence) VALUES (%(x)s,%(y)s,%(influ)s) RETURNING idPanneau",{"x" : get_json["location"]["longitude"],"y" : get_json["location"]["latitude"],"influ" : get_json["radius"]})
+
+#	// nouveau panneau
+#	kind: drink
+#	prepare:{string: int} //reccette nombre
+#	price:{string : float} //recette prix
+    if get_json['kind']=='drink':
+#price
+####################################################################################
+#a finir
+#
+####################################################################################
+
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName
@@ -236,27 +278,26 @@ def map():
 #				latitudeSpan
 #				longitudeSpan	
 #	ranking: string id/name all player
-#	itemsByPlayer:{
-#		mapItem: repeated pour tous les joueurs
-#			kind :string stand ou at
-#			owner : string playername
-#			location :
-#				coordinates :
-#					latitude
-#					longitude
-#			influence : float distance
+#	itemsByPlayer:{mapItem: repeated pour tous les joueurs
+#		
+#		kind :string stand ou at
+#		owner : string playername
+#		location :
+#			coordinates :
+#				latitude
+#				longitude
+#		influence : float distance
 #		}
-#	playerInfo:{
-#		playerInfo: repeated pour tous les joueurs
-#			cash: float
-#			sales: int nombre de vendu par recettes
-#			profit : float -> negatif perdu
-#			drinksOffered:
-#				drinkInfo :
-#					name
-#					price
-#					has alcohol
-#					is cold
+#	playerInfo:{playerInfo: repeated pour tous les joueurs
+#		cash: float
+#		sales: int nombre de vendu par recettes
+#		profit : float -> negatif perdu
+#		drinksOffered:
+#			drinkInfo :
+#				name
+#				price
+#				has alcohol
+#				is cold
 #		}
 #	drinksByPlayer:{
 #		drinkInfo :
@@ -333,7 +374,9 @@ def mapPlayer(playerName):
 
     #playerInfo
     playerInfo={}
+    #cash
     playerInfo['cash']=monjoueur[0]['joueurbudget']
+    #sales
     sales={}
     idrecette=recette=db.select("SELECT * FROM recette")
     compvendu={}
@@ -347,18 +390,21 @@ def mapPlayer(playerName):
     totalvendu=0.0
     for dep in range(len(idrecette)):
 	totalvendu+=compvendu['vend'][dep]
-    
-#playerInfo:
-#	cash: float
-#	sales: int nombre de vendu
-#	profit : float -> negatif perdu
-#	drinksOffered:
-#		name
-#		price
-#		has alcohol
-#		is cold
-#	}
+    playerInfo['sales']=totalvendu
+    #profit
+    ###############################################################
+    # a faire
+    #
+    ###############################################################
 
+    #drinksOffered
+    ###############################################################
+    # a faire
+    #
+    ###############################################################
+
+
+    db.close()
     return jsonResponse(availableIngredients)
 
 #availableIngredients:
@@ -384,7 +430,16 @@ def mapPlayer(playerName):
 #				latitude : float
 #				longitude : float
 #			influence : float
-
+#playerInfo:
+#	cash: float
+#	sales: int nombre de vendu
+#	profit : float -> negatif perdu
+#	drinksOffered:
+#		name
+#		price
+#		has alcohol
+#		is cold
+#	}
 
 ##########################################################################################################################################
 # Requête R9 - Liste ingrédients

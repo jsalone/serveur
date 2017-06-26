@@ -83,6 +83,8 @@ CREATE TABLE joueur(
 CREATE TABLE recette(
         idRecette  int  Default nextval ('recette_seq')  NOT NULL ,
         RecetteNom Char (25) ,
+        RecetteTemperature Bool ,
+        RecetteAlcohol      Bool ,
         PRIMARY KEY (idRecette )
 );
 
@@ -98,7 +100,7 @@ CREATE TABLE ingredient(
         IngredientNom         Char (25) ,
         IngredientPrix        Double precision ,
         IngredientTemperature Bool ,
-        IngredientAlcool      Bool ,
+        IngredientAlcohol      Bool ,
         PRIMARY KEY (idIngredient )
 );
 
@@ -109,6 +111,7 @@ CREATE TABLE avoir(
 	vendre    Int ,
         idJoueur    Int NOT NULL ,
         idRecette Int NOT NULL ,
+	RecettePrix Double precision,
         PRIMARY KEY (idJoueur ,idRecette )
 );
 

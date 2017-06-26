@@ -328,7 +328,7 @@ def map():
 		mapItem['itemsByPlayer']['influence'][numjoueur]=mag[0]['magasininfluence']
 	
 	
-    availableIngredients['map']=mamap
+    mamap['map']=mapItem
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float
@@ -355,7 +355,7 @@ def map():
 
 
     #return json.dumps(json_table)
-    return jsonResponse(availableIngredients)
+    return jsonResponse(mamap)
 
 
 ##########################################################################################################################################

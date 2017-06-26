@@ -276,6 +276,7 @@ def map():
     mapItem={}
     itemsByPlayer['location']={}
     mapItem['location']={}
+
     mapItem['kind']={}
     mapItem={}
     for numjoueur in range(len(ranking)):
@@ -311,11 +312,11 @@ def map():
 	else:
 		
 		mapItem['kind']= 'stand'
-		mapItem[numjoueur]['owner']= playerName
-		mapItem[numjoueur]['location']={}
-		mapItem[numjoueur]['location']['latitude']=mag[0]['magasinposy']
-		mapItem[numjoueur]['location']['longitude']= mag[0]['magasinposx']
-		mapItem[numjoueur]['influence']=mag[0]['magasininfluence']
+		mapItem['owner']= playerName
+
+		mapItem['location']['latitude']=mag[0]['magasinposy']
+		mapItem['location']['longitude']= mag[0]['magasinposx']
+		mapItem['influence']=mag[0]['magasininfluence']
 	
 	    
 	mamap['itemsByPlayer']=mapItem
@@ -346,7 +347,7 @@ def map():
 
 
     #return json.dumps(json_table)
-    return "OK:GET_MAP"
+    return jsonResponse(availableIngredients)
 
 
 ##########################################################################################################################################

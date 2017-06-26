@@ -320,7 +320,7 @@ def map():
 		mapItem['location']['longitude']= mag[0]['magasinposx']
 		mapItem['influence']=mag[0]['magasininfluence']
 	
-	mamap[numjoueur]['itemsByPlayer']=mapItem
+	mamap['itemsByPlayer'][numjoueur]=mapItem
     availableIngredients['map']=mamap
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs

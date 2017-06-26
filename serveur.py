@@ -220,10 +220,11 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    print("----------------------------------action-----------------------------------------",get_json)
+    print("----------------------------------action-----------------------------------------")
+    monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
     if action['kind']=='recipe':
-	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['recipe'][0]['name'] })
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'] })
 	
@@ -231,7 +232,10 @@ def actionsPlayer(playerName):
 		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
-   # if action['kind']=='ad':
+    if action['kind']=='ad':
+	location=action['location']
+	
+	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : location['latitude'],"y" : location[0]['longitude'],"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
 
    # if action['kind']=='drinks':

@@ -212,9 +212,20 @@ def sales():
 # Requête R6 - Instructions du joueur
 @app.route("/actions/<playerName>", methods=["POST"])
 def actionsPlayer(playerName):
-
+    
 #action:
-#	
+
+    db = Db()
+    get_json = request.get_json()
+    if get_json['actions']=='recipe':
+	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['recipe'][0]['name'] })
+	
+	for matable in range(len(get_json['recipe']['ingredients'])):
+		idingr== db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['recipe'][matable]['name']})
+	contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : get_json['recipe'][0]['name'] })	
+
+    if get_json['actions']=='ad':
+    if get_json['actions']=='drink':
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

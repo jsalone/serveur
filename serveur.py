@@ -136,16 +136,16 @@ def metrology():
     db = Db()
     if request.method == "GET":
 	print("-----------------------------------------GET METRO----------------------------------------------------------")
-
+	meteoparti = db.select("SELECT * FROM partie")
 	weather={}
 	forcast={}
 	Temps={}
 	forcast['dfn']={}
 	forcast['weather']={}
-	forcast['dfn'][0]=0
-	forcast['weather'][0]=weathertoday
+	forcast['dfn'][0]=meteoparti['partidfn']
+	forcast['weather'][0]=meteoparti['partimetrologitoday']
 	forcast['dfn'][1]=1
-	forcast['weather'][1]=weathertomor
+	forcast['weather'][1]=meteoparti['partimetrologitomor']
 	Temps['timestamp']=timestamp
 	Temps['weather']=forcast
         return jsonResponse(Temps)

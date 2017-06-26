@@ -284,7 +284,6 @@ def map():
     mapItem['itemsByPlayer']['owner']={}
     mapItem['itemsByPlayer']['influence']={}
 
-    mapItem={}
     for numjoueur in range(len(ranking)):
 	print"--------------",ranking['ranking']
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking['ranking'][numjoueur]['joueurnom']})

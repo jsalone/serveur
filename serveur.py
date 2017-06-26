@@ -371,7 +371,7 @@ def map():
 		mamap['map']['playerInfo']['profit'][numjoueur]=0.0#################################################################
 		
 		for dep in range(len(compvendu)):
-			recetteperso=recette=db.select("SELECT * FROM recette where idRecette=%(idrec)s",{"idrec":compvendu['idrecette'][0]})
+			recetteperso=recette=db.select("SELECT * FROM recette where idRecette=%(idrec)s",{"idrec":compvendu['idrecette'][dep]})
 			
 			mamap['map']['drinksByPlayer'][numjoueur]['name'][dep]=recetteperso['recettenom'][0]
 			mamap['map']['drinksByPlayer']['price']={}

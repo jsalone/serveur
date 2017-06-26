@@ -298,21 +298,21 @@ def map():
 		#parti panneau
 		
 		for matable in range(len(pan)):
-			mapItem[numjoueur]['kind'][matable]= 'at'
-			mapItem[numjoueur]['owner'][matable]= playerName
-			mapItem[numjoueur]['location'][matable]['latitude']=pan[matable]['panneauposy']
-			mapItem[numjoueur]['location'][matable]['longitude']= pan[matable]['panneauposx']
-			mapItem[numjoueur]['influene'][matable]=pan[matable]['panneauinfluence']
+			mapItem['kind'][matable]= 'at'
+			mapItem['owner'][matable]= playerName
+			mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']
+			mapItem['location'][matable]['longitude']= pan[matable]['panneauposx']
+			mapItem['influene'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
-		mapItem[numjoueur]['kind'][nbpan+1]= 'stand'
-		mapItem[numjoueur]['owner'][nbpan+1]= playerName	
-		mapItem[numjoueur]['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-		mapItem[numjoueur]['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		mapItem[numjoueur]['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		mapItem['kind'][nbpan+1]= 'stand'
+		mapItem['owner'][nbpan+1]= playerName	
+		mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+		mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+		mapItem['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
 		mapItem['kind']= 'stand'
-		mapItem['owner']= playerName
+		mapItem['owner']= monjoueur[0]['joueurnom']
 
 		mapItem['location']['latitude']=mag[0]['magasinposy']
 		mapItem['location']['longitude']= mag[0]['magasinposx']

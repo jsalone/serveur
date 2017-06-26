@@ -276,7 +276,7 @@ def map():
     mapItem={}
     itemsByPlayer['location']={}
     mapItem['location']={}
-
+    
     mapItem['kind']={}
     mapItem={}
     for numjoueur in range(len(ranking)):
@@ -313,7 +313,7 @@ def map():
 		
 		mapItem['kind']= 'stand'
 		mapItem['owner']= monjoueur[0]['joueurnom']
-
+		mapItem['location']={}
 		mapItem['location']['latitude']=mag[0]['magasinposy']
 		mapItem['location']['longitude']= mag[0]['magasinposx']
 		mapItem['influence']=mag[0]['magasininfluence']

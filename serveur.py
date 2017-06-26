@@ -268,8 +268,9 @@ def map():
 	
 #	ranking: string id/name all player
     ranking={}
-    ranking['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
-    mamap['map'][0]=ranking
+    mamap['map']['ranking']={}
+    mamap['map']['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur ORDER BY JoueurBudget")
+    
     
 
     #pour chaque joueur
@@ -305,17 +306,17 @@ def map():
 		#parti panneau
 		
 		for matable in range(len(pan)):
-			mapItem['kind'][matable]= 'at'
-			mapItem['owner'][matable]= playerName
-			mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']
-			mapItem['location'][matable]['longitude']= pan[matable]['panneauposx']
-			mapItem['influence'][matable]=pan[matable]['panneauinfluence']
+			mapItem['itemsByPlayer']['kind'][matable]= 'at'
+			mapItem['itemsByPlayer']['owner'][matable]= playerName
+			mapItem['itemsByPlayer']['location'][matable]['latitude']=pan[matable]['panneauposy']
+			mapItem['itemsByPlayer']['location'][matable]['longitude']= pan[matable]['panneauposx']
+			mapItem['itemsByPlayer']['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
-		mapItem['kind'][nbpan+1]= 'stand'
-		mapItem['owner'][nbpan+1]= playerName	
-		mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-		mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		mapItem['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		mapItem['itemsByPlayer']['kind'][nbpan+1]= 'stand'
+		mapItem['itemsByPlayer']['owner'][nbpan+1]= playerName	
+		mapItem['itemsByPlayer']['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+		mapItem['itemsByPlayer']['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+		mapItem['itemsByPlayer']['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
 		mapItem['itemsByPlayer']['kind'][numjoueur]= 'stand'

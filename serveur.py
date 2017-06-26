@@ -360,7 +360,7 @@ def map():
 		totalvendu=0.0
 		for dep in range(len(idrecette)):
 			totalvendu+=compvendu['vend'][dep]
-		mamap['map']['playerInfo']['sales']=totalvendu
+		mamap['map']['playerInfo']['sales'][numjoueur]=totalvendu
 
 #	drinksByPlayer:{
 #		drinkInfo :

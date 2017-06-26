@@ -365,27 +365,29 @@ $('#addrecette').click(function(event){
             var datare={
             "kind": "recipe",
             "nomrecette": $("#nomrecette").val(),
-            "ingrédients1": $("#igr1").val(),
-            "ingrédients2": $("#igr2").val(),
-            "ingrédients3": $("#igr3").val(),
-            "ingrédients4": $("#igr4").val(),
-            "ingrédients5": $("#igr5").val(),
-            "ingrédients6": $("#igr6").val(),
-            "ingrédients7": $("#igr7").val(),
-            "ingrédients8": $("#igr8").val(),
-            "ingrédients9": $("#igr9").val(),
-            "ingrédients10": $("#igr10").val(),
+            "ingredients1": $("#igr1").val(),
+            "ingredients2": $("#igr2").val(),
+            "ingredients3": $("#igr3").val(),
+            "ingredients4": $("#igr4").val(),
+            "ingredients5": $("#igr5").val(),
+            "ingredients6": $("#igr6").val(),
+            "ingredients7": $("#igr7").val(),
+            "ingredients8": $("#igr8").val(),
+            "ingredients9": $("#igr9").val(),
+            "ingredients10": $("#igr10").val(),
             }
             alert("Recette créée");
             alert($("#champ_joueur").val());
 
-            var dataJason =JSON.stringify(datare)
+            var datare =JSON.stringify(datare)
             //requete pour l'envoie de donnée
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "POST",
             'data': JSON.stringify(datare),// decompresse la donnée en string pour python
             'contentType': "application/json",
+
             })
+            alert(JSON.stringify(datare));
 })
 
 /**************************************************************************************************************************************************/
@@ -398,16 +400,17 @@ $('#achatpanneau').click(function(event){
             var datapa={
             "kind": "ad",
             "radius": $("#radius").val(),
-
             }
             alert("Panneau Achetté");
-            var dataJason =JSON.stringify(datapa)
+            var datapa =JSON.stringify(datapa)
+            alert(JSON.stringify(datapa));
             //requete pour l'envoie de donnée
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
             'type': "POST",
             'data': JSON.stringify(datapa),// decompresse la donnée en string pour python
             'contentType': "application/json",
             })
+            
 
             var i=1;
             for (i=0;i<$("#nbpanneau").val();i++){

@@ -154,7 +154,7 @@ def metrology():
         return jsonResponse(Temps)
     elif request.method == "POST" and len(meteoparti)!=0 :
 	get_json = request.get_json()
-	print("-----------------------------------------POST METRO----------------------------------------------------------",get_json)
+	print "----------------------------------post metro -----------------------------------------",get_json
 	
 	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
@@ -243,7 +243,7 @@ def actionsPlayer(playerName):
    ##################################################################################
    #
    #
-   ###############"""################################################################
+   ##################################################################################
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

@@ -288,8 +288,8 @@ def map():
     mapItem['itemsByPlayer']['location']['latitude']={}
     mapItem['itemsByPlayer']['location']['longitude']={}
 
-    for numjoueur in range(len(ranking['ranking'])):
-	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : ranking['ranking'][numjoueur]['joueurnom']})
+    for numjoueur in range(len(mamap['map']['ranking'])):
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)

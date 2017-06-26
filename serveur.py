@@ -312,16 +312,15 @@ def map():
 		mapItem['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		mapItem[numjoueur]= 'stand'
+		mapItem['kind']= 'stand'
 		mapItem['owner']= monjoueur[0]['joueurnom']
 		mapItem['location']={}
 		mapItem['location']['latitude']=mag[0]['magasinposy']
 		mapItem['location']['longitude']= mag[0]['magasinposx']
 		mapItem['influence']=mag[0]['magasininfluence']
 	
-	    
-	mamap['itemsByPlayer']=mapItem
-	availableIngredients['map']=mamap
+	mamap[numjoueur]['itemsByPlayer']=mapItem
+    availableIngredients['map']=mamap
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float

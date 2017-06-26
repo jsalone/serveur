@@ -356,28 +356,6 @@ def map():
 #			isCold
 #		}
 		mamap['map']['playerInfo']['cash'][numjoueur]=monjoueur[0]['joueurbudget']
-		compvendu={}
-    		compvendu['vend']={}
-    		for dep in range(len(idrecette)):
-			compvendu['vend'][dep]=db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
-		print"------------------------------------------------------------",compvendu
-		for dep in range(len(idrecette)):
-			if not compvendu['vend'][dep]:
-				compvendu['vend'][dep]=0;
-		totalvendu=0.0
-		for dep in range(len(idrecette)):
-			totalvendu+=compvendu['vend'][dep]
-		mamap['map']['playerInfo']['sales'][numjoueur]=totalvendu
-		mamap['map']['playerInfo']['profit'][numjoueur]=0.0#################################################################
-		
-		for dep in range(len(compvendu)):
-			
-			recetteperso=db.select("SELECT * FROM recette where idRecette=%(idrec)s",{"idrec":compvendu['idrecette'][dep]})
-			
-			mamap['map']['drinksByPlayer'][numjoueur]['name'][dep]=recetteperso['recettenom'][0]
-			mamap['map']['drinksByPlayer']['price']={}
-			mamap['map']['drinksByPlayer']['hasAlcohol']={}
-			mamap['map']['drinksByPlayer']['isCold']={}
 
 #	drinksByPlayer:{
 #		name

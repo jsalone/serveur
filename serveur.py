@@ -222,7 +222,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    print("----------------------------------action-----------------------------------------"get_json)
+    print "----------------------------------action -----------------------------------------",get_json
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
     if action['kind']=='recipe':

@@ -196,11 +196,11 @@ def sales():
 	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(nom)s AND idJoueur = %(rec)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
 	print"-------------------------------",get_json['sales'][dep]['quantity']
 	print"-------------------------------",avoir
-	#if not(avoir) :
-	#	avoir[0]['recetteprix']=0.0
-	#newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
-	#newbudget+=monjoueur[0]['joueurbudget']	
-	#db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"vd": newbudget,"name" : monjoueur[0]['idjoueur']})
+	if not(avoir) :
+		avoir[0]['recetteprix']=0.0
+	newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
+	newbudget+=monjoueur[0]['joueurbudget']	
+	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"vd": newbudget,"name" : monjoueur[0]['idjoueur']})
 
     #json_table[value].update(get_json)
     db.close()

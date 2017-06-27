@@ -84,7 +84,7 @@ def addPlayer():
 		})
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,50) RETURNING idMagasin as magasin", {"posX" : random.randrange(600),"posY" : random.randrange(60),"idJoueur": result[0]['idjoueur']})
 	
-	limonda = db.select("SELECT RecetteNom FROM recette WHERE IngredientNom=%(nom)s ",{"nom": "limonade"})
+	limonda = db.select("SELECT * FROM recette WHERE RecetteNom=%(nom)s ",{"nom": "limonade"})
 	
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'] })
 

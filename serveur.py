@@ -237,7 +237,7 @@ def actionsPlayer(playerName):
 
     if action['kind']=='ad':
 	print"--------------------------------------ad--------------------------------------------",action['radius'][0]
-	act=(action['radius'][0]*10)/1
+	act=action['radius'][0]/1
 	
 	if act>monjoueur[0]['joueurbudget']:
 		fund={}

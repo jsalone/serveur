@@ -167,7 +167,7 @@ def metrology():
 #weather:
 #	forcast: // 2 forcast pour aujourd'hui et demain
 #		dfn : int day from now - 0 aujourd'hui 1 demain
-#		weather:
+#		weather
 
 
 

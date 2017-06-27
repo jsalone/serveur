@@ -190,7 +190,7 @@ def sales():
     for dep in range(len(get_json['sales'])):
 	idrecette = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(nom)s",{"nom" : get_json['sales'][dep]['item']})
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : get_json['sales'][dep]['player']})
-	db.execute("UPDATE avoir SET vendre=(%(vd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"vd": get_json['sales'][dep]['quantity'],"idrect"=idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
+	db.execute("UPDATE avoir SET vendre=(%(vd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", ("vd": get_json['sales'][dep]['quantity'],"idrect"=idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']))
 
 	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(nom)s AND idJoueur = %(rec)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
 	newbudget=avoir['0']['recetteprix']*get_json['sales'][dep]['quantity']

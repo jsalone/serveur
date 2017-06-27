@@ -284,6 +284,9 @@ def map():
     mamap['map']['region']['span']={}
     mamap['map']['region']['span']['latitudeSpan']=600.0
     mamap['map']['region']['span']['longitudeSpan']=600.0
+
+    mamap['map']['playerInfo']={}
+    
 #map:
 #	region : 
 #		center :
@@ -360,9 +363,8 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-	mamap['map']['playerInfo']={}
-	mamap['map']['playerInfo'][newplayeurname]={}
 
+	mamap['map']['playerInfo'][newplayeurname]={}
 	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
 	mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
 	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int

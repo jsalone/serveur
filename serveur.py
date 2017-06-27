@@ -376,9 +376,16 @@ def map():
 	drinksOffered['hasAlcohol']={}
 	drinksOffered['isCold']={}
 
-	totalvend = 0.0
+	totalvend = 0
+
+	for dep in range(len(avoir)):
+		if not avoir[0]['vendre']:
+			avoir[0]['vendre']=0
 	for dep in range(len(avoir)):
 		totalvend+=avoir[0]['vendre']
+
+  
+
 	mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
 

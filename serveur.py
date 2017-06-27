@@ -301,7 +301,7 @@ def map():
 
 
     for numjoueur in range(len(mamap['map']['ranking'])):
-	print"------------------------------------------------"mamap['map']['ranking']
+	print"------------------------------------------------",mamap['map']['ranking']
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

@@ -362,18 +362,18 @@ def map():
 #			isCold
 #		}
 	mamap['map']['playerInfo']={}
-	mamap['map']['playerInfo'][newplayeurname]=[]
-	playerinfo={}
-	playerinfo['cash']={}
-	playerinfo['sales']={}
-	playerinfo['profit']={}
-	playerinfo['drinksOffered']={}
-	playerinfo['drinksOffered']['name']={}
-	playerinfo['drinksOffered']['price']={}
-	playerinfo['drinksOffered']['hasAlcohol']={}
-	playerinfo['drinksOffered']['isCold']={}
+	mamap['map']['playerInfo'][newplayeurname]={}
 
-	mamap['map']['playerInfo'][newplayeurname].append(playerinfo)
+	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
+	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
+	mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
+	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]
+	drinksOffered['name']={}
+	drinksOffered['price']={}
+	drinksOffered['hasAlcohol']={}
+	drinksOffered['isCold']={}
+	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+	#mamap['map']['playerInfo'][newplayeurname].append(playerinfo)
 
 #	drinksByPlayer:{
 #		name

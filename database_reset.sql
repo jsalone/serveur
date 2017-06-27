@@ -113,6 +113,7 @@ CREATE TABLE ingredient(
 --------------------------------------------------------------
 CREATE TABLE avoir(
 	vendre    Int ,
+	prevuvendre    Int ,
         idJoueur    Int NOT NULL ,
         idRecette Int NOT NULL ,
 	RecettePrix Double precision,

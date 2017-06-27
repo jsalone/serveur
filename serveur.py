@@ -156,7 +156,6 @@ def metrology():
         return jsonResponse(Temps)
     if request.method == "POST" :
 	get_json = request.get_json()
-	print "----------------------------------post metro -----------------------------------------",get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
 	if day==0:
 		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s),PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json['timestamp']})
@@ -187,25 +186,16 @@ def sales():
     #quantity
     db = Db()
     get_json = request.get_json()
-    if 'player' in get_json:
-	table['name'] = get_json['player']
-	table['item'] = get_json['item']
-	table['quantity'] = get_json['quantity']
-        idjou = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
-		"name" : table["name"]
-		})
-	idrec = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(name)s",{
-		"name" : table["item"]
-		})
-	vend =db.select("SELECT * FROM avoir WHERE idJoueur = %(name)s AND idRecette = %(idrec)s",{
-		"name" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"]
-		})
-	taille = len(vend)
-	if taille!= 0:
-		vend[0]['vendre']+=table["quantity"]
-		db.execute("UPDATE avoir SET vendre=(%(vendre)s) WHERE idJoueur=(%(j_user)s)AND idRecette = %(namerec)s", {"vendre": vend[0]["vendre"],"j_user" : idjou[0]["idjoueur"],"namerec" : idrec[0]["idrecette"]})
-	else:
-		idjoueur = db.select ("INSERT INTO vendre(vendre, idJoueur, idRecette) VALUES (%(vendre)s,%(idjoueur)s ,%(idrec)s) RETURNING idJoueur", {"vendre" : table["quantity"],"idjoueur" : idjou[0]["idjoueur"],"idrec" : idrec[0]["idrecette"] })
+
+    for dep in range(len(get_json['sales'])):
+	idrecette = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(nom)s",{"nom" : get_json['sales'][dep]['item']})
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : get_json['sales'][dep]['player']})
+	db.execute("UPDATE avoir SET vendre=(%(vd)s),prevuvendre=(%(pvd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"vd": get_json['sales'][dep]['quantity'],"pvd"=0,"idrect"=idrecette[0]['idrecette'] :,"name" : monjoueur[0]['idjoueur']})
+
+	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(nom)s AND idJoueur = %(rec)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
+	newbudget=avoir['0']['recetteprix']*get_json['sales'][dep]['quantity']
+	newbudget+=monjoueur[0]['joueurbudget']	
+	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"vd": newbudget,"name" : monjoueur[0]['idjoueur']})
 
     #json_table[value].update(get_json)
     db.close()
@@ -222,7 +212,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    print "----------------------------------action -----------------------------------------",get_json
+    print "----------------------------------action -----------------------------------------"
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
     if action['kind']=='recipe':

@@ -236,7 +236,7 @@ def actionsPlayer(playerName):
 	action['radius']*=10
 	print "---------------------------------",action['radius'][0]
 	print "---------------------------------",monjoueur[0]['joueurbudget']
-	if action['radius'][0]>monjoueur[0]['joueurbudget']:
+	if action['radius'][0]>int(monjoueur[0]['joueurbudget']):
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']

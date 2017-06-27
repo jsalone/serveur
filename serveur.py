@@ -186,7 +186,7 @@ def sales():
     #quantity
     db = Db()
     get_json = request.get_json()
-    print"-----------------------------------------sales----------------------------------------------------------",get_json
+    print"-----------------------------------------sales----------------------------------------------------------"
     for dep in range(len(get_json['sales'])):
 	idrecette = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(nom)s",{"nom" : get_json['sales'][dep]['item']})
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : get_json['sales'][dep]['player']})
@@ -194,9 +194,7 @@ def sales():
 	db.execute("UPDATE avoir SET vendre=(%(vd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"vd": get_json['sales'][dep]['quantity'],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
 
 	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(rec)s AND idJoueur = %(nom)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
-	print"-------------------------------",get_json['sales'][dep]['quantity']
-	print"-------------------------------",avoir
-	print"-------------------------------",monjoueur
+
 	newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
 	newbudget+=monjoueur[0]['joueurbudget']	
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"vd": newbudget,"name" : monjoueur[0]['idjoueur']})
@@ -222,7 +220,7 @@ def actionsPlayer(playerName):
     if action['kind']=='recipe':
 
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe']['name'] })
-	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'] })
+	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vd)s,%(Recpr)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'],"vd": 0,"Recpr":0.0 })
 	idingr={}
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
 		idingr= db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients'][matable]['name']})

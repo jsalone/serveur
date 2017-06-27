@@ -306,6 +306,8 @@ def map():
 	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	recette = db.select("SELECT * FROM recette WHERE idRecette = %(idrec)s",{"idrec" : avoir[0]['idrecette']})
 	nbpan=len(pan)
 #	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
 #		kind :string stand ou at
@@ -373,8 +375,14 @@ def map():
 	drinksOffered['price']={}
 	drinksOffered['hasAlcohol']={}
 	drinksOffered['isCold']={}
+
+	totalvend = 0.0
+	for dep in range(len(avoir)):
+		totalvend+=avoir[0]['vendre']
+	mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
-	#mamap['map']['playerInfo'][newplayeurname].append(playerinfo)
+
+	
 
 #	drinksByPlayer:{
 #		name //string

@@ -234,7 +234,7 @@ def actionsPlayer(playerName):
     if action['kind']=='ad':
 	
 	action['radius']*=10
-	print "---------------------------------",action['radius']
+	print "---------------------------------",action[0]['radius']
 	if action['radius']>monjoueur[0]['joueurbudget']:
 		fund={}
 		fund['sufficientFunds']= False
@@ -313,7 +313,7 @@ def map():
 
 
     for numjoueur in range(len(mamap['map']['ranking'])):
-	print"------------------------------------------------",mamap['map']['ranking']
+
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

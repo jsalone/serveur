@@ -196,7 +196,7 @@ def sales():
 	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(nom)s AND idJoueur = %(rec)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
 	print"-------------------------------",get_json['sales'][dep]['quantity']
 	print"-------------------------------",avoir
-	if not avoir[0]['recetteprix'] :
+	if range(len(avoir[0]['recetteprix']))==0 :
 		avoir[0]['recetteprix']=0.0
 	newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
 	newbudget+=monjoueur[0]['joueurbudget']	

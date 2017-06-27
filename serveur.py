@@ -152,10 +152,10 @@ def metrology():
         return jsonResponse(Temps)
     if request.method == "POST" :
 	get_json = request.get_json()
-	print "----------------------------------post metro -----------------------------------------",get_json
+	print "----------------------------------post metro -----------------------------------------",get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
 	if day==0:
-		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s),PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json[0]['timestamp']})
+		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s),PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json['timestamp']})
 
 	else :
 		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s), PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json[0]['timestamp']})

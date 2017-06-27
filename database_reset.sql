@@ -169,6 +169,8 @@ INSERT INTO contenir (idRecette,idIngredient) VALUES
 INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='cafe'));
 
+INSERT INTO magasin (MagasinPosX,MagasinPosY,MagasinInfluence,idJoueur) VALUES
+   ('333','400','50',(select idJoueur from joueur where JoueurNom='toi')),('500','200','50',(select idJoueur from joueur where JoueurNom='moi'));
 
 INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='eg'));

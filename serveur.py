@@ -286,7 +286,8 @@ def map():
     mamap['map']['region']['span']['longitudeSpan']=600.0
 
     mamap['map']['playerInfo']={}
-    
+
+    mamap['map']['drinksByPlayer']={}    
 #map:
 #	region : 
 #		center :
@@ -386,7 +387,8 @@ def map():
 
 	mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
-	mamap['map']['drinksByPlayer']={}
+
+
 	mamap['map']['drinksByPlayer'][newplayeurname]=[]
 	drinksByPlayer={}
 	drinksByPlayer['name']={}#string

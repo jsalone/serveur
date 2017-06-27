@@ -277,7 +277,7 @@ def map():
 
     mamap['map']['playerInfo']={}
 
-    mamap['map']['drinksByPlayer']={}
+
 
     mamap['map']['region']={}
     mamap['map']['region']['center']={}

@@ -148,20 +148,20 @@ def metrology():
 	forcast['weather'][1]=meteoparti[0]['partimetrologitomor']
 	Temps['timestamp']=meteoparti[0]['partitimestamp']
 	Temps['weather']=forcast
+	db.close()
         return jsonResponse(Temps)
     if request.method == "POST" :
 	get_json = request.get_json()
 	print "----------------------------------post metro -----------------------------------------",get_json
-	timestamp=get_json['timestamp']
 	day=get_json['weather'][0]['dfn']
 	if day==0:
 		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn']})
 
 	else :
-		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s), PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json['timestamp']})
+		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s), PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json[0]['timestamp']})
 		weathertoday=get_json['weather'][1]['weather']
 		weathertomor=get_json['weather'][0]['weather']		
-
+	db.close()
         return "OK:POST_METROLOGY"
 #timestamp: int nb d'heure joue 0 aujourd'hui 1 demain
 #weather:

@@ -360,7 +360,7 @@ def map():
 #			hasAlcohol
 #			isCold
 #		}
-
+	mamap['map']['playerInfo']={}
 	mamap['map']['playerInfo'][newplayeurname]=[]
 	playerinfo={}
 	playerinfo['cash']={}

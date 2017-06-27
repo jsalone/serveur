@@ -364,6 +364,7 @@ def map():
 	mamap['map']['playerInfo'][newplayeurname]={}
 
 	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
+	mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
 	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
 	mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
 	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]

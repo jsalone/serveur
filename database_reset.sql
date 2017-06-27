@@ -156,7 +156,10 @@ ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient_ingredient FORE
 --------------------------------------------------------------
 -- Insert
 --------------------------------------------------------------
-
+INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor) VALUES
+   ('maparti','sunny','sunny')
+INSERT INTO joueur(JoueurNom,JoueurBudget,IdPartie) VALUES
+   ('moi','50',(select idPartie from partie)),('toi','50',(select idPartie from partie))
 INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcohol) VALUES 
    ('eg', '0.5', '0', '0'),('sirop', '1', '0', '0'),('glace', '2', '0', '0'),('sucre', '4', '0', '0'),('chocolat', '4', '0', '0'),('legume', '4', '0', '0'),('lait', '4', '0', '0'),('alcohol', '4', '0', '1'),('cafe', '4', '1', '0'),('the', '4', '1', '0');
 INSERT INTO recette (RecetteNom) VALUES 
@@ -171,6 +174,11 @@ INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='legume'));
+
+
+INSERT INTO avoir (idRecette,idJoueur,vendre,RecettePrix) VALUES
+   ((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where IngredientNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where IngredientNom='moi'),'10','8.0');
+
 
 
 

@@ -500,7 +500,7 @@ def mapPlayer(playerName):
 #				longitude
 #		influence : float distance
 #		}
-	newplayeurname=mamap['map']['ranking'][numjoueur]
+	
 	mamap['map']['itemsByPlayer'][playerName]=[]
 	drinksbyplayer={}
 	drinksbyplayer['kind']={}

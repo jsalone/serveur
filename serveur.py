@@ -264,7 +264,7 @@ def map():
     table=db.select("SELECT JoueurNom FROM joueur ORDER BY JoueurBudget")
     
     for dep in range(len(table)):
-	mamap['map']['ranking']=table[dep]['joueurnom']
+	mamap['map']['ranking'].append(table[dep]['joueurnom'])
     #pour chaque joueur
     itemsByPlayer={}
     itemsByPlayer['location']={}
@@ -301,7 +301,7 @@ def map():
 
 
     for numjoueur in range(len(mamap['map']['ranking'])):
-	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]['joueurnom']})
+	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

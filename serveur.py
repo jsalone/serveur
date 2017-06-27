@@ -390,7 +390,13 @@ def map():
 		drinksOffered['isCold']={}
 	
 		totalvend = 0
-
+		
+		mamap['map']['drinksByPlayer'][newplayeurname]=[]
+		drinksByPlayer={}
+		drinksByPlayer['name']={}#string
+		drinksByPlayer['price']={}#float
+		drinksByPlayer['hasAlcohol']={}#bo
+		drinksByPlayer['isCold']={}#bo
 		for dep in range(len(avoir)):
 			if not avoir[0]['vendre']:
 				avoir[0]['vendre']=0
@@ -401,18 +407,20 @@ def map():
 			drinksOffered['price']= avoir[0]['recetteprix']
 			drinksOffered['hasAlcohol']= False
 			drinksOffered['isCold']= True
+			drinksByPlayer['name']=nomrec[0]['recettenom']
+			drinksByPlayer['price']= avoir[0]['recetteprix']
+			drinksByPlayer['hasAlcohol']=False
+			drinksByPlayer['isCold']=True
 
 		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 		mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
 		mamap['map']['playerInfo'][newplayeurname]['profit']=0
 
 
-		mamap['map']['drinksByPlayer'][newplayeurname]=[]
-		drinksByPlayer={}
-		drinksByPlayer['name']={}#string
-		drinksByPlayer['price']={}#float
-		drinksByPlayer['hasAlcohol']={}#bo
-		drinksByPlayer['isCold']={}#bo
+
+
+
+
 		mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 
     #return json.dumps(json_table)

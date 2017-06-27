@@ -350,14 +350,24 @@ def map():
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
 	mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 
+#	playerInfo:{playerInfo: repeated pour tous les joueurs
+#		cash: float
+#		sales: int nombre de vendu par recettes
+#		profit : float -> negatif perdu
+#		drinksOffered:
+#			name
+#			price
+#			hasAlcohol
+#			isCold
+#		}
 	mamap['map']['playerInfo']={}
-	mamap['map']['playerInfo'][newplayeurname]=[]
-	playerinfo={}
-	playerinfo['cash']={}#float
-	playerinfo['cash']= monjoueur[0]['joueurbudget']
-	playerinfo['sales']={}#int
-	playerinfo['profit']={}#float
-	playerinfo['drinksOffered']=[]
+	mamap['map']['playerInfo'][newplayeurname]={}
+
+	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
+	mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
+	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
+	mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
+	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]
 	drinksOffered={}
 	drinksOffered['name']={}
 	drinksOffered['price']={}
@@ -381,8 +391,8 @@ def map():
 	drinksByPlayer['price']={}#float
 	drinksByPlayer['hasAlcohol']={}#bo
 	drinksByPlayer['isCold']={}#bo
-	playerinfo['drinksOffered'].append(drinksByPlayer)
-	mamap['map']['playerInfo'][newplayeurname].append(playerinfo)
+	mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
+
     #return json.dumps(json_table)
     return jsonResponse(mamap)
 

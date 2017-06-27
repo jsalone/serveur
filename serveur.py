@@ -345,7 +345,6 @@ def map():
 		
 		drinksbyplayer['kind']= 'stand'
 		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
-		
 		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
 		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
@@ -382,11 +381,12 @@ def map():
 #		has alcohol //bo
 #		is cold //bo
 #		}
-	mamap['map']['drinksByPlayer'][newplayeurname]={}
-	mamap['map']['drinksByPlayer'][newplayeurname]['name']={}
-	mamap['map']['drinksByPlayer'][newplayeurname]['price']={}
-	mamap['map']['drinksByPlayer'][newplayeurname]['hasAlcohol']={}
-	mamap['map']['drinksByPlayer'][newplayeurname]['isCold']={}
+	mamap['map']['drinksByPlayer']=[]
+	drinksByPlayer[newplayeurname]={}	
+	drinksByPlayer[newplayeurname]['name']={}
+	drinksByPlayer[newplayeurname]['price']={}
+	drinksByPlayer[newplayeurname]['hasAlcohol']={}
+	drinksByPlayer[newplayeurname]['isCold']={}
 
 
     #return json.dumps(json_table)

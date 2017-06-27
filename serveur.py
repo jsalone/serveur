@@ -193,7 +193,7 @@ def sales():
 	
 	db.execute("UPDATE avoir SET vendre=(%(vd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"vd": get_json['sales'][dep]['quantity'],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
 
-	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(nom)s AND idJoueur = %(rec)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
+	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(rec)s AND idJoueur = %(nom)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
 	print"-------------------------------",get_json['sales'][dep]['quantity']
 	print"-------------------------------",avoir
 	print"-------------------------------",monjoueur

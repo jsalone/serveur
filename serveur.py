@@ -50,7 +50,7 @@ def jsonResponse(data, status=200):
 
 
 ##########################################################################################################################################
-# Requête R4 - Rejoindre une partie
+# Requête R4 - Rejoindre une partie //fini
 @app.route("/players", methods=["POST"])
 def addPlayer():
     print("--------------------------------------rejoindre partie---------------------------------------------------")
@@ -99,7 +99,7 @@ def addPlayer():
     return jsonResponse(table)
 
 ##########################################################################################################################################
-# Requête R4 - Quitter une partie
+# Requête R4 - Quitter une partie//fini
 @app.route("/players/<playerName>", methods=["DELETE"])
 def deletePlayer(playerName):
     print("-----------------------------------------delete----------------------------------------------------------")
@@ -158,7 +158,7 @@ def metrology():
 		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][0]['weather'],"tomor" : get_json['weather'][1]['weather'],"dfn" : get_json['weather'][0]['dfn']})
 
 	else :
-		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn']})
+		db.execute("UPDATE partie SET PartiMetrologitoday=(%(today)s),PartiMetrologitomor=(%(tomor)s),Partidfn=(%(dfn)s), PartiTimestamp=(%(stamp)s)", {"today": get_json['weather'][1]['weather'],"tomor" : get_json['weather'][0]['weather'],"dfn" : get_json['weather'][0]['dfn'],"stamp": get_json['timestamp']})
 		weathertoday=get_json['weather'][1]['weather']
 		weathertomor=get_json['weather'][0]['weather']		
 
@@ -218,7 +218,7 @@ def actionsPlayer(playerName):
 
     db = Db()
     get_json = request.get_json()
-    print "----------------------------------action -----------------------------------------",get_json
+    print "----------------------------------action -----------------------------------------"
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
     if action['kind']=='recipe':

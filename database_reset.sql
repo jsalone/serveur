@@ -58,6 +58,7 @@ CREATE TABLE partie(
 	PartiMetrologitoday Char (25) ,
 	PartiMetrologitomor Char (25) ,
 	Partidfn int ,
+	PartiTimestamp int ,
         PRIMARY KEY (IdPartie )
 );
 

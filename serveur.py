@@ -397,7 +397,7 @@ def map():
 	for dep in range(len(avoir)):
 		totalvend+=avoir[0]['vendre']
 		drinksOffered['name']= db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
-		drinksOffered['price']= avoir[0]['idrecette']
+		drinksOffered['price']= avoir[0]['recetteprix']
 		drinksOffered['hasAlcohol']= False
 		drinksOffered['isCold']= True
 

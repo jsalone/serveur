@@ -86,7 +86,7 @@ def addPlayer():
 	
 	limonda = db.select("SELECT RecetteNom FROM recette WHERE IngredientNom=%(nom)s ",{"nom": "limonade"})
 	
-
+	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'] })
 
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
@@ -249,7 +249,7 @@ def actionsPlayer(playerName):
 	db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
-
+	
     if action['kind']=='drinks':
 	print "---------------------------",action
 

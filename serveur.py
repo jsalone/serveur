@@ -429,107 +429,173 @@ def map():
 @app.route("/map/<playerName>", methods=["GET"])
 def mapPlayer(playerName):
     db = Db()
-    table ={}
-    availableIngredients={}
-    mapItem= {}
-    location={}
-    monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
-    pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
-    mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
-    nbpan=len(pan)
-
-    #ingredient
-    mesingredient= db.select("SELECT * FROM ingredient")
-    ingredient={}
-    ingredient['name']={}
-    ingredient['cost']={}
-    ingredient['hasAlcohol']={}
-    ingredient['isCold']={}
-    for dep in range(len(mesingredient)):
-	ingredient['name'][dep]=mesingredient[dep]['ingredientnom']
-	ingredient['cost'][dep]=mesingredient[dep]['ingredientprix']
-	ingredient['hasAlcohol'][dep]=mesingredient[dep]['ingredientalcohol']
-	ingredient['isCold'][dep]=mesingredient[dep]['ingredienttemperature']
-
-    availableIngredients['availableIngredients']=ingredient
-    #map
     mamap={}
-
-    #region
-#map:
-#	region:
-#		center:
-#			latitude : float
-#			longitude : float
-#		span:
-#			latitudeSpan : float
-#			longitudeSpan : float
-#
-
-
-    #ranking
-    mamap['ranking']=db.select("SELECT idJoueur,JoueurNom FROM joueur WHERE JoueurNom = %(name)s ORDER BY JoueurBudget",{"name" : playerName})
-    #itemsduPlayer
-    if nbpan!= 0:
-	#parti panneau
-	mapItem['location']={}
-	for matable in range(len(pan)):
-		mapItem['kind'][matable]= 'at'
-		mapItem['owner'][matable]= playerName
-		mapItem['location'][matable]['latitude']=pan[matable]['panneauposy']
-		mapItem['location'][matable]['longitude']= pan[matable]['panneauposx']
-		mapItem['influene'][matable]=pan[matable]['panneauinfluence']
-	#partie mag
-	mapItem['kind'][nbpan+1]= 'stand'
-	mapItem['owner'][nbpan+1]= playerName	
-	mapItem['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-	mapItem['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-	mapItem['influene'][nbpan+1]=mag[nbpan+1]['magasininfluence']
-    else:
-	mapItem['kind']= 'stand'
-	mapItem['owner']= playerName
-	mapItem['location']={}
-	mapItem['location']['latitude']=mag[0]['magasinposy']
-	mapItem['location']['longitude']= mag[0]['magasinposx']
-	mapItem['influence']=mag[0]['magasininfluence']
-    
-    mamap['itemsByPlayer']=mapItem
-    availableIngredients['map']=mamap
-
-    #playerInfo
-    playerInfo={}
-    #cash
-    playerInfo['cash']=monjoueur[0]['joueurbudget']
-    #sales
-    sales={}
+    availableIngredients={}
+    mamap['map']={}
     idrecette=recette=db.select("SELECT * FROM recette")
-    compvendu={}
-    compvendu['vend']={}
-    for dep in range(len(idrecette)):
-	compvendu['vend'][dep]=db.select("SELECT vendre FROM avoir WHERE idJoueur = %(idjou)s AND idRecette=%(idrec)s ",{"idjou" : monjoueur[0]['idjoueur'], "idrec" : idrecette[0]['idrecette']})
-  
-    for dep in range(len(idrecette)):
-	if not compvendu['vend'][dep]:
-		compvendu['vend'][dep]=0;
-    totalvendu=0.0
-    for dep in range(len(idrecette)):
-	totalvendu+=compvendu['vend'][dep]
-    playerInfo['sales']=totalvendu
-    #profit
-    ###############################################################
-    # a faire
-    #
-    ###############################################################
+    print "----------------------------------map -----------------------------------------"
 
-    #drinksOffered
-    ###############################################################
-    # a faire
-    #
-    ###############################################################
+    ranking={}
+    mamap['map']['ranking']=[]
+    
+    table={}
+    table=db.select("SELECT JoueurNom FROM joueur ORDER BY JoueurBudget")
+    
+    for dep in range(len(table)):
+	mamap['map']['ranking'].append(table[dep]['joueurnom'])
+    #pour chaque joueur
+    itemsByPlayer={}
+    itemsByPlayer['location']={}
+
+
+    mapItem={}
+    nomjoueur="joueur"
+    mamap['map']['itemsByPlayer']={}
+
+
+    mamap['map']['playerInfo']={}
 
 
 
-    return jsonResponse(availableIngredients)
+    mamap['map']['region']={}
+    mamap['map']['region']['center']={}
+    mamap['map']['region']['center']['latitude']=300.0
+    mamap['map']['region']['center']['longitude']=300.0
+    mamap['map']['region']['span']={}
+    mamap['map']['region']['span']['latitudeSpan']=600.0
+    mamap['map']['region']['span']['longitudeSpan']=600.0
+
+    mamap['map']['playerInfo']={}
+
+    mamap['map']['drinksByPlayer']={}    
+#map:
+#	region : 
+#		center :
+#			coordinates :
+#				latitude
+#				longitude
+#		span :
+#			coordinatesSpan :
+#				latitudeSpan
+#				longitudeSpan
+	
+#	ranking: string id/name all player
+
+    print"-----------------------",mamap['map']['ranking']
+
+
+    monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
+    
+    if range(len(monjoueur))!=0 :
+	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	nbpan=len(pan)
+#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
+#		kind :string stand ou at
+#		owner : string playername
+#		location :
+#			coordinates :
+#				latitude
+#				longitude
+#		influence : float distance
+#		}
+	newplayeurname=mamap['map']['ranking'][numjoueur]
+	mamap['map']['itemsByPlayer'][playerName]=[]
+	drinksbyplayer={}
+	drinksbyplayer['kind']={}
+	drinksbyplayer['location']={}
+	drinksbyplayer['owner']={}
+	drinksbyplayer['influence']={}
+	drinksbyplayer['location']={}
+	drinksbyplayer['location']['latitude']={}
+	drinksbyplayer['location']['longitude']={}
+	if nbpan!= 0:
+		#parti panneau
+		
+		for matable in range(len(pan)):
+			drinksbyplayer['kind'][matable]= 'at'
+			drinksbyplayer['owner'][matable]= playerName
+			drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
+			drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+			drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+		#partie mag
+		drinksbyplayer['kind'][nbpan+1]= 'stand'
+		drinksbyplayer['owner'][nbpan+1]= playerName	
+		drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+		drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+		drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+	else:
+		
+		drinksbyplayer['kind']= 'stand'
+		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
+		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
+		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
+		drinksbyplayer['influence']=mag[0]['magasininfluence']
+	mamap['map']['itemsByPlayer'][playerName].append(drinksbyplayer)
+	
+#	playerInfo:{playerInfo: repeated pour tous les joueurs
+#		cash: float
+#		sales: int nombre de vendu par recettes
+#		profit : float -> negatif perdu
+#		drinksOffered:
+#			name
+#			price
+#			hasAlcohol
+#			isCold
+#		}
+	
+	mamap['map']['playerInfo'][playerName]={}
+	mamap['map']['playerInfo'][playerName]['cash']={}#float
+	mamap['map']['playerInfo'][playerName]['cash']= monjoueur[0]['joueurbudget']
+	mamap['map']['playerInfo'][playerName]['sales']={}#int
+	mamap['map']['playerInfo'][playerName]['profit']={}#float
+	mamap['map']['playerInfo'][playerName]['drinksOffered']=[]
+	drinksOffered={}
+	drinksOffered['name']={}
+	drinksOffered['price']={}
+	drinksOffered['hasAlcohol']={}
+	drinksOffered['isCold']={}
+
+	totalvend = 0
+		
+	mamap['map']['drinksByPlayer'][playerName]=[]
+	drinksByPlayer={}
+	drinksByPlayer['name']={}#string
+	drinksByPlayer['price']={}#float
+	drinksByPlayer['hasAlcohol']={}#bo
+	drinksByPlayer['isCold']={}#bo
+	for dep in range(len(avoir)):
+		if not avoir[0]['vendre']:
+			avoir[0]['vendre']=0		
+		
+	for dep in range(len(avoir)):
+		totalvend+=avoir[0]['vendre']
+		nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
+		drinksOffered['name'] =	nomrec[0]['recettenom']
+		drinksOffered['price']= avoir[0]['recetteprix']
+		drinksOffered['hasAlcohol']= False
+		drinksOffered['isCold']= True
+		drinksByPlayer['name']=nomrec[0]['recettenom']
+			
+		drinksByPlayer['price']= avoir[0]['recetteprix']
+		drinksByPlayer['hasAlcohol']=False
+		drinksByPlayer['isCold']=True
+
+	mamap['map']['playerInfo'][playerName]['sales'] = totalvend
+	mamap['map']['playerInfo'][playerName]['drinksOffered'].append(drinksOffered)
+	mamap['map']['playerInfo'][playerName]['profit']=0
+
+
+
+
+
+
+	mamap['map']['drinksByPlayer'][playerName].append(drinksByPlayer)
+
+    #return json.dumps(json_table)
+    return jsonResponse(mamap)
+
 
 #availableIngredients:
 #		name string

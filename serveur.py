@@ -348,7 +348,7 @@ def map():
 		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
 		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
-	mamap['map']['itemsByPlayer'][newplayeurname]=drinksbyplayer
+	mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float

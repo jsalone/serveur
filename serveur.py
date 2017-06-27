@@ -350,24 +350,14 @@ def map():
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
 	mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 
-#	playerInfo:{playerInfo: repeated pour tous les joueurs
-#		cash: float
-#		sales: int nombre de vendu par recettes
-#		profit : float -> negatif perdu
-#		drinksOffered:
-#			name
-#			price
-#			hasAlcohol
-#			isCold
-#		}
 	mamap['map']['playerInfo']={}
-	mamap['map']['playerInfo'][newplayeurname]={}
-
-	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
-	mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
-	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
-	mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]
+	mamap['map']['playerInfo'][newplayeurname]=[]
+	playerinfo={}
+	playerinfo['cash']={}#float
+	playerinfo['cash']= monjoueur[0]['joueurbudget']
+	playerinfo['sales']={}#int
+	playerinfo['profit']={}#float
+	playerinfo['drinksOffered']=[]
 	drinksOffered={}
 	drinksOffered['name']={}
 	drinksOffered['price']={}
@@ -382,28 +372,17 @@ def map():
 	for dep in range(len(avoir)):
 		totalvend+=avoir[0]['vendre']
 
-  
-
 	mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
-
-	
-
-#	drinksByPlayer:{
-#		name //string
-#		price //float
-#		has alcohol //bo
-#		is cold //bo
-#		}
 	mamap['map']['drinksByPlayer']={}
 	mamap['map']['drinksByPlayer'][newplayeurname]=[]
 	drinksByPlayer={}
-	drinksByPlayer['name']={}
-	drinksByPlayer['price']={}
-	drinksByPlayer['hasAlcohol']={}
-	drinksByPlayer['isCold']={}
-	mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
-
+	drinksByPlayer['name']={}#string
+	drinksByPlayer['price']={}#float
+	drinksByPlayer['hasAlcohol']={}#bo
+	drinksByPlayer['isCold']={}#bo
+	playerinfo['drinksOffered'].append(drinksByPlayer)
+	mamap['map']['playerInfo'][newplayeurname].append(playerinfo)
     #return json.dumps(json_table)
     return jsonResponse(mamap)
 

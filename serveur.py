@@ -86,7 +86,7 @@ def addPlayer():
 	
 	limonda = db.select("SELECT * FROM recette WHERE RecetteNom=%(nom)s ",{"nom": "limonade"})
 	
-	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'] })
+	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vend)s,%(rec)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'], "vend" : 0, "rec" : 0.0 })
 
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']

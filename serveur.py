@@ -238,13 +238,13 @@ def actionsPlayer(playerName):
     if action['kind']=='ad':
 	
 	action['radius']*=10
-	jou=int(monjoueur[0]['joueurbudget'])
+	joubud=int(monjoueur[0]['joueurbudget'])/1
 	if action['radius'][0]>jou:
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']
 		return jsonResponse(fund)
-	newbud=monjoueur[0]['joueurbudget']-action['radius'][0]
+	newbud=joubud-action['radius'][0]
 	print "---------------------------------",newbud
 	db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })

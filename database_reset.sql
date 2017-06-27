@@ -173,13 +173,13 @@ INSERT INTO magasin (MagasinPosX,MagasinPosY,MagasinInfluence,idJoueur) VALUES
    ('333','400','50',(select idJoueur from joueur where JoueurNom='toi')),('500','200','50',(select idJoueur from joueur where JoueurNom='moi'));
 
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='eg'));
+   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='soupe'),(select idIngredient from ingredient where IngredientNom='legume'));
+   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='sirop'));
 
 
 INSERT INTO avoir (idRecette,idJoueur,vendre,RecettePrix) VALUES
-   ((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
+   ((select idRecette from recette where RecetteNom='limonade'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='limonade'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
 
 
 

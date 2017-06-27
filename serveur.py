@@ -19,8 +19,8 @@ debutpartie=0
 
 dfn=0
 
-weathertoday='sunny'
-weathertomor='rainny'
+weathertoday='SUNNY'
+weathertomor='RAINNY'
 timestamp=0
 
 @app.route('/')
@@ -84,6 +84,11 @@ def addPlayer():
 		})
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,50) RETURNING idMagasin as magasin", {"posX" : random.randrange(600),"posY" : random.randrange(60),"idJoueur": result[0]['idjoueur']})
 	
+	limonda = db.select("SELECT RecetteNom FROM recette WHERE IngredientNom=%(nom)s ",{"nom": "limonade"})
+	
+	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur) VALUES (%(rec)s,%(idjou)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],result[0]['idjoueur']})	
+
+
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
 		})
@@ -234,8 +239,6 @@ def actionsPlayer(playerName):
     if action['kind']=='ad':
 	
 	action['radius']*=10
-	print "---------------------------------",action['radius'][0]
-	print "---------------------------------",monjoueur[0]['joueurbudget']
 	jou=int(monjoueur[0]['joueurbudget'])
 	if action['radius'][0]>jou:
 		fund={}
@@ -250,6 +253,7 @@ def actionsPlayer(playerName):
 
     if action['kind']=='drinks':
 	print "---------------------------",action
+
 	#idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : action[0]})
     #global json_table
     #return json.dumps(json_table[value])
@@ -399,7 +403,8 @@ def map():
 		drinksByPlayer['isCold']={}#bo
 		for dep in range(len(avoir)):
 			if not avoir[0]['vendre']:
-				avoir[0]['vendre']=0
+				avoir[0]['vendre']=0		
+		
 		for dep in range(len(avoir)):
 			totalvend+=avoir[0]['vendre']
 			nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
@@ -408,6 +413,7 @@ def map():
 			drinksOffered['hasAlcohol']= False
 			drinksOffered['isCold']= True
 			drinksByPlayer['name']=nomrec[0]['recettenom']
+			
 			drinksByPlayer['price']= avoir[0]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True

@@ -177,7 +177,7 @@ INSERT INTO contenir (idRecette,idIngredient) VALUES
 
 
 INSERT INTO avoir (idRecette,idJoueur,vendre,RecettePrix) VALUES
-   ((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where IngredientNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where IngredientNom='moi'),'10','8.0');
+   ((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='soupe'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
 
 
 

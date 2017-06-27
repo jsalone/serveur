@@ -236,11 +236,9 @@ def actionsPlayer(playerName):
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
 
-   # if action['kind']=='drinks':
-   ##################################################################################
-   #
-   #
-   ##################################################################################
+    if action['kind']=='drinks':
+	print "---------------------------",action
+	#idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : action[0]})
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

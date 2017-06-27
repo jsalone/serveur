@@ -258,7 +258,7 @@ def map():
     print "----------------------------------map -----------------------------------------"
 
     ranking={}
-    mamap['map']['ranking']={}
+    mamap['map']['ranking']=[]
     mamap['map']['ranking']=db.select("SELECT JoueurNom FROM joueur ORDER BY JoueurBudget")
     
     

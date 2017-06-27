@@ -340,12 +340,12 @@ def map():
 		mamap['map']['itemsByPlayer'][newplayeurname]['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		drinksbyplayer['kind'][numjoueur]= 'stand'
-		drinksbyplayer['owner'][numjoueur]= monjoueur[0]['joueurnom']
+		drinksbyplayer['kind']= 'stand'
+		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
 		
-		drinksbyplayer['location']['latitude'][numjoueur]=mag[0]['magasinposy']
-		drinksbyplayer['location']['longitude'][numjoueur]= mag[0]['magasinposx']
-		drinksbyplayer['influence'][numjoueur]=mag[0]['magasininfluence']
+		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
+		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
+		drinksbyplayer['influence']=mag[0]['magasininfluence']
 	mamap['map']['itemsByPlayer'][newplayeurname]=drinksbyplayer
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs

@@ -239,7 +239,7 @@ def actionsPlayer(playerName):
 	
 	action['radius']*=10
 	joubud=int(monjoueur[0]['joueurbudget'])/1
-	if action['radius'][0]>jou:
+	if action['radius'][0]>joubud:
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']

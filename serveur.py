@@ -314,14 +314,15 @@ def map():
 #		influence : float distance
 #		}
 	newplayeurname=mamap['map']['ranking'][numjoueur]['joueurnom']
-	mamap['map']['itemsByPlayer'][newplayeurname]={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['kind']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['location']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['owner']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['influence']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['location']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['location']['latitude']={}
-	mamap['map']['itemsByPlayer'][newplayeurname]['location']['longitude']={}
+	mamap['map']['itemsByPlayer'][newplayeurname]=[]
+	drinksbyplayer={}
+	drinksbyplayer['kind']={}
+	drinksbyplayer['location']={}
+	drinksbyplayer['owner']={}
+	drinksbyplayer['influence']={}
+	drinksbyplayer['location']={}
+	drinksbyplayer['location']['latitude']={}
+	drinksbyplayer['location']['longitude']={}
 	if nbpan!= 0:
 		#parti panneau
 		
@@ -339,13 +340,13 @@ def map():
 		mamap['map']['itemsByPlayer'][newplayeurname]['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 	else:
 		
-		mamap['map']['itemsByPlayer'][newplayeurname]['kind'][numjoueur]= 'stand'
-		mamap['map']['itemsByPlayer'][newplayeurname]['owner'][numjoueur]= monjoueur[0]['joueurnom']
+		drinksbyplayer['kind'][numjoueur]= 'stand'
+		drinksbyplayer['owner'][numjoueur]= monjoueur[0]['joueurnom']
 		
-		mamap['map']['itemsByPlayer'][newplayeurname]['location']['latitude'][numjoueur]=mag[0]['magasinposy']
-		mamap['map']['itemsByPlayer'][newplayeurname]['location']['longitude'][numjoueur]= mag[0]['magasinposx']
-		mamap['map']['itemsByPlayer'][newplayeurname]['influence'][numjoueur]=mag[0]['magasininfluence']
-
+		drinksbyplayer['location']['latitude'][numjoueur]=mag[0]['magasinposy']
+		drinksbyplayer['location']['longitude'][numjoueur]= mag[0]['magasinposx']
+		drinksbyplayer['influence'][numjoueur]=mag[0]['magasininfluence']
+	mamap['map']['itemsByPlayer'][newplayeurname]=drinksbyplayer
 
 #	playerInfo:{playerInfo: repeated pour tous les joueurs
 #		cash: float
@@ -358,15 +359,15 @@ def map():
 #			isCold
 #		}
 
-	mamap['map']['playerInfo'][newplayeurname]={}
-	mamap['map']['playerInfo'][newplayeurname]['cash']={}
-	mamap['map']['playerInfo'][newplayeurname]['sales']={}
-	mamap['map']['playerInfo'][newplayeurname]['profit']={}
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']={}
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['name']={}
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['price']={}
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['hasAlcohol']={}
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['isCold']={}
+#	mamap['map']['playerInfo'][newplayeurname]={}
+#	mamap['map']['playerInfo'][newplayeurname]['cash']={}
+#	mamap['map']['playerInfo'][newplayeurname]['sales']={}
+#	mamap['map']['playerInfo'][newplayeurname]['profit']={}
+#	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']={}
+#	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['name']={}
+#	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['price']={}
+#	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['hasAlcohol']={}
+#	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']['isCold']={}
 
 
 

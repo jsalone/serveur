@@ -197,6 +197,8 @@ def sales():
 	print"-------------------------------",get_json['sales'][dep]['quantity']
 	print"-------------------------------",avoir
 	if not(avoir) :
+		avoir={}
+		avoir['recetteprix']={}
 		avoir[0]['recetteprix']=0.0
 	newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
 	newbudget+=monjoueur[0]['joueurbudget']	

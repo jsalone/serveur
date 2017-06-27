@@ -259,10 +259,12 @@ def map():
 
     ranking={}
     mamap['map']['ranking']=[]
-    mamap['map']['ranking']=db.select("SELECT JoueurNom FROM joueur ORDER BY JoueurBudget")
     
+    table={}
+    table=db.select("SELECT JoueurNom FROM joueur ORDER BY JoueurBudget")
     
-
+    for dep in range(len(table)):
+	mamap['map']['ranking']=table[dep]['joueur']
     #pour chaque joueur
     itemsByPlayer={}
     itemsByPlayer['location']={}

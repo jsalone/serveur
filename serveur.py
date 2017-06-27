@@ -313,11 +313,12 @@ def map():
 	
 #	ranking: string id/name all player
 
-
+    print"-----------------------",mamap['map']['ranking']
     for numjoueur in range(len(mamap['map']['ranking'])):
 
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 	print"-----------------------",monjoueur
+	if monjoueur[][]
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})

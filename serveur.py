@@ -318,102 +318,102 @@ def map():
 
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 	print"-----------------------",monjoueur
-	if monjoueur[][]
-	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
-	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
-	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
-	nbpan=len(pan)
-#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
-#		kind :string stand ou at
-#		owner : string playername
-#		location :
-#			coordinates :
-#				latitude
-#				longitude
-#		influence : float distance
-#		}
-	newplayeurname=mamap['map']['ranking'][numjoueur]
-	mamap['map']['itemsByPlayer'][newplayeurname]=[]
-	drinksbyplayer={}
-	drinksbyplayer['kind']={}
-	drinksbyplayer['location']={}
-	drinksbyplayer['owner']={}
-	drinksbyplayer['influence']={}
-	drinksbyplayer['location']={}
-	drinksbyplayer['location']['latitude']={}
-	drinksbyplayer['location']['longitude']={}
-	if nbpan!= 0:
-		#parti panneau
-		
-		for matable in range(len(pan)):
-			drinksbyplayer['kind'][matable]= 'at'
-			drinksbyplayer['owner'][matable]= playerName
-			drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
-			drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
-			drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
-		#partie mag
-		drinksbyplayer['kind'][nbpan+1]= 'stand'
-		drinksbyplayer['owner'][nbpan+1]= playerName	
-		drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-		drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
-	else:
-		
-		drinksbyplayer['kind']= 'stand'
-		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
-		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
-		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
-		drinksbyplayer['influence']=mag[0]['magasininfluence']
-	mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
+	if range(len(monjoueur))!=0 
+		pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+		mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+		avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+		nbpan=len(pan)
+	#	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
+	#		kind :string stand ou at
+	#		owner : string playername
+	#		location :
+	#			coordinates :
+	#				latitude
+	#				longitude
+	#		influence : float distance
+	#		}
+		newplayeurname=mamap['map']['ranking'][numjoueur]
+		mamap['map']['itemsByPlayer'][newplayeurname]=[]
+		drinksbyplayer={}
+		drinksbyplayer['kind']={}
+		drinksbyplayer['location']={}
+		drinksbyplayer['owner']={}
+		drinksbyplayer['influence']={}
+		drinksbyplayer['location']={}
+		drinksbyplayer['location']['latitude']={}
+		drinksbyplayer['location']['longitude']={}
+		if nbpan!= 0:
+			#parti panneau
+			
+			for matable in range(len(pan)):
+				drinksbyplayer['kind'][matable]= 'at'
+				drinksbyplayer['owner'][matable]= playerName
+				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+			#partie mag
+			drinksbyplayer['kind'][nbpan+1]= 'stand'
+			drinksbyplayer['owner'][nbpan+1]= playerName	
+			drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+			drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+			drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		else:
+			
+			drinksbyplayer['kind']= 'stand'
+			drinksbyplayer['owner']= monjoueur[0]['joueurnom']
+			drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
+			drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
+			drinksbyplayer['influence']=mag[0]['magasininfluence']
+		mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
+	
+	#	playerInfo:{playerInfo: repeated pour tous les joueurs
+	#		cash: float
+	#		sales: int nombre de vendu par recettes
+	#		profit : float -> negatif perdu
+	#		drinksOffered:
+	#			name
+	#			price
+	#			hasAlcohol
+	#			isCold
+	#		}
+	
+		mamap['map']['playerInfo'][newplayeurname]={}
+		mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
+		mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
+		mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
+		mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
+		mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]
+		drinksOffered={}
+		drinksOffered['name']={}
+		drinksOffered['price']={}
+		drinksOffered['hasAlcohol']={}
+		drinksOffered['isCold']={}
+	
+		totalvend = 0
 
-#	playerInfo:{playerInfo: repeated pour tous les joueurs
-#		cash: float
-#		sales: int nombre de vendu par recettes
-#		profit : float -> negatif perdu
-#		drinksOffered:
-#			name
-#			price
-#			hasAlcohol
-#			isCold
-#		}
+		for dep in range(len(avoir)):
+			if not avoir[0]['vendre']:
+				avoir[0]['vendre']=0
+		for dep in range(len(avoir)):
+			totalvend+=avoir[0]['vendre']
+			nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
+			drinksOffered['name'] =	nomrec[0]['recettenom']
+			drinksOffered['price']= avoir[0]['recetteprix']
+			drinksOffered['hasAlcohol']= False
+			drinksOffered['isCold']= True
 
-	mamap['map']['playerInfo'][newplayeurname]={}
-	mamap['map']['playerInfo'][newplayeurname]['cash']={}#float
-	mamap['map']['playerInfo'][newplayeurname]['cash']= monjoueur[0]['joueurbudget']
-	mamap['map']['playerInfo'][newplayeurname]['sales']={}#int
-	mamap['map']['playerInfo'][newplayeurname]['profit']={}#float
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=[]
-	drinksOffered={}
-	drinksOffered['name']={}
-	drinksOffered['price']={}
-	drinksOffered['hasAlcohol']={}
-	drinksOffered['isCold']={}
-
-	totalvend = 0
-
-	for dep in range(len(avoir)):
-		if not avoir[0]['vendre']:
-			avoir[0]['vendre']=0
-	for dep in range(len(avoir)):
-		totalvend+=avoir[0]['vendre']
-		nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
-		drinksOffered['name'] =	nomrec[0]['recettenom']
-		drinksOffered['price']= avoir[0]['recetteprix']
-		drinksOffered['hasAlcohol']= False
-		drinksOffered['isCold']= True
-
-	mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
-	mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
-	mamap['map']['playerInfo'][newplayeurname]['profit']=0
+		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
+		mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+		mamap['map']['playerInfo'][newplayeurname]['profit']=0
 
 
-	mamap['map']['drinksByPlayer'][newplayeurname]=[]
-	drinksByPlayer={}
-	drinksByPlayer['name']={}#string
-	drinksByPlayer['price']={}#float
-	drinksByPlayer['hasAlcohol']={}#bo
-	drinksByPlayer['isCold']={}#bo
-	mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
+		mamap['map']['drinksByPlayer'][newplayeurname]=[]
+		drinksByPlayer={}
+		drinksByPlayer['name']={}#string
+		drinksByPlayer['price']={}#float
+		drinksByPlayer['hasAlcohol']={}#bo
+		drinksByPlayer['isCold']={}#bo
+		mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 
     #return json.dumps(json_table)
     return jsonResponse(mamap)

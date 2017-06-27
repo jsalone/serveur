@@ -236,7 +236,7 @@ def actionsPlayer(playerName):
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
 
     if action['kind']=='ad':
-	
+	print"--------------------------------------ad--------------------------------------------",action['radius'][0]
 	act=(action['radius'][0]*10)/1
 	
 	if act>monjoueur[0]['joueurbudget']:

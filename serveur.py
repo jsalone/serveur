@@ -382,6 +382,7 @@ def map():
 #		is cold //bo
 #		}
 	mamap['map']['drinksByPlayer']=[]
+	drinksByPlayer={}
 	drinksByPlayer[newplayeurname]={}	
 	drinksByPlayer[newplayeurname]['name']={}
 	drinksByPlayer[newplayeurname]['price']={}

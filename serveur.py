@@ -400,11 +400,10 @@ def map():
 	mamap['map']['drinksByPlayer']={}
 	mamap['map']['drinksByPlayer'][newplayeurname]=[]
 	drinksByPlayer={}
-	drinksByPlayer[newplayeurname]={}	
-	drinksByPlayer[newplayeurname]['name']={}
-	drinksByPlayer[newplayeurname]['price']={}
-	drinksByPlayer[newplayeurname]['hasAlcohol']={}
-	drinksByPlayer[newplayeurname]['isCold']={}
+	drinksByPlayer['name']={}
+	drinksByPlayer['price']={}
+	drinksByPlayer['hasAlcohol']={}
+	drinksByPlayer['isCold']={}
 	mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 
     #return json.dumps(json_table)

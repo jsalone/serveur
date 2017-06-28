@@ -402,6 +402,7 @@ def map():
 				avoir[0]['vendre']=0		
 		
 		for dep in range(len(avoir)):
+			
 			totalvend+=avoir[0]['vendre']
 			nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[0]['idrecette']})
 			drinksOffered['name'] =	nomrec[0]['recettenom']
@@ -413,6 +414,7 @@ def map():
 			drinksByPlayer['price']= avoir[0]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True
+			print"--------------------------------------",drinksByPlayer
 			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'][dep].append(drinksOffered)
 
 		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend

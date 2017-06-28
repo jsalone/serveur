@@ -65,6 +65,7 @@ def addPlayer():
 		})
 	partiExist = db.select("SELECT idPartie FROM partie")
 	taille = len(partiExist)
+	#verif parti existant
 	if taille == 0:
 		partiExist=db.select ("INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor,Partidfn) VALUES (%(name)s,%(today)s,%(tomor)s,0) RETURNING idPartie",{"name" : table["name"],"today" : "sunny","tomor" : "rainny"})
 	taille = len(result)
@@ -77,7 +78,7 @@ def addPlayer():
 			result = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : table["name"]})
 			taille = len(result)
 					
-	
+	#ajout joueur
 	idjoueur=db.select ("INSERT INTO joueur(JoueurNom, JoueurBudget,IdPartie) VALUES (%(name)s, 50,%(parti)s) RETURNING idJoueur", {"name" : table["name"],"parti":partiExist[0]['idpartie']})
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
@@ -87,7 +88,7 @@ def addPlayer():
 	limonda = db.select("SELECT * FROM recette WHERE RecetteNom=%(nom)s ",{"nom": 'limonade'})
 	print"-------------------",limonda
 	print"-------------------",limonda[0]['idrecette']
-	#racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vend)s,%(rec)s) RETURNING vendre", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'], "vend" : 0, "rec" : 0.0 })
+	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vd)s,%(Recpr)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'],"vd": 0,"Recpr":0.0 })
 
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
 		"name" : result[0]['idjoueur']
@@ -218,6 +219,7 @@ def actionsPlayer(playerName):
     print "----------------------------------action -----------------------------------------"
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     action=get_json['actions']
+    #ajout recette
     if action['kind']=='recipe':
 
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe']['name'] })
@@ -227,7 +229,7 @@ def actionsPlayer(playerName):
 		idingr= db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients'][matable]['name']})
 	
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
-
+    #ajout panneau
     if action['kind']=='ad':
 	print"--------------------------------------ad--------------------------------------------",action['radius'][0]
 	act=action['radius'][0]/1
@@ -242,7 +244,7 @@ def actionsPlayer(playerName):
 	db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idRecette", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
-	
+    #vente drink
     if action['kind']=='drinks':
 	print "---------------------------",action
 

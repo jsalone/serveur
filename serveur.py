@@ -250,7 +250,7 @@ def actionsPlayer(playerName):
     #vente drink
     if action['kind']=='drinks':
 	drink=action['kind']
-	print"-------------------drink1----------------------",drink['price']
+	print"-------------------drink1----------------------",drink[0]
 	print"-------------------drink1----------------------", drink['prepare'][0]
 	print"-------------------drink1----------------------",idrecette[0]['idrecette']
 	print"-------------------drink1----------------------",monjoueur[0]['idjoueur']

@@ -321,7 +321,7 @@ def map():
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
 
 	if range(len(monjoueur))!=0 :
-		print"--------------------------------",monjoueur
+		
 		pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 		mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 		avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
@@ -413,9 +413,10 @@ def map():
 			drinksByPlayer['price']= avoir[0]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True
+			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
 
 		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
-		mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+		
 		mamap['map']['playerInfo'][newplayeurname]['profit']=0
 
 
@@ -492,6 +493,7 @@ def mapPlayer(playerName):
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})
     
     if range(len(monjoueur))!=0 :
+	
 	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
@@ -623,7 +625,6 @@ def mapPlayer(playerName):
 #			owner: string
 #			location :
 #				latitude : float
-#				longitude : float
 #			influence : float
 #playerInfo:
 #	cash: float

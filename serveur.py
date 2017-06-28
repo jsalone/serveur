@@ -254,7 +254,7 @@ def actionsPlayer(playerName):
 	print"------------------------------------",action['prepare'][keyboisson[0]]
 	idrecette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : keyboisson[0]})
 	
-	listeIdingre=db.select("SELECT DISTINCT * FROM CONTENIR WHERE RecetteNom=%(idrec)s ",{"idrec" : idrecette[0]['idrecette']})
+	listeIdingre=db.select("SELECT DISTINCT * FROM contenir WHERE RecetteNom=%(idrec)s ",{"idrec" : idrecette[0]['idrecette']})
 	
 	for dep in range(len(listeIdingre)):
 		valIngre=db.select("SELECT * FROM ingredient WHERE idIngredien=%(idrec)s ",{"idrec" : listeIdingre[dep]['idingredient']})

@@ -350,9 +350,9 @@ def map():
 				drinksbyplayer['owner'][matable]= newplayeurname
 				print "--------------------drink------------------------",pan[matable]['panneauposy']
 				print "--------------------drink------------------------",pan
-				drinksbyplayer['location']['latitude'][matable]=15.0
-				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
-				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+
+				drinksbyplayer['location']['latitude'][matable]=pan[matable]['panneauposy']
+				drinksbyplayer['location']['longitude'][matable]= pan[matable]['panneauposx']
 				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 			#partie mag
 			drinksbyplayer['kind'][nbpan+1]= 'stand'

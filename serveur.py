@@ -232,7 +232,8 @@ def actionsPlayer(playerName):
     #ajout panneau
     if action['kind']=='ad':
 	print"--------------------------------------ad--------------------------------------------",action['radius'][0]
-	act=action['radius'][0]/1
+	act=action['radius'][0]
+	act=act*10
 	
 	if act>monjoueur[0]['joueurbudget']:
 		fund={}

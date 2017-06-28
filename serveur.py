@@ -250,7 +250,7 @@ def actionsPlayer(playerName):
     #vente drink
     if action['kind']=='drinks':
 	drink=action['kind']
-	print"-------------------drink1----------------------",drink
+	print"-------------------drink1----------------------",action['kind']
 	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink['prepare'][0]})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink['price'][0],"vd": drink['prepare'][0],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
 	print"--------------------drink2---------------------",idrecette

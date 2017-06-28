@@ -355,11 +355,11 @@ def map():
 			print"-----------------possede panneau--------------------",range(len(pan))
 			for matable in range(len(pan)):
 				print"-------------------------------",range(len(pan))
-				drinksbyplayer['kind']= 'ad'
-				drinksbyplayer['owner']= newplayeurname
-				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
-				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
-				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
+				drinksbyplayer['kind'][matable]= 'ad'
+				drinksbyplayer['owner'][matable]= newplayeurname
+				drinksbyplayer['location']['latitude'][matable]=pan[matable]['panneauposy']
+				drinksbyplayer['location']['longitude'][matable]= pan[matable]['panneauposx']
+				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 				#mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 			
 		

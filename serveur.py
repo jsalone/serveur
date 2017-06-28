@@ -346,10 +346,11 @@ def map():
 			#parti panneau
 			
 			for matable in range(len(pan)):
-				drinksbyplayer['kind'][matable]= 'at'
+				drinksbyplayer['kind'][matable]= 'ad'
 				drinksbyplayer['owner'][matable]= newplayeurname
 				print "--------------------drink------------------------",pan[matable]['panneauposy']
 				print "--------------------drink------------------------",pan
+				drinksbyplayer['location'][matable]['latitude']=15.0
 				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
 				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
 				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']

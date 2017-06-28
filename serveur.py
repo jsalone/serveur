@@ -353,12 +353,14 @@ def map():
 				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
 				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
 				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
+				mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 			#partie maga
 			drinksbyplayer['kind']= 'stand'
 			drinksbyplayer['owner']= newplayeurname	
 			drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
 			drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
 			drinksbyplayer['influence']=mag[0]['magasininfluence']
+
 		else:
 			
 			drinksbyplayer['kind']= 'stand'

@@ -86,8 +86,6 @@ def addPlayer():
 	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,50) RETURNING idMagasin as magasin", {"posX" : random.randrange(600),"posY" : random.randrange(600),"idJoueur": result[0]['idjoueur']})
 	
 	limonda = db.select("SELECT * FROM recette WHERE RecetteNom=%(nom)s ",{"nom": 'limonade'})
-	print"-------------------",limonda
-	print"-------------------",limonda[0]['idrecette']
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vd)s,%(Recpr)s) RETURNING idRecette", {"rec" : limonda[0]['idrecette'],"idjou" : result[0]['idjoueur'],"vd": 0,"Recpr":0.0 })
 
 	result = db.select("SELECT * FROM magasin WHERE idJoueur = %(name)s",{
@@ -135,11 +133,11 @@ def deletePlayer(playerName):
 # Requête R1/R7 - Metrology
 @app.route("/metrology", methods=["GET", "POST"])
 def metrology():
-    print"-----------------------------------------METRO-----------------------------------------------------------",request.method
+    print"-----------------------------------------METRO-----------------------------------------------------------"
     db = Db()
     meteoparti = db.select("SELECT * FROM partie")
     if request.method == "GET" and len(meteoparti)!=0 :
-	print"-----------------------------------------GET METRO-----------------------------------------------------------",meteoparti[0]['partitimestamp']
+	print"-----------------------------------------GET METRO-----------------------------------------------------------"
 	
 	weather={}
 	forcast={}
@@ -252,11 +250,11 @@ def actionsPlayer(playerName):
     #vente drink
     if action['kind']=='drinks':
 	drink=action['kind']
-	print"-----------------------------------------",drink
+	print"-------------------drink1----------------------",drink
 	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink['prepare'][0]})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink['price'][0],"vd": drink['prepare'][0],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
-	print"-----------------------------------------",idrecette
-	print"-----------------------------------------",monjoueur
+	print"--------------------drink2---------------------",idrecette
+	print"--------------------drink3---------------------",monjoueur
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName
@@ -322,7 +320,7 @@ def map():
     for numjoueur in range(len(mamap['map']['ranking'])):
 
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
-	print"-----------------------",monjoueur
+
 	if range(len(monjoueur))!=0 :
 		pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 		mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
@@ -350,11 +348,9 @@ def map():
 
 
 		#parti panneau
-		print"-----------------possede panneau--------------------",range(len(pan))
+
 		if nbpan!= 0:
-			print"-----------------possede panneau--------------------",range(len(pan))
 			for matable in range(len(pan)):
-				print"-------------------------------",range(len(pan))
 				drinksbyplayer['kind']= 'ad'
 				drinksbyplayer['owner']= newplayeurname
 				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
@@ -490,7 +486,7 @@ def mapPlayer(playerName):
 	
 #	ranking: string id/name all player
 
-    print"-----------------------",mamap['map']['ranking']
+
 
 
     monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : playerName})

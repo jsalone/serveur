@@ -252,8 +252,8 @@ def actionsPlayer(playerName):
 	print"------------------------------------",action['prepare'].keys()
 	keyboisson=action['prepare'].keys()
 	print"------------------------------------",action['prepare'][keyboisson[0]]
-	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : action['prepare'].keys()})
-	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": action['price'],"vd": action[0]['prepare'],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
+	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : keyboisson[0]})
+	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": action['price'][keyboisson[0]],"vd": action['prepare'][keyboisson[0]],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

@@ -164,7 +164,7 @@ INSERT INTO joueur(JoueurNom,JoueurBudget,IdPartie) VALUES
 INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcohol) VALUES 
    ('eg', '0.5', '0', '0'),('sirop', '1', '0', '0'),('glace', '2', '0', '0'),('sucre', '4', '0', '0'),('chocolat', '4', '0', '0'),('legume', '4', '0', '0'),('lait', '4', '0', '0'),('alcohol', '4', '0', '1'),('cafe', '4', '1', '0'),('the', '4', '1', '0');
 INSERT INTO recette (RecetteNom) VALUES 
-   ('eg'),('limonade'),('cafe'),('soupe');
+   ('eg'),('Limonade'),('cafe'),('soupe');
 INSERT INTO contenir (idRecette,idIngredient) VALUES
    ((select idRecette from recette where RecetteNom='eg'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
@@ -174,13 +174,13 @@ INSERT INTO magasin (MagasinPosX,MagasinPosY,MagasinInfluence,idJoueur) VALUES
    ('333','400','50',(select idJoueur from joueur where JoueurNom='toi')),('500','200','50',(select idJoueur from joueur where JoueurNom='moi'));
 
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='eg'));
+   ((select idRecette from recette where RecetteNom='Limonade'),(select idIngredient from ingredient where IngredientNom='eg'));
 INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='limonade'),(select idIngredient from ingredient where IngredientNom='sirop'));
+   ((select idRecette from recette where RecetteNom='Limonade'),(select idIngredient from ingredient where IngredientNom='sirop'));
 
 
 INSERT INTO avoir (idRecette,idJoueur,vendre,RecettePrix) VALUES
-   ((select idRecette from recette where RecetteNom='limonade'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='limonade'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
+   ((select idRecette from recette where RecetteNom='Limonade'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='Limonade'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
 
 
 

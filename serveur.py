@@ -346,19 +346,19 @@ def map():
 			#parti panneau
 			
 			for matable in range(len(pan)):
-				drinksbyplayer['kind'][matable]= 'ad'
-				drinksbyplayer['owner'][matable]= newplayeurname
+				drinksbyplayer['kind']= 'ad'
+				drinksbyplayer['owner']= newplayeurname
 
 
-				drinksbyplayer['location']['latitude'][matable]=pan[matable]['panneauposy']
-				drinksbyplayer['location']['longitude'][matable]= pan[matable]['panneauposx']
-				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
 			#partie maga
-			#drinksbyplayer['kind'][nbpan+1]= 'stand'
-			#drinksbyplayer['owner'][nbpan+1]= newplayeurname	
-			#drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-			#drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-			#drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+			drinksbyplayer['kind']= 'stand'
+			drinksbyplayer['owner']= newplayeurname	
+			drinksbyplayer['location']['latitude']=mag[nbpan+1]['magasinposy']
+			drinksbyplayer['location']['longitude']= mag[nbpan+1]['magasinposx']
+			drinksbyplayer['influence']=mag[nbpan+1]['magasininfluence']
 		else:
 			
 			drinksbyplayer['kind']= 'stand'

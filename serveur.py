@@ -348,18 +348,17 @@ def map():
 			for matable in range(len(pan)):
 				drinksbyplayer['kind'][matable]= 'ad'
 				drinksbyplayer['owner'][matable]= newplayeurname
-				print "--------------------drink------------------------",pan[matable]['panneauposy']
-				print "--------------------drink------------------------",pan
+
 
 				drinksbyplayer['location']['latitude'][matable]=pan[matable]['panneauposy']
 				drinksbyplayer['location']['longitude'][matable]= pan[matable]['panneauposx']
 				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 			#partie mag
-			drinksbyplayer['kind'][nbpan+1]= 'stand'
-			drinksbyplayer['owner'][nbpan+1]= newplayeurname	
-			drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-			drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-			drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+			#drinksbyplayer['kind'][nbpan+1]= 'stand'
+			#drinksbyplayer['owner'][nbpan+1]= newplayeurname	
+			#drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
+			#drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
+			#drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
 		else:
 			
 			drinksbyplayer['kind']= 'stand'

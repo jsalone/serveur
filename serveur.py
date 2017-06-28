@@ -408,7 +408,7 @@ def map():
 			print"-------------------nomrec-------------------",nomrec
 			drinksOffered['name'].appen(nomrec[0]['recettenom'])
 			print"-------------------drinksOffered['name']-------------------",drinksOffered['name']
-			drinksOffered['price']= .append(avoir[0]['recetteprix'])
+			drinksOffered['price'].append(avoir[0]['recetteprix'])
 			drinksOffered['hasAlcohol']= False
 			drinksOffered['isCold']= True
 			drinksByPlayer['name']=nomrec[0]['recettenom']

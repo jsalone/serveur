@@ -253,8 +253,8 @@ def actionsPlayer(playerName):
     if action['kind']=='drinks':
 	drink=action['kind']
 
-	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink[0]['prepare']})
-	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink[0]['price'],"vd": drink[0]['prepare'],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
+	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink['prepare'][0]})
+	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink['price'][0],"vd": drink['prepare'][0],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
 
     #global json_table
     #return json.dumps(json_table[value])

@@ -418,7 +418,7 @@ def map():
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True
 			print"--------------------------------------",drinksByPlayer
-			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+			mamap['map']['playerInfo'][newplayeurname]['drinksOffered']=drinksOffered
 			print"------------------ajout--------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
 			mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 

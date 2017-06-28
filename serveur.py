@@ -342,26 +342,26 @@ def map():
 		drinksbyplayer['location']['latitude']={}
 		drinksbyplayer['location']['longitude']={}
 
-		drinksbyplayer['kind']= 'stand'
-		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
-		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
-		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
-		drinksbyplayer['influence']=mag[0]['magasininfluence']
-		mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
-		
+
 		#parti panneau
 		print"-----------------possede panneau--------------------",range(len(pan))
 		if nbpan!= 0:
 			print"-----------------possede panneau--------------------",range(len(pan))
 			for matable in range(len(pan)):
 				print"-------------------------------",range(len(pan))
-				drinksbyplayer[matable]['kind']= 'ad'
-				drinksbyplayer[matable]['owner']= newplayeurname
-				drinksbyplayer[matable]['location']['latitude']=pan[matable]['panneauposy']
-				drinksbyplayer[matable]['location']['longitude']= pan[matable]['panneauposx']
-				drinksbyplayer[matable]['influence']=pan[matable]['panneauinfluence']
+				drinksbyplayer['kind']= 'ad'
+				drinksbyplayer['owner']= newplayeurname
+				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
 				#mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 			
+		drinksbyplayer['kind']= 'stand'
+		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
+		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
+		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
+		drinksbyplayer['influence']=mag[0]['magasininfluence']
+		mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 		
 
 	#	playerInfo:{playerInfo: repeated pour tous les joueurs

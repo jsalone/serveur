@@ -347,13 +347,13 @@ def map():
 			
 			for matable in range(len(pan)):
 				drinksbyplayer['kind'][matable]= 'at'
-				drinksbyplayer['owner'][matable]= playerName
+				drinksbyplayer['owner'][matable]= newplayeurname
 				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
 				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
 				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 			#partie mag
 			drinksbyplayer['kind'][nbpan+1]= 'stand'
-			drinksbyplayer['owner'][nbpan+1]= playerName	
+			drinksbyplayer['owner'][nbpan+1]= newplayeurname	
 			drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
 			drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
 			drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']

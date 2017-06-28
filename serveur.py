@@ -348,6 +348,8 @@ def map():
 			for matable in range(len(pan)):
 				drinksbyplayer['kind'][matable]= 'at'
 				drinksbyplayer['owner'][matable]= newplayeurname
+				print "--------------------drink------------------------",pan[matable]['panneauposy']
+				print "--------------------drink------------------------",pan
 				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
 				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
 				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']

@@ -83,7 +83,7 @@ def addPlayer():
 	result = db.select("SELECT idJoueur FROM joueur WHERE JoueurNom = %(name)s",{
 		"name" : table["name"]
 		})
-	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,50) RETURNING idMagasin as magasin", {"posX" : random.randrange(600),"posY" : random.randrange(60),"idJoueur": result[0]['idjoueur']})
+	db.select ("INSERT INTO magasin(MagasinPosX, MagasinPosY,idJoueur,MagasinInfluence) VALUES (%(posX)s,%(posY)s,%(idJoueur)s,50) RETURNING idMagasin as magasin", {"posX" : random.randrange(600),"posY" : random.randrange(600),"idJoueur": result[0]['idjoueur']})
 	
 	limonda = db.select("SELECT * FROM recette WHERE RecetteNom=%(nom)s ",{"nom": 'limonade'})
 	print"-------------------",limonda

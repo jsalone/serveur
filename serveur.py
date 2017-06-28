@@ -313,7 +313,6 @@ def map():
 	
 #	ranking: string id/name all player
 
-    print"-----------------------",mamap['map']['ranking']
     for numjoueur in range(len(mamap['map']['ranking'])):
 
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : mamap['map']['ranking'][numjoueur]})
@@ -342,18 +341,7 @@ def map():
 		drinksbyplayer['location']={}
 		drinksbyplayer['location']['latitude']={}
 		drinksbyplayer['location']['longitude']={}
-		if nbpan!= 0:
-			#parti panneau
-			
-			for matable in range(len(pan)):
-				print"-------------------------------",pan
-				drinksbyplayer['kind']= 'ad'
-				drinksbyplayer['owner']= newplayeurname
-				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
-				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
-				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
-				mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
-		
+
 			
 		drinksbyplayer['kind']= 'stand'
 		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
@@ -361,7 +349,19 @@ def map():
 		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
 		mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
-	
+		#parti panneau
+		if nbpan!= 0:
+			print"-----------------possede panneau--------------------",range(len(pan))
+			for matable in range(len(pan)):
+				print"-------------------------------",range(len(pan))
+				drinksbyplayer['kind']= 'ad'
+				drinksbyplayer['owner']= newplayeurname
+				drinksbyplayer['location']['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location']['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence']=pan[matable]['panneauinfluence']
+				mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
+		
+
 	#	playerInfo:{playerInfo: repeated pour tous les joueurs
 	#		cash: float
 	#		sales: int nombre de vendu par recettes

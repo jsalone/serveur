@@ -225,7 +225,6 @@ def actionsPlayer(playerName):
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe']['name'] })
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vd)s,%(Recpr)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'],"vd": 0,"Recpr":0.0 })
 	idingr={}
-	print "-------------------------------------------------------",get_json
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
 		idingr= db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients'][matable]['name']})
 
@@ -235,12 +234,12 @@ def actionsPlayer(playerName):
 			contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
     #ajout panneau
     if action['kind']=='ad':
-	print"--------------------------------------ad--------------------------------------------",action['radius'][0]
+
 	act=action['radius'][0]
 	act=int(act)*10
-	print"--------------------------------------ad error1--------------------------------------------",act
+
 	if act>monjoueur[0]['joueurbudget']:
-		print"--------------------------------------ad error--------------------------------------------",act
+
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']
@@ -255,7 +254,7 @@ def actionsPlayer(playerName):
 	drink=action['kind']
 
 	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink[0]['prepare']})
-	db.execute("UPDATE avoir SET vendre=(%(vd)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"vd": drink[0]['price'] ,"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
+	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink[0]['price'],"vd": drink[0]['prepare'],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
 
     #global json_table
     #return json.dumps(json_table[value])

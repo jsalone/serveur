@@ -245,17 +245,18 @@ def actionsPlayer(playerName):
 		fund['totalCost']=action['radius']
 		return jsonResponse(fund)
 	newbud=monjoueur[0]['joueurbudget']-act
-	print "---------------------------------",newbud
+
 	db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
 	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idPanneau", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
     #vente drink
     if action['kind']=='drinks':
 	drink=action['kind']
-
+	print"-----------------------------------------",drink
 	idrecette=recette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : drink['prepare'][0]})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": drink['price'][0],"vd": drink['prepare'][0],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
-
+	print"-----------------------------------------",idrecette
+	print"-----------------------------------------",monjoueur
     #global json_table
     #return json.dumps(json_table[value])
     return "OK:POST_" + playerName

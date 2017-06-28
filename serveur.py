@@ -413,7 +413,7 @@ def map():
 			drinksByPlayer['price']= avoir[0]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True
-			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+			mamap['map']['playerInfo'][newplayeurname][dep]['drinksOffered'].append(drinksOffered)
 
 		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 		

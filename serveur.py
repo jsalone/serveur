@@ -258,7 +258,7 @@ def actionsPlayer(playerName):
 	listeIdingre=db.select("SELECT DISTINCT * FROM contenir WHERE idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette']})
 	
 	for dep in range(len(listeIdingre)):
-		valIngre=db.select("SELECT * FROM ingredient WHERE idIngredien=%(idrec)s ",{"idrec" : listeIdingre[dep]['idingredient']})
+		valIngre=db.select("SELECT * FROM ingredient WHERE idIngredient=%(idrec)s ",{"idrec" : listeIdingre[dep]['idingredient']})
 		cost+=valIngre[0]['ingredientprix']
 	if cost>monjoueur[0]['joueurbudget']:
 

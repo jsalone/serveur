@@ -231,7 +231,7 @@ def actionsPlayer(playerName):
 
 		if not idingr[0]['idingredient']:
 
-		else :
+		else:
 			contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
     #ajout panneau
     if action['kind']=='ad':

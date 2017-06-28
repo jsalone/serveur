@@ -350,6 +350,7 @@ def map():
 		drinksbyplayer['influence']=mag[0]['magasininfluence']
 		mamap['map']['itemsByPlayer'][newplayeurname].append(drinksbyplayer)
 		#parti panneau
+		print"-----------------possede panneau--------------------",range(len(pan))
 		if nbpan!= 0:
 			print"-----------------possede panneau--------------------",range(len(pan))
 			for matable in range(len(pan)):

@@ -417,7 +417,7 @@ def map():
 			print"--------------------------------------",drinksByPlayer
 		
 			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
-			print"--------------------------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
+			print"------------------ajout--------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
 			mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 
 		mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend

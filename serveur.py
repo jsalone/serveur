@@ -236,6 +236,7 @@ def actionsPlayer(playerName):
 	act=act*10
 	
 	if act>monjoueur[0]['joueurbudget']:
+		print"--------------------------------------ad error--------------------------------------------",act
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']

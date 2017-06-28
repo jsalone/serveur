@@ -225,10 +225,10 @@ def actionsPlayer(playerName):
 	idrecette = db.select ("INSERT INTO recette(RecetteNom) VALUES (%(nom)s) RETURNING idRecette", {"nom" : get_json['actions']['recipe']['name'] })
 	racord =db.select ("INSERT INTO avoir(idRecette,idJoueur,vendre,RecettePrix) VALUES (%(rec)s,%(idjou)s,%(vd)s,%(Recpr)s) RETURNING idRecette", {"rec" : idrecette[0]['idrecette'],"idjou" : monjoueur[0]['idjoueur'],"vd": 0,"Recpr":0.0 })
 	idingr={}
+	print "-------------------------------------------------------",get_json
 	for matable in range(len(get_json['actions']['recipe']['ingredients'])):
 		idingr= db.select("SELECT idIngredient FROM ingredient WHERE IngredientNom=%(nom)s ",{"nom":get_json['actions']['recipe']['ingredients'][matable]['name']})
-		print"-------------------------------------------",idrecette[0]['idrecette']
-		print"-------------------------------------------",idingr
+
 
 		contenir = db.select ("INSERT INTO contenir(idRecette,idIngredient) VALUES (%(idrec)s,%(iding)s) RETURNING idRecette", {"idrec" : idrecette[0]['idrecette'],"iding" : idingr[0]['idingredient'] })
     #ajout panneau

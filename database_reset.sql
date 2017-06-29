@@ -54,9 +54,9 @@ CREATE TABLE magasin(
 
 CREATE TABLE partie(
         IdPartie  int  Default nextval ('partie_seq')  NOT NULL ,
-        PartieNom Char (25) ,
-	PartiMetrologitoday Char (25) ,
-	PartiMetrologitomor Char (25) ,
+        PartieNom VarChar (25) ,
+	PartiMetrologitoday VarChar (25) ,
+	PartiMetrologitomor VarChar (25) ,
 	Partidfn int ,
 	PartiTimestamp int ,
         PRIMARY KEY (IdPartie )
@@ -71,7 +71,7 @@ CREATE TABLE partie(
 
 CREATE TABLE joueur(
         idJoueur     int  Default nextval ('joueur_seq')  NOT NULL ,
-        JoueurNom    Char (25) ,
+        JoueurNom    VarChar (25) ,
         JoueurBudget Double precision ,
         IdPartie     Int ,
         PRIMARY KEY (idJoueur )
@@ -86,7 +86,7 @@ CREATE TABLE joueur(
 
 CREATE TABLE recette(
         idRecette  int  Default nextval ('recette_seq')  NOT NULL ,
-        RecetteNom Char (25) ,
+        RecetteNom VarChar (25) ,
         RecetteTemperature Bool ,
         RecetteAlcohol      Bool ,
         PRIMARY KEY (idRecette )
@@ -101,7 +101,7 @@ CREATE TABLE recette(
 
 CREATE TABLE ingredient(
         idIngredient          int  Default nextval ('ingredient_seq')  NOT NULL ,
-        IngredientNom         Char (25) ,
+        IngredientNom         VarChar (25) ,
         IngredientPrix        Double precision ,
         IngredientTemperature Bool ,
         IngredientAlcohol      Bool ,

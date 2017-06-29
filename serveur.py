@@ -427,12 +427,12 @@ def map():
 			totalvend=avoir[dep]['vendre']
 			nomrec = db.select("SELECT RecetteNom FROM recette WHERE idRecette = %(idre)s",{"idre" : avoir[dep]['idrecette']})
 			print"-------------------nomrec-------------------",nomrec
-			drinksOffered['name']=nomrec[dep]['recettenom']
+			drinksOffered['name']=nomrec[0]['recettenom']
 			print"-------------------drinksOffered['name']-------------------",drinksOffered['name']
 			drinksOffered['price']=(avoir[dep]['recetteprix'])
 			drinksOffered['hasAlcohol']= False
 			drinksOffered['isCold']= True
-			drinksByPlayer['name']=nomrec[dep]['recettenom']
+			drinksByPlayer['name']=nomrec[0]['recettenom']
 			
 			drinksByPlayer['price']= avoir[dep]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False

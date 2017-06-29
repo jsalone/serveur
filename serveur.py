@@ -540,9 +540,9 @@ def mapPlayer(playerName):
 	drinksbyplayer['influence']={}
 	drinksbyplayer['location']={}
 	matable=0
-	drinksbyplayer['location']={}
-	drinksbyplayer['location']['latitude']={}
-	drinksbyplayer['location']['longitude']={}
+	drinksbyplayer['location'][matable]={}
+	drinksbyplayer['location'][matable]['latitude']={}
+	drinksbyplayer['location'][matable]['longitude']={}
 	
 
 	if nbpan!= 0:
@@ -561,7 +561,6 @@ def mapPlayer(playerName):
 		#partie mag
 		drinksbyplayer['kind'][matable+1]= 'stand'
 		drinksbyplayer['owner'][matable+1]= playerName	
-		
 		drinksbyplayer['location'][matable+1]['latitude']=mag[0]['magasinposy']
 		drinksbyplayer['location'][matable+1]['longitude']= mag[0]['magasinposx']
 		drinksbyplayer['influence'][matable+1]=mag[0]['magasininfluence']

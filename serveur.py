@@ -261,8 +261,10 @@ def actionsPlayer(playerName):
 		cost+=valIngre[0]['ingredientprix']
 		print"-----------------cost--------------------",cost
 	vendre=db.select("SELECT * FROM avoir WHERE idJoueur=%(idjour)s AND idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette'],"idjour": monjoueur[0]['idjoueur']})
+
 	print"-----------------vendre--------------------",vendre[0]['vendre']
 	prixtotal=vendre[0]['vendre']*cost
+	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:
 
 		fund={}

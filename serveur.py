@@ -249,12 +249,11 @@ def actionsPlayer(playerName):
 	
     #vente drink
     if action['kind']=='drinks':
-	print"------------------------------------",action['prepare'].keys()
+
 	keyboisson=action['prepare'].keys()
-	print"------------------------------------",action['prepare'][keyboisson[0]]
+
 
 	idrecette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : keyboisson[0]})
-	print"-----------------------idrecette-----------------------------",idrecette
 	listeIdingre=db.select("SELECT DISTINCT * FROM contenir WHERE idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette']})
 	cost=0.0
 	for dep in range(len(listeIdingre)):
@@ -435,7 +434,7 @@ def map():
 			print"--------------------------------------",drinksByPlayer
 			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
 			print"------------------ajout--------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
-			mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
+			mamap['map']['drinksByPlayer'][newplayeurname].push(drinksByPlayer)
 
 		
 		mamap['map']['playerInfo'][newplayeurname]['profit']=0

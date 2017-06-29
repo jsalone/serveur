@@ -233,8 +233,8 @@ def actionsPlayer(playerName):
     #ajout panneau
     if action['kind']=='ad':
 
-	act=action['radius'][0]
-	act=int(act)*10
+	act=float(action['radius'][0])
+	act*=10.0
 
 	if act>monjoueur[0]['joueurbudget']:
 
@@ -243,8 +243,12 @@ def actionsPlayer(playerName):
 		fund['totalCost']=action['radius']
 		return jsonResponse(fund)
 	newbud=monjoueur[0]['joueurbudget']-act
-	db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
-	contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idPanneau", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
+	ancienInfluence=db.select("SELECT * FROM magasin WHERE idJoueur = %(id)s",{"id" : monjoueur[0]['idjoueur']})
+	newInfluence=ancienInfluence+act
+	
+	db.execute("UPDATE magasin SET MagasinInfluence=(%(infl)s) WHERE idJoueur = %(idjou)s", {"infl" : newInfluence,"idjou" : monjoueur[0]['idjoueur']})
+	#db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})
+	#contenir = db.select ("INSERT INTO panneau(PanneauPosX,PanneauPosY,PanneauInfluence,idJoueur) VALUES (%(x)s,%(y)s,%(inf)s,%(joueur)s) RETURNING idPanneau", {"x" : random.randrange(10),"y" : random.randrange(10),"inf" : action['radius'],"joueur" :monjoueur[0]['idjoueur'] })
 	
     #vente drink
     if action['kind']=='drinks':
@@ -268,10 +272,7 @@ def actionsPlayer(playerName):
 		fund['sufficientFunds']= False
 		fund['totalCost']=prixtotal
 		return jsonResponse(fund)
-	print"-----------------------prixtotal-----------------------------------",prixtotal
-	print"-----------------------prixtotal avant-----------------------------------",monjoueur[0]['joueurbudget']
 	monjoueur[0]['joueurbudget']=monjoueur[0]['joueurbudget']-(float(prixtotal)*float(action['prepare'][keyboisson[0]]))
-	print"-----------------------prixtotal apres-----------------------------------",monjoueur[0]['joueurbudget']
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"recpri": monjoueur[0]['joueurbudget'],"vd": monjoueur[0]['joueurbudget'],"name" : monjoueur[0]['idjoueur']})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": action['price'][keyboisson[0]],"vd": action['prepare'][keyboisson[0]],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
     #global json_table

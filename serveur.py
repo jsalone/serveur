@@ -265,7 +265,7 @@ def actionsPlayer(playerName):
 	
 	print"-----------------vendre--------------------",float(action['price'][keyboisson[0]])
 	
-	prixtotal=float(action['price'][keyboisson[0]])*float(cost)
+	prixtotal=float(cost)
 	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:
 

@@ -457,6 +457,8 @@ def mapPlayer(playerName):
     db = Db()
     mamap={}
     availableIngredients={}
+    if not playerName:
+	return "ERROR no name player"
     mamap['map']={}
     idrecette=recette=db.select("SELECT * FROM recette")
     print "----------------------------------map player-----------------------------------------",playerName

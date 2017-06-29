@@ -244,7 +244,7 @@ def actionsPlayer(playerName):
 		return jsonResponse(fund)
 	newbud=monjoueur[0]['joueurbudget']-act
 	ancienInfluence=db.select("SELECT * FROM magasin WHERE idJoueur = %(id)s",{"id" : monjoueur[0]['idjoueur']})
-	newInfluence=ancienInfluence+act
+	newInfluence=ancienInfluence[0]['magasininfluence']+act
 	
 	db.execute("UPDATE magasin SET MagasinInfluence=(%(infl)s) WHERE idJoueur = %(idjou)s", {"infl" : newInfluence,"idjou" : monjoueur[0]['idjoueur']})
 	#db.execute("UPDATE joueur SET JoueurBudget=(%(new)s) WHERE JoueurNom = %(name)s", {"new" : newbud,"name" : playerName})

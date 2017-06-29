@@ -429,12 +429,12 @@ def map():
 			print"-------------------nomrec-------------------",nomrec
 			drinksOffered['name']=nomrec[0]['recettenom']
 			print"-------------------drinksOffered['name']-------------------",drinksOffered['name']
-			drinksOffered['price']=(avoir[0]['recetteprix'])
+			drinksOffered['price']=(avoir[dep]['recetteprix'])
 			drinksOffered['hasAlcohol']= False
 			drinksOffered['isCold']= True
 			drinksByPlayer['name']=nomrec[0]['recettenom']
 			
-			drinksByPlayer['price']= avoir[0]['recetteprix']
+			drinksByPlayer['price']= avoir[dep]['recetteprix']
 			drinksByPlayer['hasAlcohol']=False
 			drinksByPlayer['isCold']=True
 			mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend

@@ -540,9 +540,9 @@ def mapPlayer(playerName):
 	drinksbyplayer['influence']={}
 	drinksbyplayer['location']={}
 	matable=0
-	drinksbyplayer['location'][matable]={}
-	drinksbyplayer['location'][matable]['latitude']={}
-	drinksbyplayer['location'][matable]['longitude']={}
+	drinksbyplayer['location']={}
+	drinksbyplayer['location']['latitude']={}
+	drinksbyplayer['location']['longitude']={}
 	
 
 	if nbpan!= 0:
@@ -553,17 +553,14 @@ def mapPlayer(playerName):
 				print"nonplayer"
 			else:
 				
-				drinksbyplayer['kind'][matable]= 'at'
-				drinksbyplayer['owner'][matable]= playerName
-				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
-				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
-				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+				drinksbyplayer['kind'].append('at')
+				drinksbyplayer['owner'].append(playerName)
+				drinksbyplayer['location']['latitude'].append(pan[matable]['panneauposy'])
+				drinksbyplayer['location']['longitude'].append([matable]['panneauposx'])
+				drinksbyplayer['influence'].append(pan[matable]['panneauinfluence'])
 		#partie mag
 		drinksbyplayer['kind'][matable+1]= 'stand'
 		drinksbyplayer['owner'][matable+1]= playerName	
-		print "---------panneau trouver-----------",drinksbyplayer
-		print "---------panneau trouver-----------",mag[0]['magasinposy']
-		print "---------panneau trouver-----------", mag[0]['magasinposx']
 		
 		drinksbyplayer['location'][matable+1]['latitude']=mag[0]['magasinposy']
 		drinksbyplayer['location'][matable+1]['longitude']= mag[0]['magasinposx']

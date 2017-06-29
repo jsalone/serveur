@@ -541,11 +541,13 @@ def mapPlayer(playerName):
 		#parti panneau
 		
 		for matable in range(len(pan)):
-			drinksbyplayer['kind'][matable]= 'at'
-			drinksbyplayer['owner'][matable]= playerName
-			drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
-			drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
-			drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+			if not playerName:
+			else:
+				drinksbyplayer['kind'][matable]= 'at'
+				drinksbyplayer['owner'][matable]= playerName
+				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
 		drinksbyplayer['kind'][nbpan+1]= 'stand'
 		drinksbyplayer['owner'][nbpan+1]= playerName	

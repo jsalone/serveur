@@ -263,7 +263,7 @@ def actionsPlayer(playerName):
 
 	
 	
-	print"-----------------vendre--------------------",action['price'][0]
+	print"-----------------vendre--------------------",action[0]['price']
 	prixtotal=vendre[0]['vendre']*cost
 	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:

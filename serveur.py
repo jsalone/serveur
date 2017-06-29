@@ -514,9 +514,9 @@ def mapPlayer(playerName):
     
     if range(len(monjoueur))!=0 :
 	
-	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" :playerName})
-	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" :playerName})
-	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" :playerName})
+	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
+	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
+	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
 	nbpan=len(pan)
 #	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
 #		kind :string stand ou at

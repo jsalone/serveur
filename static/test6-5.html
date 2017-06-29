@@ -503,7 +503,7 @@ else
 /**************************************************************************************************************************************************/
 /*                                                              refreshAction    (metrologie)                                                     */
 /**************************************************************************************************************************************************/
-var i=0,j=0,jo1=0,jo=0,he=0,prof=0,ptoff=0;
+var i=0,j=0,jo1=0,jo=0,he=0,prof=0,proff=50,ploplop=0;
 $("#jour").val(jo);
       function refreshAction(event) {
             if (event) event.preventDefault();
@@ -511,30 +511,39 @@ $("#jour").val(jo);
             $("#meteo").val(reponse['weather']['weather']['0'])
             $("#prevmeteo").val(reponse['weather']['weather']['1'])
             $("#durertotal").val(reponse['timestamp'])
-            jo=0
+            
             //alert("j")
             j=$("#durertotal").val();
             while (j>=60){
               //alert("j")
               j=j-60
               jo=jo+1
-              if (jo1!=jo){
+
+            }
+                if (jo1!=jo){
                 jo1=jo
                 vente =0
 
-                prof=$('#budget').val()-$('#profit').val()
+                rof=ploplop-proff
+                proff=ploplop
                 $('#profit').val(prof)
+
               }
               $("#jour").val(jo);
               he=j/2.5
               $("#heure").val(he);
-            }
             })
             
-
+            //alert("popopop")
             $.ajax("https://enigmatic-bayou-14181.herokuapp.com/map/"+ $("#champ_joueur").val()).then(function(reponse) {
-            $("#budget").val(response['cash'])
-            $("#venteproduit1").val(response['drinkoffered']['sale'])
+            ploplop=reponse['map']['playerInfo'][$("#champ_joueur").val()]['cash']
+
+            $("#budget").val(ploplop)
+
+
+
+            //$("#venteproduit1").val(reponse['map']['playerInfo'][$("#champ_joueur").val()]['sales'])
+            //alert(reponse)
             })  
         
           }

@@ -260,9 +260,10 @@ def actionsPlayer(playerName):
 		valIngre=db.select("SELECT * FROM ingredient WHERE idIngredient=%(idrec)s ",{"idrec" : listeIdingre[dep]['idingredient']})
 		cost+=valIngre[0]['ingredientprix']
 		print"-----------------cost--------------------",cost
-	vendre=db.select("SELECT * FROM avoir WHERE idJoueur=%(idjour)s AND idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette'],"idjour": monjoueur[0]['idjoueur']})
 
-	print"-----------------vendre--------------------",vendre
+	
+	
+	print"-----------------vendre--------------------",action['price'][0]
 	prixtotal=vendre[0]['vendre']*cost
 	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:

@@ -548,12 +548,12 @@ def mapPlayer(playerName):
 			if not playerName:
 				print"nonplayer"
 			else:
-				if pan:
-					drinksbyplayer['kind'][matable]= 'at'
-					drinksbyplayer['owner'][matable]= playerName
-					drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
-					drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
-					drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
+				print "---------panneau trouver-----------",pan[matable]['panneauposy']
+				drinksbyplayer['kind'][matable]= 'at'
+				drinksbyplayer['owner'][matable]= playerName
+				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
 		drinksbyplayer['kind'][nbpan+1]= 'stand'
 		drinksbyplayer['owner'][nbpan+1]= playerName	

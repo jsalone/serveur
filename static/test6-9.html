@@ -503,7 +503,7 @@ else
 /**************************************************************************************************************************************************/
 /*                                                              refreshAction    (metrologie)                                                     */
 /**************************************************************************************************************************************************/
-var i=0,j=0,jo1=0,jo=0,he=0,prof=0,proff=50,ploplop=0;
+var i=0,j=0,jo1=0,he=0,prof=0,proff=50,ploplop=0;
 $("#jour").val(jo);
       function refreshAction(event) {
             if (event) event.preventDefault();
@@ -511,7 +511,7 @@ $("#jour").val(jo);
             $("#meteo").val(reponse['weather']['weather']['0'])
             $("#prevmeteo").val(reponse['weather']['weather']['1'])
             $("#durertotal").val(reponse['timestamp'])
-            
+            jo=0
             //alert("j")
             j=$("#durertotal").val();
             while (j>=60){
@@ -520,7 +520,7 @@ $("#jour").val(jo);
               jo=jo+1
 
             }
-                if (jo1!=jo){
+           if (jo1!=jo){
                 jo1=jo
                 vente =0
 

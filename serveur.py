@@ -186,7 +186,7 @@ def sales():
     #quantity
     db = Db()
     get_json = request.get_json()
-    print"-----------------------------------------sales----------------------------------------------------------"
+    print"-----------------------------------------sales----------------------------------------------------------",get_json
     for dep in range(len(get_json['sales'])):
 	idrecette = db.select("SELECT idRecette FROM recette WHERE RecetteNom = %(nom)s",{"nom" : get_json['sales'][dep]['item']})
 	monjoueur = db.select("SELECT * FROM joueur WHERE JoueurNom = %(name)s",{"name" : get_json['sales'][dep]['player']})

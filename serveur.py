@@ -434,7 +434,7 @@ def map():
 			print"--------------------------------------",drinksByPlayer
 			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
 			print"------------------ajout--------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
-			mamap['map']['drinksByPlayer'][newplayeurname].push(drinksByPlayer)
+			mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
 
 		
 		mamap['map']['playerInfo'][newplayeurname]['profit']=0
@@ -459,7 +459,7 @@ def mapPlayer(playerName):
     availableIngredients={}
     mamap['map']={}
     idrecette=recette=db.select("SELECT * FROM recette")
-    print "----------------------------------map player-----------------------------------------"
+    print "----------------------------------map -----------------------------------------"
 
     ranking={}
     mamap['map']['ranking']=[]
@@ -514,9 +514,9 @@ def mapPlayer(playerName):
     
     if range(len(monjoueur))!=0 :
 	
-	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
-	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
-	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" :monjoueur['0']['idjoueur']})
+	pan = db.select("SELECT * FROM panneau WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	mag = db.select("SELECT * FROM magasin WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
+	avoir = db.select("SELECT * FROM avoir WHERE idJoueur = %(idjou)s",{"idjou" : monjoueur[0]['idjoueur']})
 	nbpan=len(pan)
 #	itemsByPlayer:{mapItem: repeated pour tous les joueurs		
 #		kind :string stand ou at
@@ -555,7 +555,7 @@ def mapPlayer(playerName):
 	else:
 		
 		drinksbyplayer['kind']= 'stand'
-		drinksbyplayer['owner']= playerName
+		drinksbyplayer['owner']= monjoueur[0]['joueurnom']
 		drinksbyplayer['location']['latitude']=mag[0]['magasinposy']
 		drinksbyplayer['location']['longitude']= mag[0]['magasinposx']
 		drinksbyplayer['influence']=mag[0]['magasininfluence']

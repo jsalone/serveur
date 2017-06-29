@@ -542,6 +542,7 @@ def mapPlayer(playerName):
 		
 		for matable in range(len(pan)):
 			if not playerName:
+				print"nonplayer"
 			else:
 				drinksbyplayer['kind'][matable]= 'at'
 				drinksbyplayer['owner'][matable]= playerName

@@ -262,14 +262,14 @@ def actionsPlayer(playerName):
 		print"-----------------cost--------------------",cost
 	vendre=db.select("SELECT * FROM avoir WHERE idJoueur=%(idjour)s AND idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette'],"idjour": monjoueur[0]['idjoueur']})
 
-	print"-----------------vendre--------------------",vendre[0]['vendre']
+	print"-----------------vendre--------------------",vendre
 	prixtotal=vendre[0]['vendre']*cost
 	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:
 
 		fund={}
 		fund['sufficientFunds']= False
-		fund['totalCost']=action['radius']
+		fund['totalCost']=prixtotal
 		return jsonResponse(fund)
 	print"-----------------prix totla----------------",prixtotal
 	print"-----------------prix monjoueur----------------",monjoueur[0]['joueurbudget']

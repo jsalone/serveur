@@ -459,7 +459,7 @@ def mapPlayer(playerName):
     availableIngredients={}
     mamap['map']={}
     idrecette=recette=db.select("SELECT * FROM recette")
-    print "----------------------------------map -----------------------------------------"
+    print "----------------------------------map player-----------------------------------------",playerName
 
     ranking={}
     mamap['map']['ranking']=[]

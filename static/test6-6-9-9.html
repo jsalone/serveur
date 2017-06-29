@@ -477,7 +477,19 @@ else
 /**************************************************************************************************************************************************/
 /*                                                              quitterpartie                                                                     */
 /**************************************************************************************************************************************************/
+function abientot(event){
+  if (event) event.preventDefault();
+            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
+            'type': "DELETE",
+            'contentType': "application/json"
+        }) 
+        alert("A bientôt sur notre projet!!!");
+        $("#champ_joueur").val("")
+        $("#xjoueur").val("")
+        $("#yjoueur").val("")
+        $("#budget").val("")
 
+}
       $("#quitterpartie").click(function(event) {
 
 if($('#champ_joueur').val()==""){
@@ -485,17 +497,7 @@ if($('#champ_joueur').val()==""){
 }
 else
 {
-
-            $.ajax("https://enigmatic-bayou-14181.herokuapp.com/actions/" + $("#champ_joueur").val(), {
-            'type': "DELETE",
-            'contentType': "application/json"
-        }) 
-      	alert("A bientôt sur notre projet!!!");
-        $("#champ_joueur").val("")
-        $("#xjoueur").val("")
-        $("#yjoueur").val("")
-        $("#budget").val("")
-
+abientot()
 }
 
       })
@@ -503,7 +505,7 @@ else
 /**************************************************************************************************************************************************/
 /*                                                              refreshAction    (metrologie)                                                     */
 /**************************************************************************************************************************************************/
-var i=0,j=0,jo1=0,he=0,prof=0,proff=50,ploplop=0;
+var i=0,j=0,jo1=0,he=0,prof=0,proff=50,ploplop=0,jo=0;
 $("#jour").val(jo);
       function refreshAction(event) {
             if (event) event.preventDefault();
@@ -539,7 +541,11 @@ $("#jour").val(jo);
             ploplop=reponse['map']['playerInfo'][$("#champ_joueur").val()]['cash']
 
             $("#budget").val(ploplop)
+            if($("#budget").val()<=0){
+              alert("gameover")
+              abientot()
 
+          }
 
 
             //$("#venteproduit1").val(reponse['map']['playerInfo'][$("#champ_joueur").val()]['sales'])

@@ -251,7 +251,7 @@ def actionsPlayer(playerName):
     if action['kind']=='drinks':
 
 	keyboisson=action['prepare'].keys()
-
+	
 
 	idrecette=db.select("SELECT * FROM recette WHERE RecetteNom=%(idrec)s ",{"idrec" : keyboisson[0]})
 	listeIdingre=db.select("SELECT DISTINCT * FROM contenir WHERE idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette']})
@@ -263,7 +263,7 @@ def actionsPlayer(playerName):
 
 	
 	
-	print"-----------------vendre--------------------",action[0]['price']
+	print"-----------------vendre--------------------",action['price'][keyboisson[0]]
 	prixtotal=vendre[0]['vendre']*cost
 	print"-----------------vendre--------------------",prixtotal
 	if prixtotal>monjoueur[0]['joueurbudget']:

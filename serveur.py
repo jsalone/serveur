@@ -440,8 +440,10 @@ def map():
 			mamap['map']['playerInfo'][newplayeurname]['sales'] = totalvend
 			print"--------------------------------------",drinksByPlayer
 			mamap['map']['playerInfo'][newplayeurname]['drinksOffered'].append(drinksOffered)
+			drinksOffered.clear()
 			print"------------------ajout--------------------",mamap['map']['playerInfo'][newplayeurname]['drinksOffered']
 			mamap['map']['drinksByPlayer'][newplayeurname].append(drinksByPlayer)
+			drinksByPlayer.clear()
 
 		
 		mamap['map']['playerInfo'][newplayeurname]['profit']=0

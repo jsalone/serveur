@@ -553,11 +553,11 @@ def mapPlayer(playerName):
 				print"nonplayer"
 			else:
 				
-				drinksbyplayer['kind'].push('at')
-				drinksbyplayer['owner'].append(playerName)
-				drinksbyplayer['location']['latitude'].append(pan[matable]['panneauposy'])
-				drinksbyplayer['location']['longitude'].append([matable]['panneauposx'])
-				drinksbyplayer['influence'].append(pan[matable]['panneauinfluence'])
+				drinksbyplayer['kind'][matable]= 'at'
+				drinksbyplayer['owner'][matable]= playerName
+				drinksbyplayer['location'][matable]['latitude']=pan[matable]['panneauposy']
+				drinksbyplayer['location'][matable]['longitude']= pan[matable]['panneauposx']
+				drinksbyplayer['influence'][matable]=pan[matable]['panneauinfluence']
 		#partie mag
 		drinksbyplayer['kind'][matable+1]= 'stand'
 		drinksbyplayer['owner'][matable+1]= playerName	

@@ -269,6 +269,7 @@ def actionsPlayer(playerName):
 		fund['totalCost']=prixtotal
 		return jsonResponse(fund)
 	print"-----------------------prixtotal-----------------------------------",prixtotal
+	print"-----------------------prixtotal-----------------------------------",monjoueur[0]['joueurbudget']
 	monjoueur[0]['joueurbudget']-=prixtotal
 
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"recpri": monjoueur[0]['joueurbudget'],"vd": monjoueur[0]['joueurbudget'],"name" : monjoueur[0]['idjoueur']})

@@ -539,8 +539,12 @@ def mapPlayer(playerName):
 	drinksbyplayer['owner']={}
 	drinksbyplayer['influence']={}
 	drinksbyplayer['location']={}
-	drinksbyplayer['location']['latitude']={}
-	drinksbyplayer['location']['longitude']={}
+	matable=0
+	drinksbyplayer['location'][matable]={}
+	drinksbyplayer['location'][matable]['latitude']={}
+	drinksbyplayer['location'][matable]['longitude']={}
+	
+
 	if nbpan!= 0:
 		#parti panneau
 		

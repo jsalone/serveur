@@ -195,7 +195,7 @@ def sales():
 
 	avoir= db.select("SELECT * FROM avoir WHERE idRecette = %(rec)s AND idJoueur = %(nom)s",{"nom" : monjoueur[0]['idjoueur'],"rec" : idrecette[0]['idrecette']})
 
-	newbudget=avoir[0]['recetteprix']*get_json['sales'][dep]['quantity']
+	newbudget=(avoir[0]['recetteprix']*get_json['sales'][dep]['quantity'])+monjoueur[0]['joueurbudget']
 	newbudget+=monjoueur[0]['joueurbudget']	
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"vd": newbudget,"name" : monjoueur[0]['idjoueur']})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": 0 ,"vd": 0,"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})

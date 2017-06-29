@@ -561,9 +561,9 @@ def mapPlayer(playerName):
 		#partie mag
 		drinksbyplayer['kind'][nbpan+1]= 'stand'
 		drinksbyplayer['owner'][nbpan+1]= playerName	
-		drinksbyplayer['location'][nbpan+1]['latitude']=mag[nbpan+1]['magasinposy']
-		drinksbyplayer['location'][nbpan+1]['longitude']= mag[nbpan+1]['magasinposx']
-		drinksbyplayer['influence'][nbpan+1]=mag[nbpan+1]['magasininfluence']
+		drinksbyplayer['location'][nbpan+1]['latitude']=mag[0]['magasinposy']
+		drinksbyplayer['location'][nbpan+1]['longitude']= mag[0]['magasinposx']
+		drinksbyplayer['influence'][nbpan+1]=mag[0]['magasininfluence']
 	else:
 		
 		drinksbyplayer['kind']= 'stand'

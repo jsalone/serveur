@@ -259,13 +259,15 @@ def actionsPlayer(playerName):
 	for dep in range(len(listeIdingre)):
 		valIngre=db.select("SELECT * FROM ingredient WHERE idIngredient=%(idrec)s ",{"idrec" : listeIdingre[dep]['idingredient']})
 		cost+=valIngre[0]['ingredientprix']
-	if cost>monjoueur[0]['joueurbudget']:
+	vendre=db.select("SELECT * FROM avoir WHERE idJoueur=%(idjour)s AND idRecette=%(idrec)s ",{"idrec" : idrecette[0]['idrecette'],"idjour": monjoueur[0]['idjoueur']})
+	prixtotal=vendre['0']['vendre']*cost
+	if prixtotal>monjoueur[0]['joueurbudget']:
 
 		fund={}
 		fund['sufficientFunds']= False
 		fund['totalCost']=action['radius']
 		return jsonResponse(fund)
-	monjoueur[0]['joueurbudget']-=cost
+	monjoueur[0]['joueurbudget']-=prixtotal
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"recpri": monjoueur[0]['joueurbudget'],"vd": cost,"name" : monjoueur[0]['idjoueur']})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": action['price'][keyboisson[0]],"vd": action['prepare'][keyboisson[0]],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
     #global json_table

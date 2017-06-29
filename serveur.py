@@ -553,7 +553,7 @@ def mapPlayer(playerName):
 				print"nonplayer"
 			else:
 				
-				drinksbyplayer['kind'].append('at')
+				drinksbyplayer['kind'].push('at')
 				drinksbyplayer['owner'].append(playerName)
 				drinksbyplayer['location']['latitude'].append(pan[matable]['panneauposy'])
 				drinksbyplayer['location']['longitude'].append([matable]['panneauposx'])

@@ -269,9 +269,9 @@ def actionsPlayer(playerName):
 		fund['totalCost']=prixtotal
 		return jsonResponse(fund)
 	print"-----------------------prixtotal-----------------------------------",prixtotal
-	print"-----------------------prixtotal-----------------------------------",monjoueur[0]['joueurbudget']
+	print"-----------------------prixtotal avant-----------------------------------",monjoueur[0]['joueurbudget']
 	monjoueur[0]['joueurbudget']-=prixtotal
-
+	print"-----------------------prixtotal apres-----------------------------------",monjoueur[0]['joueurbudget']
 	db.execute("UPDATE joueur SET JoueurBudget=(%(vd)s) WHERE idJoueur=%(name)s", {"recpri": monjoueur[0]['joueurbudget'],"vd": monjoueur[0]['joueurbudget'],"name" : monjoueur[0]['idjoueur']})
 	db.execute("UPDATE avoir SET vendre=(%(vd)s),recetteprix=(%(recpri)s) WHERE idRecette =%(idrect)s AND idJoueur=%(name)s", {"recpri": action['price'][keyboisson[0]],"vd": action['prepare'][keyboisson[0]],"idrect":idrecette[0]['idrecette'],"name" : monjoueur[0]['idjoueur']})
     #global json_table

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # programme développé par SALONE Jonathan dans le cadre d'un projet d'école et ne peut etre réutilisé pour une commercialisation ou autre objectif pour obtenir un profit quelconque
+# serveur pour un jeux de gestion
 from flask import Flask, request
 from flask import render_template
 from db import Db # voyez db.py

@@ -1,188 +1,150 @@
---------------------------------------------------------------
---        Script MySQL.
---------------------------------------------------------------
-DROP TABLE IF EXISTS panneau CASCADE;
-DROP TABLE IF EXISTS magasin CASCADE;
-DROP TABLE IF EXISTS partie CASCADE;
-DROP TABLE IF EXISTS joueur CASCADE;
-DROP TABLE IF EXISTS recette CASCADE;
-DROP TABLE IF EXISTS ingredient CASCADE;
-DROP TABLE IF EXISTS contenir CASCADE;
-DROP TABLE IF EXISTS compatible CASCADE;
-DROP TABLE IF EXISTS avoir CASCADE;
+DROP TABLE IF EXISTS possede;
+DROP TABLE IF EXISTS avoir;
+DROP TABLE IF EXISTS fourni;
+DROP TABLE IF EXISTS construit;
+DROP TABLE IF EXISTS developpe;
+DROP TABLE IF EXISTS constituer;
+DROP TABLE IF EXISTS creer;
+DROP TABLE IF EXISTS prets;
+DROP TABLE IF EXISTS Monde;
+DROP TABLE IF EXISTS Joueur;
+DROP TABLE IF EXISTS Village;
+DROP TABLE IF EXISTS Matiere;
+DROP TABLE IF EXISTS Batiment;
+DROP TABLE IF EXISTS Recherche;
+DROP TABLE IF EXISTS Soldat;
+DROP TABLE IF EXISTS Armee;
 
---------------------------------------------------------------
--- Table: panneau
---------------------------------------------------------------
+--CREATE TABLE prets (id SERIAL primary key,quoi varchar,qui varchar,status varchar);
 
-
-
-
---CREATE SEQUENCE panneau_seq;
-
-CREATE TABLE panneau(
-        idPanneau        int  Default nextval ('panneau_seq')  NOT NULL ,
-        PanneauPosX      Double precision ,
-        PanneauPosY      Double precision ,
-        PanneauInfluence Double precision ,
-        idJoueur         Int ,
-        PRIMARY KEY (idPanneau )
+CREATE TABLE Monde(
+        idmonde   SERIAL primary key ,
+        monde_nom Varchar 
 );
 
 
---------------------------------------------------------------
--- Table: magasin
---------------------------------------------------------------
 
---CREATE SEQUENCE magasin_seq;
-
-CREATE TABLE magasin(
-        idMagasin   int  Default nextval ('magasin_seq')  NOT NULL ,
-        MagasinPosX Double precision ,
-        MagasinPosY Double precision ,
-	MagasinInfluence Double precision ,
-        idJoueur    Int ,
-        PRIMARY KEY (idMagasin )
+CREATE TABLE Joueur(
+        id_joueur     SERIAL primary key ,
+        joueur_mail   Varchar (255) ,
+        joueur_mtp    Varchar (25) ,
+        joueur_pseudo Varchar (25) 
 );
 
 
---------------------------------------------------------------
--- Table: partie
---------------------------------------------------------------
-
---CREATE SEQUENCE partie_seq;
-
-CREATE TABLE partie(
-        IdPartie  int  Default nextval ('partie_seq')  NOT NULL ,
-        PartieNom VarChar (25) ,
-	PartiMetrologitoday VarChar (25) ,
-	PartiMetrologitomor VarChar (25) ,
-	Partidfn int ,
-	PartiTimestamp int ,
-        PRIMARY KEY (IdPartie )
+CREATE TABLE Village(
+        id_village  SERIAL primary key ,
+        village_nom Varchar (25) 
 );
 
 
---------------------------------------------------------------
--- Table: joueur
---------------------------------------------------------------
+CREATE TABLE Matiere(
+        id_matiere          SERIAL primary key ,
+        matiere_nom         Varchar (25) ,
+        matiere_description Varchar (255) ,
+        matiere_montant     double precision ,
+        matiere_valeur      double precision 
+);
 
---CREATE SEQUENCE joueur_seq;
-
-CREATE TABLE joueur(
-        idJoueur     int  Default nextval ('joueur_seq')  NOT NULL ,
-        JoueurNom    VarChar (25) ,
-        JoueurBudget Double precision ,
-        IdPartie     Int ,
-        PRIMARY KEY (idJoueur )
+CREATE TABLE Batiment(
+        id_batiment          SERIAL primary key ,
+        batiment_nom         Varchar (25) ,
+        batiment_niv         double precision ,
+        batiment_description Varchar (255) ,
+        batiment_mis_a_jour  Time 
 );
 
 
---------------------------------------------------------------
--- Table: recette
---------------------------------------------------------------
-
---CREATE SEQUENCE recette_seq;
-
-CREATE TABLE recette(
-        idRecette  int  Default nextval ('recette_seq')  NOT NULL ,
-        RecetteNom VarChar (25) ,
-        RecetteTemperature Bool ,
-        RecetteAlcohol      Bool ,
-        PRIMARY KEY (idRecette )
+CREATE TABLE Recherche(
+        id_recherche          SERIAL primary key ,
+        recherche_nom         Varchar (255) ,
+        recherche_description Varchar (255) 
 );
 
 
---------------------------------------------------------------
--- Table: ingredient
---------------------------------------------------------------
-
---CREATE SEQUENCE ingredient_seq;
-
-CREATE TABLE ingredient(
-        idIngredient          int  Default nextval ('ingredient_seq')  NOT NULL ,
-        IngredientNom         VarChar (25) ,
-        IngredientPrix        Double precision ,
-        IngredientTemperature Bool ,
-        IngredientAlcohol      Bool ,
-        PRIMARY KEY (idIngredient )
+CREATE TABLE Soldat(
+        id_soldat          SERIAL primary key ,
+        soldat_nom         Varchar (255) ,
+        soldat_description Varchar (255) ,
+        soldat_nombre      double precision ,
+        soldat_attack      double precision ,
+        soldat_defense     double precision ,
+        soldat_vitesse     double precision ,
+        soldat_effet       Bool 
 );
 
---------------------------------------------------------------
--- Table: avoir
---------------------------------------------------------------
+
+CREATE TABLE Armee(
+        id_armee SERIAL primary key 
+);
+
+
+CREATE TABLE possede(
+        idmonde   Int NOT NULL ,
+        id_joueur Int NOT NULL ,
+        PRIMARY KEY (idmonde ,id_joueur )
+);
+
+
 CREATE TABLE avoir(
-	vendre    Int ,
-	prevuvendre    Int ,
-        idJoueur    Int NOT NULL ,
-        idRecette Int NOT NULL ,
-	RecettePrix Double precision,
-        PRIMARY KEY (idJoueur ,idRecette )
-);
-
---------------------------------------------------------------
--- Table: contenir
---------------------------------------------------------------
-
-CREATE TABLE contenir(
-        idRecette    Int NOT NULL ,
-        idIngredient Int NOT NULL ,
-        PRIMARY KEY (idRecette ,idIngredient )
+        id_joueur  Int NOT NULL ,
+        id_village Int NOT NULL ,
+        PRIMARY KEY (id_joueur ,id_village )
 );
 
 
---------------------------------------------------------------
--- Table: compatible
---------------------------------------------------------------
-
-CREATE TABLE compatible(
-        idIngredient            Int NOT NULL ,
-        idIngredient_ingredient Int NOT NULL ,
-        PRIMARY KEY (idIngredient ,idIngredient_ingredient )
+CREATE TABLE fourni(
+        id_village Int NOT NULL ,
+        id_matiere Int NOT NULL ,
+        PRIMARY KEY (id_village ,id_matiere )
 );
 
-ALTER TABLE panneau ADD CONSTRAINT FK_panneau_idJoueur FOREIGN KEY (idJoueur) REFERENCES joueur(idJoueur);
-ALTER TABLE magasin ADD CONSTRAINT FK_magasin_idJoueur FOREIGN KEY (idJoueur) REFERENCES joueur(idJoueur);
-ALTER TABLE joueur ADD CONSTRAINT FK_joueur_IdPartie FOREIGN KEY (IdPartie) REFERENCES partie(IdPartie);
 
-ALTER TABLE avoir ADD CONSTRAINT FK_avoir_idJoueur FOREIGN KEY (idJoueur) REFERENCES joueur(idJoueur);
-ALTER TABLE avoir ADD CONSTRAINT FK_avoir_idRecette FOREIGN KEY (idRecette) REFERENCES recette(idRecette);
-
-ALTER TABLE contenir ADD CONSTRAINT FK_contenir_idRecette FOREIGN KEY (idRecette) REFERENCES recette(idRecette);
-ALTER TABLE contenir ADD CONSTRAINT FK_contenir_idIngredient FOREIGN KEY (idIngredient) REFERENCES ingredient(idIngredient);
-ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient FOREIGN KEY (idIngredient) REFERENCES ingredient(idIngredient);
-ALTER TABLE compatible ADD CONSTRAINT FK_compatible_idIngredient_ingredient FOREIGN KEY (idIngredient_ingredient) REFERENCES ingredient(idIngredient);
+CREATE TABLE construit(
+        id_village  Int NOT NULL ,
+        id_batiment Int NOT NULL ,
+        PRIMARY KEY (id_village ,id_batiment )
+);
 
 
---------------------------------------------------------------
--- Insert
---------------------------------------------------------------
-INSERT INTO partie(PartieNom,PartiMetrologitoday,PartiMetrologitomor) VALUES
-   ('maparti','sunny','sunny');
-INSERT INTO joueur(JoueurNom,JoueurBudget,IdPartie) VALUES
-   ('moi','50',(select idPartie from partie)),('toi','50',(select idPartie from partie));
-INSERT INTO ingredient (IngredientNom,IngredientPrix,IngredientTemperature,IngredientAlcohol) VALUES 
-   ('eg', '0.5', '0', '0'),('sirop', '1', '0', '0'),('glace', '2', '0', '0'),('sucre', '4', '0', '0'),('chocolat', '4', '0', '0'),('legume', '4', '0', '0'),('lait', '4', '0', '0'),('alcohol', '4', '0', '1'),('cafe', '4', '1', '0'),('the', '4', '1', '0');
-INSERT INTO recette (RecetteNom) VALUES 
-   ('eg'),('Limonade'),('cafe'),('soupe');
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='eg'),(select idIngredient from ingredient where IngredientNom='eg'));
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='cafe'),(select idIngredient from ingredient where IngredientNom='cafe'));
-
-INSERT INTO magasin (MagasinPosX,MagasinPosY,MagasinInfluence,idJoueur) VALUES
-   ('333','400','50',(select idJoueur from joueur where JoueurNom='toi')),('500','200','50',(select idJoueur from joueur where JoueurNom='moi'));
-
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='Limonade'),(select idIngredient from ingredient where IngredientNom='eg'));
-INSERT INTO contenir (idRecette,idIngredient) VALUES
-   ((select idRecette from recette where RecetteNom='Limonade'),(select idIngredient from ingredient where IngredientNom='sirop'));
+CREATE TABLE developpe(
+        id_recherche Int NOT NULL ,
+        id_village   Int NOT NULL ,
+        PRIMARY KEY (id_recherche ,id_village )
+);
 
 
-INSERT INTO avoir (idRecette,idJoueur,vendre,RecettePrix) VALUES
-   ((select idRecette from recette where RecetteNom='Limonade'),(select idJoueur from joueur where JoueurNom='toi'),'4','6.0'),((select idRecette from recette where RecetteNom='Limonade'),(select idJoueur from joueur where JoueurNom='moi'),'10','8.0');
+CREATE TABLE constituer(
+        id_soldat Int NOT NULL ,
+        id_armee  Int NOT NULL ,
+        PRIMARY KEY (id_soldat ,id_armee )
+);
+
+
+CREATE TABLE creer(
+        id_armee   Int NOT NULL ,
+        id_village Int NOT NULL ,
+        PRIMARY KEY (id_armee ,id_village )
+);
 
 
 
+ALTER TABLE possede ADD CONSTRAINT FK_possede_idmonde FOREIGN KEY (idmonde) REFERENCES Monde(idmonde);
+ALTER TABLE possede ADD CONSTRAINT FK_possede_id_joueur FOREIGN KEY (id_joueur) REFERENCES Joueur(id_joueur);
+ALTER TABLE avoir ADD CONSTRAINT FK_avoir_id_joueur FOREIGN KEY (id_joueur) REFERENCES Joueur(id_joueur);
+ALTER TABLE avoir ADD CONSTRAINT FK_avoir_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
+ALTER TABLE fourni ADD CONSTRAINT FK_fourni_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
+ALTER TABLE fourni ADD CONSTRAINT FK_fourni_id_matiere FOREIGN KEY (id_matiere) REFERENCES Matiere(id_matiere);
+ALTER TABLE construit ADD CONSTRAINT FK_construit_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
+ALTER TABLE construit ADD CONSTRAINT FK_construit_id_batiment FOREIGN KEY (id_batiment) REFERENCES Batiment(id_batiment);
+ALTER TABLE developpe ADD CONSTRAINT FK_developpe_id_recherche FOREIGN KEY (id_recherche) REFERENCES Recherche(id_recherche);
+ALTER TABLE developpe ADD CONSTRAINT FK_developpe_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
+ALTER TABLE constituer ADD CONSTRAINT FK_constituer_id_soldat FOREIGN KEY (id_soldat) REFERENCES Soldat(id_soldat);
+ALTER TABLE constituer ADD CONSTRAINT FK_constituer_id_armee FOREIGN KEY (id_armee) REFERENCES Armee(id_armee);
+ALTER TABLE creer ADD CONSTRAINT FK_creer_id_armee FOREIGN KEY (id_armee) REFERENCES Armee(id_armee);
+ALTER TABLE creer ADD CONSTRAINT FK_creer_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
 
+--INSERT INTO prets (quoi,qui,status) VALUES ('test','moi','encours');
+--INSERT INTO prets (quoi,qui,status) VALUES ('plus','toi','finis');
 
+INSERT INTO Monde (monde_nom) VALUES ('monde1');

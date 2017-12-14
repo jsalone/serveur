@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+ <head>
+    <meta charset="utf-8">
+    <title>GameAlchimie</title>
+  </head>
+
+
+<body>
+
+<fieldset id="part" class="container">
+  <legend>Partie</legend>
+	<select name="mySel" id="select" onchange="lesmondes(this)"></select>
+	<label>pseudo: <input id="pseudo"></label>
+	<label>mail: <input type='email' id="mail"></label>
+	<label>mot de passe: <input type='password' id="password"></label>
+        <button id="inscription" onclick="inscription()">inscription</button> 
+
+</fieldset>
+
+<br>
+</body>
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            SCRIPT                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script >
+
+/**************************************************************************************************************************************************/
+/*                                                              liste monde                                                               */
+/**************************************************************************************************************************************************/
+var adresse ='http://127.0.0.1:5000/';
+function lesmondes(obj){
+                alert('selected value = '+obj.value+"selected index = "+obj.selectedIndex);
+            }
+            window.onload=function(){
+                var mySelO = document.getElementsByName('mySel')[0];
+                //creat the options
+                var myOptions = [];
+                myOptions[0] = new Option('monde1','monde1',false,false);
+
+                //add options to the <select>
+                for(i=0; i < myOptions.length; i++){
+                    mySelO.options[mySelO.options.length] = myOptions[i];
+                }
+            }
+/**************************************************************************************************************************************************/
+/*                                                              connexion                                                               */
+/**************************************************************************************************************************************************/
+
+
+function inscription() {
+
+	var name=  $('#pseudo').val();
+	var mail=  $('#mail').val();
+	var pw=  $('#password').val();
+	var monde=  document.getElementById("select").value;
+	var rawJSON = JSON.stringify({"pseudo": name, "mail": mail, "password": pw, "monde":monde});
+	
+	$.ajax(adresse+'inscription/'+monde, {
+		method: 'POST',
+		contentType: 'application/json',
+		data: rawJSON,
+		success: location.replace(adresse+"connexion"),
+		error: function(){ alert("error") }
+	})
+      
+}
+
+
+
+
+
+</script>
+
+</html>

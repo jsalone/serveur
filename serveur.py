@@ -6,7 +6,7 @@ from flask import Flask, request, make_response
 from flask import render_template
 from db import Db # voyez db.py
 from flask_cors import CORS, cross_origin
-
+from flask import render_template
 import json
 import random
 import os
@@ -30,7 +30,7 @@ def route_dbinit():
 ##########################################################################################################################################
 @app.route("/connexion", methods=["GET"])
 def connexionget():
-	return "connexion.html"
+	return render_template("connexion.html")
 
 ##########################################################################################################################################
 @app.route("/connexion/<idmonde>", methods=["POST"])

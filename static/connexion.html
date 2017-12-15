@@ -71,12 +71,14 @@ function connexion() {
 		method: 'POST',
 		contentType: 'application/json',
 		data: rawJSON,
+		dataType: 'json',
 		error: function(){ alert("error") }
-	}).done(function() {
+	}).success(function() {
 	    alert( "second success" );
-	  }).fail(function() {
-	    alert( "error" );
-	  })
+	  }).error(function (err) {
+  		var msg = $.parseJSON(err).msg;
+  		alert(msg);
+		});
       
 }
 

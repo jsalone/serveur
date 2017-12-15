@@ -19,8 +19,7 @@ CORS(app)
 invite=0
 debutpartie=0
 your_dict={}
-error=json_response(your_dict, status_code=404)
-#error=403
+error=json.dumps(your_dict), 404, {'Content-Type': 'application/json'}
 @app.route('/reset')
 def route_dbinit():
   """Cette route sert à initialiser (ou nettoyer) la base de données."""

@@ -41,7 +41,7 @@
 /**************************************************************************************************************************************************/
 /*                                                              liste monde                                                               */
 /**************************************************************************************************************************************************/
-var adresse ='https://enigmatic-bayou-14181.herokuapp.com/static/';
+var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
 function lesmondes(obj){
                 alert('selected value = '+obj.value+"selected index = "+obj.selectedIndex);
             }
@@ -73,7 +73,7 @@ function connexion() {
 		data: rawJSON,
 		success: function(data) {
                 // Call this function on success
-            		location.replace(adresse+"village.html");
+            		location.replace(adresse+"/static/village.html");
             		return data;
         	},
 		error: function(){ alert("error") }
@@ -85,7 +85,7 @@ function connexion() {
 /*                                                              new player                                                               */
 /**************************************************************************************************************************************************/
 function newplayer() {
-    location.replace(adresse+"inscription.html");
+    location.replace(adresse+"/static/inscription.html");
 }
 
 

@@ -70,10 +70,12 @@ function inscription() {
 	var rawJSON = JSON.stringify({"pseudo": name, "mail": mail, "password": pw, "monde":monde});
 
 	$.ajax('https://enigmatic-bayou-14181.herokuapp.com/inscription/'+monde, {
-		method: 'POST',
-		contentType: 'application/json',
-		data: rawJSON,
-		success: location.replace("https://enigmatic-bayou-14181.herokuapp.com/static/connexion.html"),
+		'type': 'POST',
+		'contentType': 'application/json',
+		'data': rawJSON,
+		success: function(code_html, statut){
+           		location.replace(adresse+"static/connexion.html");
+       		},
 		error: function(){ alert("error") }
 	})
       

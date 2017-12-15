@@ -27,6 +27,10 @@ def route_dbinit():
   db.executeFile("database_reset.sql")
   db.close()
   return "Done."
+##########################################################################################################################################
+# Fonction de réponse
+def jsonResponse(data, status=200):
+  return json.dumps(data), status, {'Content-Type': 'application/json'}
 
 ##########################################################################################################################################
 @app.route("/connexion", methods=["GET"])
@@ -41,6 +45,7 @@ def connexionpost(idmonde):
 	get_json = request.get_json()
 	table={}
 	tablemtp={}
+	Temps={}
 	if 'mail' in get_json:
 		if 'password' in get_json:
 			table['mail'] = get_json['mail']
@@ -48,15 +53,15 @@ def connexionpost(idmonde):
 			bonmtp = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
 			if len(bonmtp)!=0:
 				db.close()
-				return "village.html"
-			else:
-				db.close()
-				return error
-		else:
-			db.close()
-			return error
-	db.close()
-	return error
+				return jsonResponse(Temps['village']="village.html")
+#			else:
+#				db.close()
+#				return error
+#		else:
+#			db.close()
+#			return error
+#	db.close()
+#	return error
 ##########################################################################################################################################
 @app.route("/inscription", methods=["GET"])
 def inscriptionget():

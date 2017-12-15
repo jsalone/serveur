@@ -53,7 +53,7 @@ def connexionpost(idmonde):
 		if 'password' in get_json:
 			table['mail'] = get_json['mail']
 			tablemtp['mtp'] = get_json['password']
-			bonmtp = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
+			bonmtp = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s AND joueur_mtp = %(mtp)s",{"mail" : table["mail"],"mtp" : tablemtp['mtp']})
 			if len(bonmtp)!=0:
 				db.close()
 				return jsonResponse({'village':"village.html"})

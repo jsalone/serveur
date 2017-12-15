@@ -30,7 +30,7 @@ def route_dbinit():
 ##########################################################################################################################################
 @app.route("/connexion", methods=["GET"])
 def connexionget():
-	return render_template("connexion.html")
+	return "connexion.html"
 
 ##########################################################################################################################################
 @app.route("/connexion/<idmonde>", methods=["POST"])
@@ -48,7 +48,7 @@ def connexionpost(idmonde):
 			print(bonmtp)
 			if len(bonmtp)!=0:
 				db.close()
-				return "village"
+				return "village.html"
 			else:
 				db.close()
 				return error
@@ -65,7 +65,7 @@ def inscriptionget():
 ##########################################################################################################################################
 @app.route("/village/<idjoueur>", methods=["GET"])
 def monvillage(idjoueur):
-	return render_template("village.html")
+	return "village.html"
 
 
 
@@ -112,7 +112,7 @@ def inscriptionpost(idmonde):
 					
 					
 					db.close()
-					return render_template("connexion.html")
+					return "connexion.html"
 				else:
 					db.close()
 					return error

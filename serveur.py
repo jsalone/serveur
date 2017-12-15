@@ -18,10 +18,8 @@ app.debug = True
 CORS(app)
 invite=0
 debutpartie=0
-error=app.response_class(
-        status=404,
-        mimetype='application/json'
-    )
+your_dict={}
+error=json_response(your_dict, status_code=404)
 #error=403
 @app.route('/reset')
 def route_dbinit():

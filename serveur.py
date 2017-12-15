@@ -99,7 +99,7 @@ def inscriptionpost(idmonde):
 				tablemtp['mtp'] = get_json['password']
 				tablepseudo['pseudo']= get_json['pseudo']
 				#on verifie que le joueur n'a pas de compte deja cree
-				verifexit = db.select("SELECT * FROM Joueur WHERE joueur_mtp = %(mtp)s AND joueur_mail = %(mail)s",{"mtp" : tablemtp["mtp"],"mail" : table["mail"]})
+				verifexit = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
 				
 				if len(verifexit)==0:	
 					
@@ -123,17 +123,17 @@ def inscriptionpost(idmonde):
 					return "connexion.html"
 				else:
 					db.close()
-					return error
+					abort(404)
 			else:
 				db.close()
-				return error
+				abort(404)
 		else:
 			db.close()
-			return error
+			abort(404)
 
 	else:
 		db.close()
-		return error
+		abort(404)
 
 
 #-----------------------------------------------------------------

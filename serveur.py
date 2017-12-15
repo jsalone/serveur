@@ -19,7 +19,7 @@ CORS(app)
 invite=0
 debutpartie=0
 your_dict={}
-error=json.dumps(your_dict), 404, {'Content-Type': 'application/json'}
+error=json.dumps(your_dict), 200, {'Content-Type': 'application/json'}
 @app.route('/reset')
 def route_dbinit():
   """Cette route sert à initialiser (ou nettoyer) la base de données."""
@@ -29,8 +29,11 @@ def route_dbinit():
   return "Done."
 ##########################################################################################################################################
 # Fonction de réponse
-def jsonResponse(data, status=404):
+def jsonResponse(data, status=200):
   return json.dumps(data), status, {'Content-Type': 'application/json'}
+
+def jsonResponseerror(data, status=404):
+  return json.dumps({'village':"NULL"}), status, {'Content-Type': 'application/json'}
 
 ##########################################################################################################################################
 @app.route("/connexion", methods=["GET"])
@@ -54,14 +57,14 @@ def connexionpost(idmonde):
 			if len(bonmtp)!=0:
 				db.close()
 				return jsonResponse({'village':"village.html"})
-#			else:
-#				db.close()
-#				return error
-#		else:
-#			db.close()
-#			return error
-#	db.close()
-#	return error
+			else:
+				db.close()
+				return jsonResponseerror({'village':"NULL"})
+		else:
+			db.close()
+			return jsonResponseerror({'village':"NULL"})
+	db.close()
+	return jsonResponseerror({'village':"village.html"})
 ##########################################################################################################################################
 @app.route("/inscription", methods=["GET"])
 def inscriptionget():

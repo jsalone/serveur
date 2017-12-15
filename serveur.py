@@ -102,7 +102,7 @@ def inscriptionpost(idmonde):
 						'joueur_mtp': tablemtp["mtp"],
 						'joueur_pseudo': tablepseudo['pseudo']
 					})
-					print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+					
 					idjoueur=idjoueur[0]['id_joueur']
 					idjoueur=db.select("INSERT INTO possede ( id_joueur,idmonde) VALUES (%(id_joueur)s,%(idmonde)s)RETURNING id_joueur", {
 						'id_joueur': idjoueur,

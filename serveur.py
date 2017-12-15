@@ -18,7 +18,10 @@ app.debug = True
 CORS(app)
 invite=0
 debutpartie=0
-error=json.dumps({'success':False}), 403, {'ContentType':'application/json'}
+error=app.response_class(
+        status=404,
+        mimetype='application/json'
+    )
 #error=403
 @app.route('/reset')
 def route_dbinit():

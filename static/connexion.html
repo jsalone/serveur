@@ -73,11 +73,17 @@ function connexion() {
 		data: rawJSON,
 		success: function(data) {
                 // Call this function on success
+			
+			
             		location.replace(adresse+"static/village.html");
             		return data;
         	},
 		error: function(){ alert("error") }
-	})
+	}).done(function() {
+    alert( "second success" );
+  }).fail(function() {
+    alert( "error" );
+  })
       
 }
 

@@ -71,13 +71,12 @@ function connexion() {
 		'type': 'POST',
 		'contentType': 'application/json',
 		'data': rawJSON,
-	}).fail(function(response) {
-	          //$("#error").text(response.responseJSON["error"])
-		alert("error");
-	          })
-		  .done(function(response) {
-	          alert("Bienvenu sur notre projet!!!");
-	          })
+		success : function(code_html, statut){
+
+           		alert(statut)
+
+       		},
+	})
 	
       
 }

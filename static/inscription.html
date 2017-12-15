@@ -69,7 +69,7 @@ function inscription() {
 	var monde=  document.getElementById("select").value;
 	var rawJSON = JSON.stringify({"pseudo": name, "mail": mail, "password": pw, "monde":monde});
 
-	$.ajax(adresse+'inscription/'+monde, {
+	$.ajax('https://enigmatic-bayou-14181.herokuapp.com/inscription/'+monde, {
 		method: 'POST',
 		contentType: 'application/json',
 		data: rawJSON,

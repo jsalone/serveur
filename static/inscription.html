@@ -68,7 +68,7 @@ function inscription() {
 	var pw=  $('#password').val();
 	var monde=  document.getElementById("select").value;
 	var rawJSON = JSON.stringify({"pseudo": name, "mail": mail, "password": pw, "monde":monde});
-	alter("envoie");
+
 	$.ajax(adresse+'inscription/'+monde, {
 		method: 'POST',
 		contentType: 'application/json',

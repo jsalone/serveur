@@ -18,7 +18,7 @@ app.debug = True
 CORS(app)
 invite=0
 debutpartie=0
-
+error=json.dumps({'success':False}), 403, {'ContentType':'application/json'}
 @app.route('/reset')
 def route_dbinit():
   """Cette route sert à initialiser (ou nettoyer) la base de données."""

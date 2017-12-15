@@ -73,7 +73,7 @@ function connexion() {
 		'data': rawJSON,
 		success : function(code_html, statut){
 
-           		alert(code_html);
+           		alert(JSON.parse(code_html));
 
        		},
 	})

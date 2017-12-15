@@ -53,7 +53,7 @@ def connexionpost(idmonde):
 			bonmtp = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
 			if len(bonmtp)!=0:
 				db.close()
-				return jsonResponse(var jason = {"village":"village.html"};)
+				return jsonResponse({'village':"village.html"})
 #			else:
 #				db.close()
 #				return error

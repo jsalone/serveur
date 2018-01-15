@@ -148,3 +148,8 @@ ALTER TABLE creer ADD CONSTRAINT FK_creer_id_village FOREIGN KEY (id_village) RE
 --INSERT INTO prets (quoi,qui,status) VALUES ('plus','toi','finis');
 
 INSERT INTO Monde (monde_nom) VALUES ('monde1');
+INSERT INTO Matiere (matiere_nom,matiere_description) VALUES ('ametiste','pierre viollette');
+INSERT INTO Matiere (matiere_nom,matiere_description) VALUES ('quartz','pierre transparente');
+INSERT INTO Matiere (matiere_nom,matiere_description) VALUES ('ore','pierre gold');
+INSERT INTO Matiere (matiere_nom,matiere_description) VALUES ('topaze','pierre bleu');
+INSERT INTO Matiere (matiere_nom,matiere_description) VALUES ('balsate','pierre noire');

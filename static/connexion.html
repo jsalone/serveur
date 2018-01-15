@@ -8,18 +8,22 @@
     <meta charset="utf-8">
     <title>GameAlchimie</title>
   </head>
-
-
+<style>
+.button {background-color: #000000;}
+</style>
 <body>
 
 <fieldset id="part" class="container">
   <legend>Partie</legend>
-	<select name="mySel" id="select" onchange="lesmondes(this);"></select>
-	<label>mail: <input type='email' id="mail"></label>
-	<label>mot de passe: <input type='password' id="password"></label>
-        <button id="connexion" onclick="connexion()">connexion</button>   
-        <button id="NewPlayer" onclick="newplayer()">nouveau joueur</button>
-
+	<form method="get" name="fileinfo">
+		<select name="mySel" id="select" onchange="lesmondes(this);"></select>
+		<label>mail: <input type='email' id="mail" name="mail"></label>
+		<label>mot de passe: <input type='password' id="password"></label>
+        	 
+	</form> 
+	<button id="connexion" onclick="connexion()" >connexion</button> 
+        <button id="NewPlayer" onclick="newplayer()" class="button" >nouveau joueur</button>
+	
 </fieldset>
 
 <br>
@@ -41,7 +45,8 @@
 /**************************************************************************************************************************************************/
 /*                                                              liste monde                                                               */
 /**************************************************************************************************************************************************/
-var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
+//var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
+var adresse ='127.0.0.1:5000/';
 function lesmondes(obj){
                 alert('selected value = '+obj.value+"selected index = "+obj.selectedIndex);
             }
@@ -66,14 +71,16 @@ function connexion() {
 	var pw=  $('#password').val();
 	var monde=  document.getElementById("select").value;
 	var rawJSON = JSON.stringify({"mail": mail, "password": pw, "monde":monde});
-	
-	$.ajax(adresse+'connexion/'+monde, {
-		'type': 'POST',
-		'contentType': 'application/json',
-		'data': rawJSON,
-		success : function(code_html, statut){
+	var form = document.forms.namedItem("fileinfo");
 
-           		location.replace(adresse+"static/village.html");
+	$.ajax('connexion/'+monde, {
+		type: 'POST',
+		contentType: 'application/json',
+		data: rawJSON,
+		success : function(code_html, statut,data){
+			var resp =jQuery.parseJSON(data.responseText);
+			console.log(resp.idjoueur);
+           		location.replace("interface.html?idjoueur="+resp.idjoueur);
 
        		},
 	})
@@ -85,7 +92,7 @@ function connexion() {
 /*                                                              new player                                                               */
 /**************************************************************************************************************************************************/
 function newplayer() {
-    location.replace(adresse+"static/inscription.html");
+    location.replace("inscription.html");
 }
 
 

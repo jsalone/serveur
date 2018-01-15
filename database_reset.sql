@@ -41,17 +41,13 @@ CREATE TABLE Village(
 CREATE TABLE Matiere(
         id_matiere          SERIAL primary key ,
         matiere_nom         Varchar (25) ,
-        matiere_description Varchar (255) ,
-        matiere_montant     double precision ,
-        matiere_valeur      double precision 
+        matiere_description Varchar (255)
 );
 
 CREATE TABLE Batiment(
         id_batiment          SERIAL primary key ,
         batiment_nom         Varchar (25) ,
-        batiment_niv         double precision ,
-        batiment_description Varchar (255) ,
-        batiment_mis_a_jour  Time 
+        batiment_description Varchar (255)
 );
 
 
@@ -74,11 +70,6 @@ CREATE TABLE Soldat(
 );
 
 
-CREATE TABLE Armee(
-        id_armee SERIAL primary key 
-);
-
-
 CREATE TABLE possede(
         idmonde   Int NOT NULL ,
         id_joueur Int NOT NULL ,
@@ -94,6 +85,9 @@ CREATE TABLE avoir(
 
 
 CREATE TABLE fourni(
+        montant_mat double precision ,
+        niveau_mat  Int ,
+        maj_mat     Time ,
         id_village Int NOT NULL ,
         id_matiere Int NOT NULL ,
         PRIMARY KEY (id_village ,id_matiere )
@@ -101,6 +95,8 @@ CREATE TABLE fourni(
 
 
 CREATE TABLE construit(
+        niveau_bat   Int ,
+        maj_Batiment Time ,
         id_village  Int NOT NULL ,
         id_batiment Int NOT NULL ,
         PRIMARY KEY (id_village ,id_batiment )
@@ -110,22 +106,22 @@ CREATE TABLE construit(
 CREATE TABLE developpe(
         id_recherche Int NOT NULL ,
         id_village   Int NOT NULL ,
+        niveau_rech   Int ,
+        maj_recherche Time ,
         PRIMARY KEY (id_recherche ,id_village )
 );
 
 
 CREATE TABLE constituer(
         id_soldat Int NOT NULL ,
-        id_armee  Int NOT NULL ,
-        PRIMARY KEY (id_soldat ,id_armee )
+        id_village  Int NOT NULL ,
+	nombre_sol        Int ,
+        nb_sold_creer     Int ,
+        time_soldat_creat Time ,
+        PRIMARY KEY (id_soldat ,id_village )
 );
 
 
-CREATE TABLE creer(
-        id_armee   Int NOT NULL ,
-        id_village Int NOT NULL ,
-        PRIMARY KEY (id_armee ,id_village )
-);
 
 
 
@@ -140,9 +136,7 @@ ALTER TABLE construit ADD CONSTRAINT FK_construit_id_batiment FOREIGN KEY (id_ba
 ALTER TABLE developpe ADD CONSTRAINT FK_developpe_id_recherche FOREIGN KEY (id_recherche) REFERENCES Recherche(id_recherche);
 ALTER TABLE developpe ADD CONSTRAINT FK_developpe_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
 ALTER TABLE constituer ADD CONSTRAINT FK_constituer_id_soldat FOREIGN KEY (id_soldat) REFERENCES Soldat(id_soldat);
-ALTER TABLE constituer ADD CONSTRAINT FK_constituer_id_armee FOREIGN KEY (id_armee) REFERENCES Armee(id_armee);
-ALTER TABLE creer ADD CONSTRAINT FK_creer_id_armee FOREIGN KEY (id_armee) REFERENCES Armee(id_armee);
-ALTER TABLE creer ADD CONSTRAINT FK_creer_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
+ALTER TABLE constituer ADD CONSTRAINT FK_constituer_id_village FOREIGN KEY (id_village) REFERENCES Village(id_village);
 
 --INSERT INTO prets (quoi,qui,status) VALUES ('test','moi','encours');
 --INSERT INTO prets (quoi,qui,status) VALUES ('plus','toi','finis');

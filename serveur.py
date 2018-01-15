@@ -78,7 +78,7 @@ def activate_job():
     def G_balsate():
 		
 		global newplay
-		time.sleep(2)
+		time.sleep(4)
 		db = Db()
 		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
 						'matiere_nom': 'balsate',
@@ -103,7 +103,7 @@ def activate_job():
 
     def G_topaze():
 		global newplay
-		time.sleep(4)
+		time.sleep(7)
 		db = Db()
 		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
 						'matiere_nom': 'topaze',
@@ -127,7 +127,7 @@ def activate_job():
 		db.close()
     def G_quartz():
 		global newplay
-		time.sleep(6)
+		time.sleep(9)
 		db = Db()
 		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
 						'matiere_nom': 'quartz',
@@ -151,7 +151,7 @@ def activate_job():
 		db.close()
     def G_ore():
 		global newplay
-		time.sleep(8)
+		time.sleep(12)
 		db = Db()
 		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
 						'matiere_nom': 'ore',

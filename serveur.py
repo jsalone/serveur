@@ -41,6 +41,7 @@ def route_dbinit():
   return "Done."
 
 
+
 @app.before_first_request
 def activate_job():
 
@@ -49,10 +50,7 @@ def activate_job():
 		db = Db()
 		global newplay
 		
-		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
-						'matiere_nom': 'ametiste',
-						'matiere_description': 'pierre des sorcières'
-		})
+		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		db.close()
 		print "G_ametiste OK "
@@ -78,12 +76,9 @@ def activate_job():
     def G_balsate():
 		
 		global newplay
-		time.sleep(4)
+		time.sleep(2)
 		db = Db()
-		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
-						'matiere_nom': 'balsate',
-						'matiere_description': 'pierre du volcan'
-		})
+		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print "G_balsate OK"
 		print idame
@@ -103,12 +98,9 @@ def activate_job():
 
     def G_topaze():
 		global newplay
-		time.sleep(7)
+		time.sleep(4)
 		db = Db()
-		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
-						'matiere_nom': 'topaze',
-						'matiere_description': 'pierre du ocean'
-		})
+		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print "G_topaze OK"
 		print idame
@@ -127,12 +119,9 @@ def activate_job():
 		db.close()
     def G_quartz():
 		global newplay
-		time.sleep(9)
+		time.sleep(6)
 		db = Db()
-		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
-						'matiere_nom': 'quartz',
-						'matiere_description': 'pierre de lumiere'
-		})
+		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print "G_quartz OK"
 		print idame
@@ -151,12 +140,9 @@ def activate_job():
 		db.close()
     def G_ore():
 		global newplay
-		time.sleep(12)
+		time.sleep(8)
 		db = Db()
-		idame=db.select("INSERT INTO Matiere ( matiere_nom,matiere_description) VALUES (%(matiere_nom)s,%(matiere_description)s)RETURNING id_matiere", {
-						'matiere_nom': 'ore',
-						'matiere_description': 'gold'
-		})
+		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ore'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print "G_ore OK"
 		print idame
@@ -184,6 +170,7 @@ def activate_job():
     thread.start()
     thread = threading.Thread(target=G_ore)
     thread.start()
+
 
 
 

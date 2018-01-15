@@ -8,7 +8,9 @@
     <meta charset="utf-8">
     <title>GameAlchimie</title>
   </head>
-
+<style>
+.button {background-color: #0000ff;}
+</style>
 
 <body>
 
@@ -18,7 +20,7 @@
 	<label>pseudo: <input id="pseudo"></label>
 	<label>mail: <input type='email' id="mail"></label>
 	<label>mot de passe: <input type='password' id="password"></label>
-        <button id="inscription" onclick="inscription()">inscription</button> 
+        <button id="inscription" onclick="inscription()" class="button">inscription</button> 
 
 </fieldset>
 
@@ -41,7 +43,8 @@
 /**************************************************************************************************************************************************/
 /*                                                              liste monde                                                               */
 /**************************************************************************************************************************************************/
-var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
+//var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
+var adresse= '127.0.0.1:5000/';
 function lesmondes(obj){
                 alert('selected value = '+obj.value+"selected index = "+obj.selectedIndex);
             }
@@ -69,12 +72,12 @@ function inscription() {
 	var monde=  document.getElementById("select").value;
 	var rawJSON = JSON.stringify({"pseudo": name, "mail": mail, "password": pw, "monde":monde});
 
-	$.ajax('https://enigmatic-bayou-14181.herokuapp.com/inscription/'+monde, {
+	$.ajax('inscription/'+monde, {
 		'type': 'POST',
 		'contentType': 'application/json',
 		'data': rawJSON,
 		success: function(code_html, statut){
-           		location.replace(adresse+"static/connexion.html");
+           		location.replace("connexion.html");
        		},
 		error: function(){ alert("error") }
 	})

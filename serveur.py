@@ -346,7 +346,7 @@ def myressource(idjoueur,nomvillage):
 	
 	return resp
 
-#-----------------------------------------------------------------
+##########################################################################################################################################
 @app.route("/pierre", methods=["GET"])
 @app.route("/static/pierre", methods=["GET"])
 def mypierre():
@@ -355,8 +355,14 @@ def mypierre():
 	db.close()
 	return jsonResponse({'liste':pierre})
 
+##########################################################################################################################################
+@app.route("/interface", methods=["GET"])
+def inscriptionget():
+	return render_template("/interface")
 
 
+
+##########################################################################################################################################
 @app.route('/admin', methods=['GET'])
 def affichejoueur():
 	db = Db()

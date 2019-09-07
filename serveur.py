@@ -357,7 +357,7 @@ def mypierre():
 
 ##########################################################################################################################################
 @app.route("/interface", methods=["GET"])
-def inscriptionget():
+def interface():
 	return render_template("/interface")
 
 

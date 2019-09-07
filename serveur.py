@@ -191,7 +191,7 @@ def jsonResponseerror(data, status=404):
 @app.route("/connexion", methods=["GET"])
 @app.route("/static/connexion", methods=["GET"])
 def connexionget():
-	return "connexion.html"
+	return render_template("connexion.html")
 
 ##########################################################################################################################################
 @app.route("/connexion/<idmonde>", methods=["POST"])

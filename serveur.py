@@ -224,13 +224,13 @@ def connexionpost(idmonde):
 @app.route("/inscription", methods=["GET"])
 @app.route("/static/inscription", methods=["GET"])
 def inscriptionget():
-	return render_template("inscription.html")
+	return app.send_static_file("inscription.html")
 
 ##########################################################################################################################################
 @app.route("/village/<idjoueur>", methods=["GET"])
 @app.route("/static/village/<idjoueur>", methods=["GET"])
 def monvillage(idjoueur):
-	return "village.html"
+	return app.send_static_file("village.html")
 
 
 
@@ -304,7 +304,7 @@ def inscriptionpost(idmonde):
 					})
 					newplay=1
 					db.close()
-					return "connexion.html"
+					return app.send_static_file("connexion.html")
 				else:
 					db.close()
 					abort(404)

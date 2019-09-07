@@ -14,7 +14,7 @@ import psycopg2
 import urlparse
 import threading
 import time
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 app.debug = True
 CORS(app)
 invite=0

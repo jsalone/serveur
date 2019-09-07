@@ -76,7 +76,7 @@ def activate_job():
     def G_balsate():
 		
 		global newplay
-		time.sleep(2)
+		time.sleep(4)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -98,7 +98,7 @@ def activate_job():
 
     def G_topaze():
 		global newplay
-		time.sleep(4)
+		time.sleep(8)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -119,7 +119,7 @@ def activate_job():
 		db.close()
     def G_quartz():
 		global newplay
-		time.sleep(6)
+		time.sleep(12)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -190,6 +190,8 @@ def jsonResponseerror(data, status=404):
 ##########################################################################################################################################
 @app.route("/connexion", methods=["GET"])
 @app.route("/static/connexion", methods=["GET"])
+@app.route("/", methods=["GET"])
+@app.route("/static/", methods=["GET"])
 def connexionget():
 	return render_template("connexion.html")
 

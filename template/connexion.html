@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+ <head>
+    <meta charset="utf-8">
+    <title>GameAlchimie</title>
+  </head>
+<style>
+.button {background-color: #000000;}
+</style>
+<body>
+
+<fieldset id="part" class="container">
+  <legend>Partie</legend>
+	<form method="get" name="fileinfo">
+		<select name="mySel" id="select" onchange="lesmondes(this);"></select>
+		<label>mail: <input type='email' id="mail" name="mail"></label>
+		<label>mot de passe: <input type='password' id="password"></label>
+        	 
+	</form> 
+	<button id="connexion" onclick="connexion()" >connexion</button> 
+        <button id="NewPlayer" onclick="newplayer()" class="button" >nouveau joueur</button>
+	
+</fieldset>
+
+<br>
+</body>
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--                            SCRIPT                                                                              -->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script >
+
+/**************************************************************************************************************************************************/
+/*                                                              liste monde                                                               */
+/**************************************************************************************************************************************************/
+//var adresse ='https://enigmatic-bayou-14181.herokuapp.com/';
+var adresse ='127.0.0.1:5000/';
+function lesmondes(obj){
+                alert('selected value = '+obj.value+"selected index = "+obj.selectedIndex);
+            }
+            window.onload=function(){
+                var mySelO = document.getElementsByName('mySel')[0];
+                //creat the options
+                var myOptions = [];
+                myOptions[0] = new Option('monde1','1',false,false);
+
+                //add options to the <select>
+                for(i=0; i < myOptions.length; i++){
+                    mySelO.options[mySelO.options.length] = myOptions[i];
+                }
+            }
+/**************************************************************************************************************************************************/
+/*                                                              connexion                                                               */
+/**************************************************************************************************************************************************/
+
+
+function connexion() {
+	var mail=  $('#mail').val();
+	var pw=  $('#password').val();
+	var monde=  document.getElementById("select").value;
+	var rawJSON = JSON.stringify({"mail": mail, "password": pw, "monde":monde});
+	var form = document.forms.namedItem("fileinfo");
+
+	$.ajax('connexion/'+monde, {
+		type: 'POST',
+		contentType: 'application/json',
+		data: rawJSON,
+		success : function(code_html, statut,data){
+			var resp =jQuery.parseJSON(data.responseText);
+			console.log(resp.idjoueur);
+           		location.replace("interface.html?idjoueur="+resp.idjoueur);
+
+       		},
+	})
+	
+      
+}
+
+/**************************************************************************************************************************************************/
+/*                                                              new player                                                               */
+/**************************************************************************************************************************************************/
+function newplayer() {
+    location.replace("inscription.html");
+}
+
+
+
+</script>
+
+</html>

@@ -191,7 +191,7 @@ def jsonResponseerror(data, status=404):
 @app.route("/connexion", methods=["GET"])
 @app.route("/static/connexion", methods=["GET"])
 def connexionget():
-	return app.send_static_file("connexion.html")
+	return render_template("connexion.html")
 
 ##########################################################################################################################################
 @app.route("/connexion/<idmonde>", methods=["POST"])
@@ -224,13 +224,13 @@ def connexionpost(idmonde):
 @app.route("/inscription", methods=["GET"])
 @app.route("/static/inscription", methods=["GET"])
 def inscriptionget():
-	return app.send_static_file("inscription.html")
+	return render_template("inscription.html")
 
 ##########################################################################################################################################
 @app.route("/village/<idjoueur>", methods=["GET"])
 @app.route("/static/village/<idjoueur>", methods=["GET"])
 def monvillage(idjoueur):
-	return app.send_static_file("village.html")
+	return render_template("village.html")
 
 
 
@@ -304,7 +304,7 @@ def inscriptionpost(idmonde):
 					})
 					newplay=1
 					db.close()
-					return app.send_static_file("connexion.html")
+					return render_template("connexion.html")
 				else:
 					db.close()
 					abort(404)

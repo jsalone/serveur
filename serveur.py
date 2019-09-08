@@ -59,7 +59,7 @@ def activate_job():
 			
 			if len(listematame)!=0:
 				print(len(listematame))
-				for maliste in range(0,len(listematame)):
+				for maliste in len(listematame):
 					print(maliste)
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 					nivmine=listematame[maliste]['niveau_mat']

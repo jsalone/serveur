@@ -80,9 +80,31 @@ function connexion() {
 		success : function(code_html, statut,data){
 			var resp =jQuery.parseJSON(data.responseText);
 			console.log(resp.idjoueur);
-           		location.replace("interface.html?idjoueur="+resp.idjoueur);
+           	location.replace("interface.html?idjoueur="+resp.idjoueur);
+            
+	        $.ajax('interface', {
+		        type: 'GET',
+		        contentType: 'application/json',
+		        data: rawJSON,
+		        success : function(code_html, statut,data){
+			        var resp =jQuery.parseJSON(data.responseText);
+                    console.log(data.responseText);
 
-       		},
+           	        location.replace(data.responseText+"?idjoueur="+resp.idjoueur);
+                    
+       	        },
+	        })
+
+
+
+
+
+
+
+
+
+
+       	},
 	})
 	
       

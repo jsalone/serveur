@@ -13,7 +13,7 @@ class Db:
         database=url.path[1:],
         user=url.username,
         password=url.password,
-        host=url.hostname,
+        host='jojo',
         port=url.port
     )
     self.cur = self.conn.cursor()

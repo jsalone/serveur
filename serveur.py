@@ -364,6 +364,7 @@ def mypierre():
 ##########################################################################################################################################
 @app.route("/interface", methods=["GET"])
 def interface():
+	print("interface")
 	return render_template("/interface")
 
 

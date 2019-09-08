@@ -62,17 +62,11 @@ def activate_job():
 			if len(listematame)!=0:
 				
 				for maliste in range(0,len(listematame)):
-					print("1")
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-					print("2")
 					nivmine=listematame[maliste]['niveau_mat']
-					print("3")
 					ancien=listematame[maliste]['montant_mat']
-					print("4")
 					ancien+=ametiste[nivmine]
-					print("5")
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
-					print("6")
 				time.sleep(12)
 			else:
 				db = Db()

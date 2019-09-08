@@ -11,7 +11,7 @@ import json
 import random
 import os
 import psycopg2
-import urlparse
+from urllib.parse import urlparse
 import threading
 import time
 app = Flask(__name__)

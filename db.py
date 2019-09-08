@@ -70,7 +70,7 @@ class Db:
     self.conn.close()
 
   def executeFile(self, filename):
-    f = file(filename, "r")
+    f = open(filename, "r")
     sql = f.read()
     f.close()
     self.execute(sql)

@@ -14,7 +14,7 @@ import psycopg2
 from urllib.parse import urlparse
 import threading
 import time
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 app.debug = True
 CORS(app)
 invite=0
@@ -359,7 +359,7 @@ def mypierre():
 @app.route("/interface", methods=["GET"])
 def interface():
 	print("interface")
-	return render_template("/interface")
+	return render_template("interface")
 
 
 

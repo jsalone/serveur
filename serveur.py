@@ -37,10 +37,10 @@ error=json.dumps(your_dict), 200, {'Content-Type': 'application/json'}
 @app.route('/reset')
 def route_dbinit():
   """Cette route sert à initialiser (ou nettoyer) la base de données."""
-  #db = Db()
+  db = Db()
   dbbackconnection.executeFile("database_reset.sql")
 
-  #db.close()
+  db.close()
   return "Done."
 
 
@@ -55,10 +55,11 @@ def activate_job():
 		
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
+		db.close()
 		print ("G_ametiste OK ")
 		print (idame)
 		while True:
-			
+			db = Db()
 			if len(listematame)!=0:
 				
 				for maliste in range(0,len(listematame)):
@@ -72,7 +73,7 @@ def activate_job():
 				db = Db()
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(12)
-				
+			db.close()
 		db.close()
 	def G_balsate():
 		
@@ -81,9 +82,12 @@ def activate_job():
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
+		db.close()
 		print ("G_balsate OK")
 		print (idame)
 		while True:
+			db = Db()
+
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -95,6 +99,7 @@ def activate_job():
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(10)
+			db.close()
 		db.close()
 
 	def G_topaze():
@@ -103,9 +108,11 @@ def activate_job():
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
+		db.close()
 		print ("G_topaze OK")
 		print (idame)
 		while True:
+			db = Db()
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -117,6 +124,7 @@ def activate_job():
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(10)
+			db.close()
 		db.close()
 	def G_quartz():
 		global newplay
@@ -125,8 +133,10 @@ def activate_job():
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print ("G_quartz OK")
+		db.close()
 		print (idame)
 		while True:
+			db = Db()
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -138,6 +148,7 @@ def activate_job():
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(10)
+			db.close()
 		db.close()
 	def G_ore():
 		global newplay
@@ -146,8 +157,10 @@ def activate_job():
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ore'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		print ("G_ore OK")
+		db.close()
 		print (idame)
 		while True:
+			db = Db()
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -159,6 +172,7 @@ def activate_job():
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(10)
+			db.close()
 		db.close()	
 	thread = threading.Thread(target=G_ametiste)
 	thread.start()
@@ -200,7 +214,7 @@ def connexionget():
 @app.route("/static/connexion/<idmonde>", methods=["POST"])
 def connexionpost(idmonde):
 
-	#db = Db()
+	db = Db()
 	get_json = request.get_json()
 	table={}
 	tablemtp={}
@@ -209,18 +223,18 @@ def connexionpost(idmonde):
 		if 'password' in get_json:
 			table['mail'] = get_json['mail']
 			tablemtp['mtp'] = get_json['password']
-			bonmtp = dbbackconnection.select("SELECT id_joueur FROM Joueur WHERE joueur_mail = %(mail)s AND joueur_mtp = %(mtp)s",{"mail" : table["mail"],"mtp" : tablemtp['mtp']})
+			bonmtp = db.select("SELECT id_joueur FROM Joueur WHERE joueur_mail = %(mail)s AND joueur_mtp = %(mtp)s",{"mail" : table["mail"],"mtp" : tablemtp['mtp']})
 			
 			if len(bonmtp)!=0:
-				#.close()
+				db.close()
 				return jsonResponse({'idjoueur':bonmtp[0]['id_joueur']})
 			else:
-				#db.close()
+				db.close()
 				abort(404)
 		else:
-			#db.close()
+			db.close()
 			abort(404)
-	#db.close()
+	db.close()
 	abort(404)
 ##########################################################################################################################################
 @app.route("/inscription", methods=["GET"])
@@ -245,7 +259,7 @@ def monvillage(idjoueur):
 def inscriptionpost(idmonde):
 
 
-	#db = Db()
+	db = Db()
 	get_json = request.get_json()
 	table={}
 	tablemtp={}
@@ -259,66 +273,66 @@ def inscriptionpost(idmonde):
 				tablemtp['mtp'] = get_json['password']
 				tablepseudo['pseudo']= get_json['pseudo']
 				#on verifie que le joueur n'a pas de compte deja cree
-				verifexit = dbbackconnection.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
+				verifexit = db.select("SELECT * FROM Joueur WHERE joueur_mail = %(mail)s",{"mail" : table["mail"]})
 				
 				if len(verifexit)==0:	
 					
-					id_monde=dbbackconnection.select("SELECT idmonde FROM Monde WHERE monde_nom = %(idmonde)s ",{"idmonde" : idmonde})
+					id_monde=db.select("SELECT idmonde FROM Monde WHERE monde_nom = %(idmonde)s ",{"idmonde" : idmonde})
 					
-					idjoueur=dbbackconnection.select("INSERT INTO Joueur (joueur_mail,joueur_pseudo, joueur_mtp) VALUES (%(joueur_mail)s, %(joueur_pseudo)s, %(joueur_mtp)s) RETURNING id_joueur", {
+					idjoueur=db.select("INSERT INTO Joueur (joueur_mail,joueur_pseudo, joueur_mtp) VALUES (%(joueur_mail)s, %(joueur_pseudo)s, %(joueur_mtp)s) RETURNING id_joueur", {
 						'joueur_mail': table["mail"],
 						'joueur_mtp': tablemtp["mtp"],
 						'joueur_pseudo': tablepseudo['pseudo']
 					})
 					
 					idjoueur=idjoueur[0]['id_joueur']
-					idjoueur=dbbackconnection.select("INSERT INTO possede ( id_joueur,idmonde) VALUES (%(id_joueur)s,%(idmonde)s)RETURNING id_joueur", {
+					idjoueur=db.select("INSERT INTO possede ( id_joueur,idmonde) VALUES (%(id_joueur)s,%(idmonde)s)RETURNING id_joueur", {
 						'id_joueur': idjoueur,
 						'idmonde': id_monde[0]['idmonde']
 					})
-					idvillage=dbbackconnection.select("INSERT INTO village ( village_nom) VALUES (%(village_nom)s)RETURNING id_village", {
+					idvillage=db.select("INSERT INTO village ( village_nom) VALUES (%(village_nom)s)RETURNING id_village", {
 						'village_nom': 'NouveauVillage'
 					})
-					idavoir=dbbackconnection.select("INSERT INTO avoir (id_joueur,id_village) VALUES (%(id_joueur)s,%(id_village)s)RETURNING id_village", {
+					idavoir=db.select("INSERT INTO avoir (id_joueur,id_village) VALUES (%(id_joueur)s,%(id_village)s)RETURNING id_village", {
 						'id_joueur': idjoueur[0]['id_joueur'],'id_village': idvillage[0]['id_village']
 					})
-					tpierre=dbbackconnection.select("SELECT * FROM Matiere ")
-					pierre=dbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
+					tpierre=db.select("SELECT * FROM Matiere ")
+					pierre=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
 
 					
-					idfourni=dbbackconnection.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':50,'niveau_mat':0
+					idfourni=db.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':50,'niveau_mat':0
 					})
-					pierre=dbbackconnection.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='balsate'")
-					idfourni=dbbackconnection.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
+					pierre=db.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='balsate'")
+					idfourni=db.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
 						'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':100,'niveau_mat':0
 					})
-					pierre=dbbackconnection.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='topaze'")
-					idfourni=dbbackconnection.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
+					pierre=db.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='topaze'")
+					idfourni=db.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
 						'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':150,'niveau_mat':0
 					})
-					pierre=dbbackconnection.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='quartz'")
-					idfourni=dbbackconnection.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
+					pierre=db.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='quartz'")
+					idfourni=db.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
 						'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':200,'niveau_mat':0
 					})
-					pierre=dbbackconnection.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='ore'")
-					idfourni=dbbackconnection.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
+					pierre=db.select("SELECT id_matiere FROM Matiere WHERE matiere_nom='ore'")
+					idfourni=db.select("INSERT INTO fourni (id_matiere,id_village,montant_mat,niveau_mat) VALUES (%(id_matiere)s,%(id_village)s,%(montant_mat)s,%(niveau_mat)s)RETURNING id_village", {
 						'id_matiere': pierre[0]['id_matiere'],'id_village': idvillage[0]['id_village'],'montant_mat':20,'niveau_mat':0
 					})
 					newplay=1
-					#db.close()
+					db.close()
 					return render_template("connexion.html")
 				else:
-					#db.close()
+					db.close()
 					abort(404)
 			else:
-				#db.close()
+				db.close()
 				abort(404)
 		else:
-			#db.close()
+			db.close()
 			abort(404)
 
 	else:
-		#db.close()
+		db.close()
 		abort(404)
 
 
@@ -327,19 +341,19 @@ def inscriptionpost(idmonde):
 @app.route("/ressource/<idjoueur>/<nomvillage>", methods=["GET"])
 @app.route("/static/ressource/<idjoueur>/<nomvillage>", methods=["GET"])
 def myressource(idjoueur,nomvillage):
-	#db = Db()
-	idvillage=dbbackconnection.select("SELECT id_village FROM avoir WHERE id_joueur = %(id_joueur)s",{"id_joueur" : idjoueur})
-	pierreame=dbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
-	listemyressourceame = dbbackconnection.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierreame[0]['id_matiere']})
-	pierrebal=dbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
-	listemyressourcebal = dbbackconnection.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierrebal[0]['id_matiere']})
-	pierretop=dbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
-	listemyressourcetop = dbbackconnection.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierretop[0]['id_matiere']})
-	pierrequa=dbdbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
-	listemyressourcequa = dbbackconnection.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierrequa[0]['id_matiere']})
-	pierreore=dbdbbackconnection.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ore'})
-	listemyressourceore = dbbackconnection.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierreore[0]['id_matiere']})
-	#db.close()
+	db = Db()
+	idvillage=db.select("SELECT id_village FROM avoir WHERE id_joueur = %(id_joueur)s",{"id_joueur" : idjoueur})
+	pierreame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
+	listemyressourceame = db.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierreame[0]['id_matiere']})
+	pierrebal=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
+	listemyressourcebal = db.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierrebal[0]['id_matiere']})
+	pierretop=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
+	listemyressourcetop = db.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierretop[0]['id_matiere']})
+	pierrequa=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
+	listemyressourcequa = db.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierrequa[0]['id_matiere']})
+	pierreore=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ore'})
+	listemyressourceore = db.select("SELECT * FROM fourni WHERE id_village = %(id_village)s AND id_matiere= %(id_matiere)s",{"id_village" : idvillage[0]['id_village'],'id_matiere':pierreore[0]['id_matiere']})
+	db.close()
 	total={'ametiste':listemyressourceame,'balsate':listemyressourcebal,'topaze':listemyressourcetop,'quartz':listemyressourcequa,'ore':listemyressourceore}
 	resp = make_response(json.dumps(total))
 	resp.mimetype = 'application/json'
@@ -350,9 +364,9 @@ def myressource(idjoueur,nomvillage):
 @app.route("/pierre", methods=["GET"])
 @app.route("/static/pierre", methods=["GET"])
 def mypierre():
-	#db = Db()
-	pierre=dbbackconnection.select("SELECT * FROM Matiere")
-	#db.close()
+	db = Db()
+	pierre=db.select("SELECT * FROM Matiere")
+	db.close()
 	return jsonResponse({'liste':pierre})
 
 ##########################################################################################################################################
@@ -366,9 +380,9 @@ def interface():
 ##########################################################################################################################################
 @app.route('/admin', methods=['GET'])
 def affichejoueur():
-	#db = Db()
-	joueur=dbbackconnection.select("SELECT * FROM Joueur")
-	#db.close()
+	db = Db()
+	joueur=db.select("SELECT * FROM Joueur")
+	db.close()
 	resp = make_response(json.dumps(joueur))
 	resp.mimetype = 'application/json'
 	return resp

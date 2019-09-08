@@ -97,14 +97,14 @@ def activate_job():
 				time.sleep(1)
 		db.close()
 
-    def G_topaze():
+	def G_topaze():
 		global newplay
 		time.sleep(8)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-		print "G_topaze OK"
-		print idame
+		print ("G_topaze OK")
+		print (idame)
 		while True:
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
@@ -118,14 +118,14 @@ def activate_job():
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(1)
 		db.close()
-    def G_quartz():
+	def G_quartz():
 		global newplay
 		time.sleep(12)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-		print "G_quartz OK"
-		print idame
+		print ("G_quartz OK")
+		print (idame)
 		while True:
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
@@ -139,14 +139,14 @@ def activate_job():
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(1)
 		db.close()
-    def G_ore():
+	def G_ore():
 		global newplay
 		time.sleep(8)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ore'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-		print "G_ore OK"
-		print idame
+		print ("G_ore OK")
+		print (idame)
 		while True:
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):
@@ -159,18 +159,17 @@ def activate_job():
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 				time.sleep(1)
-		db.close()
-		
-    thread = threading.Thread(target=G_ametiste)
-    thread.start()
-    thread = threading.Thread(target=G_balsate)
-    thread.start()
-    thread = threading.Thread(target=G_topaze)
-    thread.start()
-    thread = threading.Thread(target=G_quartz)
-    thread.start()
-    thread = threading.Thread(target=G_ore)
-    thread.start()
+		db.close()	
+	thread = threading.Thread(target=G_ametiste)
+	thread.start()
+	thread = threading.Thread(target=G_balsate)
+	thread.start()
+	thread = threading.Thread(target=G_topaze)
+	thread.start()
+	thread = threading.Thread(target=G_quartz)
+	thread.start()
+	thread = threading.Thread(target=G_ore)
+	thread.start()
 
 
 

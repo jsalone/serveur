@@ -45,7 +45,7 @@ def route_dbinit():
 @app.before_first_request
 def activate_job():
 
-    def G_ametiste():
+	def G_ametiste():
 		route_dbinit()
 		db = Db()
 		global newplay
@@ -53,11 +53,12 @@ def activate_job():
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
 		db.close()
-		print "G_ametiste OK "
-		print idame
+		print ("G_ametiste OK ")
+		print (idame)
 		while True:
 			
 			if len(listematame)!=0:
+				print("len(listematame)")
 				for maliste in range(0,len(listematame)):
 
 					listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -73,15 +74,15 @@ def activate_job():
 				time.sleep(1)
 				
 		db.close()
-    def G_balsate():
+	def G_balsate():
 		
 		global newplay
 		time.sleep(4)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-		print "G_balsate OK"
-		print idame
+		print ("G_balsate OK")
+		print (idame)
 		while True:
 			if len(listematame)!=0:
 				for maliste in range(0,len(listematame)):

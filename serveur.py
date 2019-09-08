@@ -29,6 +29,9 @@ topaze=[1,2,3,4,5,6,7,8,9,10]
 quartz=[2,4,6,8,10,12,14,16,18,20]
 ore=[0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.10]
 
+#####connexion bdd
+#db = Db()
+
 
 error=json.dumps(your_dict), 200, {'Content-Type': 'application/json'}
 @app.route('/reset')
@@ -52,7 +55,6 @@ def activate_job():
 		
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'ametiste'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-		db.close()
 		print ("G_ametiste OK ")
 		print (idame)
 		while True:
@@ -71,17 +73,17 @@ def activate_job():
 					print("5")
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
 					print("6")
-				time.sleep(1)
+				time.sleep(12)
 			else:
 				db = Db()
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-				time.sleep(1)
+				time.sleep(12)
 				
 		db.close()
 	def G_balsate():
 		
 		global newplay
-		time.sleep(4)
+		time.sleep(2)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'balsate'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -95,15 +97,15 @@ def activate_job():
 					ancien=listematame[maliste]['montant_mat']
 					ancien+=balsate[nivmine]
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
-				time.sleep(1)
+				time.sleep(10)
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-				time.sleep(1)
+				time.sleep(10)
 		db.close()
 
 	def G_topaze():
 		global newplay
-		time.sleep(8)
+		time.sleep(4)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'topaze'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -117,14 +119,14 @@ def activate_job():
 					ancien=listematame[maliste]['montant_mat']
 					ancien+=topaze[nivmine]
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
-				time.sleep(1)
+				time.sleep(10)
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-				time.sleep(1)
+				time.sleep(10)
 		db.close()
 	def G_quartz():
 		global newplay
-		time.sleep(12)
+		time.sleep(6)
 		db = Db()
 		idame=db.select("SELECT * FROM Matiere WHERE matiere_nom = %(idmat)s",{"idmat" : 'quartz'})
 		listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
@@ -138,10 +140,10 @@ def activate_job():
 					ancien=listematame[maliste]['montant_mat']
 					ancien+=quartz[nivmine]
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
-				time.sleep(1)
+				time.sleep(10)
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-				time.sleep(1)
+				time.sleep(10)
 		db.close()
 	def G_ore():
 		global newplay
@@ -159,10 +161,10 @@ def activate_job():
 					ancien=listematame[maliste]['montant_mat']
 					ancien+=ore[nivmine]
 					db.execute("UPDATE fourni SET montant_mat='"+ str(ancien) +"' WHERE id_matiere= "+ str(listematame[maliste]['id_matiere']) +" AND id_village="+ str(listematame[maliste]['id_village']) +"")
-				time.sleep(1)
+				time.sleep(10)
 			else:
 				listematame = db.select("SELECT * FROM fourni WHERE id_matiere = %(idmat)s",{"idmat" : idame[0]['id_matiere']})
-				time.sleep(1)
+				time.sleep(10)
 		db.close()	
 	thread = threading.Thread(target=G_ametiste)
 	thread.start()
